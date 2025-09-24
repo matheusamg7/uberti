@@ -1,0 +1,175 @@
+{
+  "navigation": {
+    "home": "Início",
+    "collections": "Coleções",
+    "about": "Sobre",
+    "blog": "Blog",
+    "products": "Produtos",
+    "cart": "Carrinho",
+    "account": "Conta",
+    "login": "Entrar",
+    "logout": "Sair"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "continue": "Continuar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "close": "Fechar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "clear": "Limpar",
+    "all": "Todos",
+    "none": "Nenhum",
+    "more": "Mais",
+    "less": "Menos"
+  },
+  "product": {
+    "sku": "SKU",
+    "price": "Preço",
+    "size": "Tamanho",
+    "sizes": "Tamanhos",
+    "color": "Cor",
+    "quantity": "Quantidade",
+    "inStock": "Em Estoque",
+    "outOfStock": "Esgotado",
+    "lowStock": "Apenas {count} restante(s)",
+    "addToCart": "Adicionar ao Carrinho",
+    "addToWishlist": "Adicionar aos Favoritos",
+    "featured": "Destaque",
+    "newArrival": "Novo Lançamento",
+    "viewDetails": "Ver Detalhes",
+    "relatedProducts": "Produtos Relacionados"
+  },
+  "cart": {
+    "title": "Carrinho de Compras",
+    "empty": "Seu carrinho está vazio",
+    "emptyDescription": "Descubra nossas coleções e adicione algumas peças lindas ao seu carrinho.",
+    "itemCount": "{count} {count, plural, =0 {itens} =1 {item} other {itens}}",
+    "subtotal": "Subtotal",
+    "shipping": "Envio",
+    "tax": "Taxa",
+    "total": "Total",
+    "free": "Grátis",
+    "checkout": "Finalizar Compra",
+    "continueShopping": "Continuar Comprando",
+    "remove": "Remover",
+    "update": "Atualizar"
+  },
+  "collection": {
+    "viewCollection": "Ver Coleção",
+    "exploreCollection": "Explorar Coleção",
+    "productsInCollection": "{count} {count, plural, =0 {produtos} =1 {produto} other {produtos}}"
+  },
+  "filter": {
+    "showingResults": "Mostrando {count} {count, plural, =0 {resultados} =1 {resultado} other {resultados}}",
+    "noResults": "Nenhum produto encontrado",
+    "clearFilters": "Limpar Filtros",
+    "category": "Categoria",
+    "collection": "Coleção",
+    "priceRange": "Faixa de Preço",
+    "availability": "Disponibilidade",
+    "sortBy": "Ordenar por",
+    "newest": "Mais Recentes",
+    "oldest": "Mais Antigos",
+    "priceAsc": "Preço: Menor para Maior",
+    "priceDesc": "Preço: Maior para Menor",
+    "nameAsc": "Nome: A a Z",
+    "nameDesc": "Nome: Z a A"
+  },
+  "auth": {
+    "signIn": "Entrar",
+    "signUp": "Cadastrar",
+    "signOut": "Sair",
+    "email": "Email",
+    "password": "Senha",
+    "confirmPassword": "Confirmar Senha",
+    "fullName": "Nome Completo",
+    "phone": "Telefone",
+    "forgotPassword": "Esqueceu a senha?",
+    "rememberMe": "Lembrar de mim",
+    "createAccount": "Criar Conta",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "dontHaveAccount": "Não tem uma conta?",
+    "resetPassword": "Redefinir Senha"
+  },
+  "footer": {
+    "newsletter": {
+      "title": "Assine nossa newsletter",
+      "description": "Seja o primeiro a saber sobre novas coleções e eventos exclusivos.",
+      "placeholder": "Digite seu email",
+      "button": "Assinar"
+    },
+    "links": {
+      "collections": "Coleções",
+      "categories": "Categorias",
+      "support": "Suporte",
+      "company": "Empresa"
+    },
+    "legal": {
+      "privacy": "Política de Privacidade",
+      "terms": "Termos de Uso",
+      "copyright": "Todos os direitos reservados."
+    }
+  },
+  "about": {
+    "title": "Sobre Helena & UBERTI",
+    "subtitle": "Uma jornada através do artesanato, paixão e elegância atemporal",
+    "philosophy": {
+      "craftsmanship": {
+        "title": "Artesanato",
+        "description": "Cada peça é meticulosamente feita à mão com técnicas transmitidas através de gerações."
+      },
+      "sustainability": {
+        "title": "Sustentabilidade",
+        "description": "Estamos comprometidos com o fornecimento ético e apoio às comunidades artesãs locais."
+      },
+      "storytelling": {
+        "title": "Narrativa",
+        "description": "Cada coleção nasce de uma história, criando peças que ressoam em um nível mais profundo."
+      }
+    }
+  },
+  "blog": {
+    "title": "O Diário UBERTI",
+    "subtitle": "Histórias, inspiração e insights da jornada criativa de Helena",
+    "comingSoon": "Em Breve",
+    "readMore": "Leia Mais",
+    "categories": {
+      "behindTheScenes": "Bastidores",
+      "collections": "Histórias das Coleções",
+      "craftsmanship": "Artesanato",
+      "inspiration": "Estilo e Inspiração"
+    }
+  },
+  "metadata": {
+    "home": {
+      "title": "UBERTI - Moda Artesanal Feita à Mão",
+      "description": "Descubra as coleções únicas de Helena com peças de moda artesanal que misturam elegância atemporal com narrativas contemporâneas."
+    },
+    "collections": {
+      "title": "Coleções - UBERTI",
+      "description": "Explore nossas coleções cuidadosamente curadas, cada uma contando uma história única inspirada na natureza e na emoção."
+    },
+    "products": {
+      "title": "Produtos - UBERTI",
+      "description": "Navegue por nossa coleção completa de peças de moda artesanal e itens decorativos."
+    },
+    "about": {
+      "title": "Sobre Helena & UBERTI",
+      "description": "Conheça a jornada de Helena e a filosofia por trás da abordagem artesanal da UBERTI à moda."
+    },
+    "blog": {
+      "title": "O Diário UBERTI - Histórias e Inspiração",
+      "description": "Histórias dos bastidores, inspiração criativa e insights da jornada artística de Helena."
+    }
+  }
+}
