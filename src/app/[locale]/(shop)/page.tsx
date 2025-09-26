@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/shop/ProductCard';
 import { mockCollections, getFeaturedProducts } from '@/lib/mock-data';
+import { HeroCarousel } from '@/components/shop/HeroCarousel';
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -10,29 +11,33 @@ interface HomePageProps {
 
 export default async function HomePage({ params }: HomePageProps) {
   const resolvedParams = await params;
-  const locale = resolvedParams.locale as 'en' | 'pt' | 'es';
+  const locale = resolvedParams.locale as 'en' | 'pt' | 'es' | 'fr';
   const featuredProducts = getFeaturedProducts().slice(0, 6);
 
   const heroContent = {
     title: {
-      en: 'Handcrafted Elegance',
-      pt: 'Elegância Artesanal',
-      es: 'Elegancia Artesanal',
+      en: 'The body wears what the soul asks for',
+      pt: 'O corpo veste, o que a alma pede',
+      es: 'El cuerpo viste lo que el alma pide',
+      fr: 'Le corps porte ce que l\'âme demande',
     },
     subtitle: {
-      en: 'Where every piece tells a story',
-      pt: 'Onde cada peça conta uma história',
-      es: 'Donde cada pieza cuenta una historia',
+      en: '',
+      pt: '',
+      es: '',
+      fr: '',
     },
     description: {
-      en: 'Discover Helena\'s unique vision through carefully crafted collections that blend timeless elegance with contemporary storytelling.',
-      pt: 'Descubra a visão única de Helena através de coleções cuidadosamente elaboradas que misturam elegância atemporal com narrativas contemporâneas.',
-      es: 'Descubre la visión única de Helena a través de colecciones cuidadosamente elaboradas que mezclan elegancia atemporal con narrativas contemporáneas.',
+      en: 'Unique pieces crafted with soul and passion',
+      pt: 'Peças únicas criadas com alma e paixão',
+      es: 'Piezas únicas creadas con alma y pasión',
+      fr: 'Pièces uniques créées avec âme et passion',
     },
     cta: {
-      en: 'Explore Collections',
-      pt: 'Explorar Coleções',
-      es: 'Explorar Colecciones',
+      en: 'Explore Our Collections',
+      pt: 'Explore Nossas Coleções',
+      es: 'Explora Nuestras Colecciones',
+      fr: 'Explorez Nos Collections',
     },
   };
 
@@ -42,11 +47,13 @@ export default async function HomePage({ params }: HomePageProps) {
         en: 'Featured Pieces',
         pt: 'Peças em Destaque',
         es: 'Piezas Destacadas',
+        fr: 'Pièces Vedettes',
       },
       subtitle: {
         en: 'Carefully selected pieces that embody our vision',
         pt: 'Peças cuidadosamente selecionadas que incorporam nossa visão',
         es: 'Piezas cuidadosamente seleccionadas que encarnan nuestra visión',
+        fr: 'Pièces soigneusement sélectionnées qui incarnent notre vision',
       },
     },
     collections: {
@@ -54,16 +61,19 @@ export default async function HomePage({ params }: HomePageProps) {
         en: 'Our Collections',
         pt: 'Nossas Coleções',
         es: 'Nuestras Colecciones',
+        fr: 'Nos Collections',
       },
       subtitle: {
         en: 'Each collection tells a unique story inspired by nature and emotion',
         pt: 'Cada coleção conta uma história única inspirada na natureza e na emoção',
         es: 'Cada colección cuenta una historia única inspirada en la naturaleza y la emoción',
+        fr: 'Chaque collection raconte une histoire unique inspirée par la nature et l\'émotion',
       },
       viewAll: {
         en: 'View All Collections',
         pt: 'Ver Todas as Coleções',
         es: 'Ver Todas las Colecciones',
+        fr: 'Voir Toutes les Collections',
       },
     },
     about: {
@@ -71,62 +81,27 @@ export default async function HomePage({ params }: HomePageProps) {
         en: 'About Helena',
         pt: 'Sobre Helena',
         es: 'Sobre Helena',
+        fr: 'À Propos d\'Helena',
       },
       description: {
         en: 'Helena brings decades of craftsmanship experience to every piece, creating wearable art that celebrates the beauty of handmade quality and authentic design.',
         pt: 'Helena traz décadas de experiência em artesanato para cada peça, criando arte vestível que celebra a beleza da qualidade artesanal e do design autêntico.',
         es: 'Helena aporta décadas de experiencia en artesanía a cada pieza, creando arte portable que celebra la belleza de la calidad artesanal y el diseño auténtico.',
+        fr: 'Helena apporte des décennies d\'expérience artisanale à chaque pièce, créant un art portable qui célèbre la beauté de la qualité artisanale et du design authentique.',
       },
       cta: {
         en: 'Learn More',
         pt: 'Saiba Mais',
         es: 'Conoce Más',
+        fr: 'En Savoir Plus',
       },
     },
   };
 
   return (
     <div className="space-y-20 sm:space-y-32">
-      {/* Hero Section */}
-      <section className="hero-section relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1600&h=1200&fit=crop"
-            alt="Helena's atelier"
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-black/30" />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-white">
-          <div className="space-y-8 animate-fade-in-up">
-            <h1 className="display-1 text-white max-w-4xl mx-auto">
-              {heroContent.title[locale]}
-            </h1>
-            <p className="heading-2 font-light max-w-2xl mx-auto opacity-90">
-              {heroContent.subtitle[locale]}
-            </p>
-            <p className="body-text text-lg leading-relaxed max-w-3xl mx-auto opacity-80">
-              {heroContent.description[locale]}
-            </p>
-            <div className="pt-8">
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:border-white/50 backdrop-blur-sm"
-                asChild
-              >
-                <Link href={`/${locale}/collections`}>
-                  {heroContent.cta[locale]}
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Carousel Section */}
+      <HeroCarousel locale={locale} heroContent={heroContent} />
 
       {/* Featured Products Section */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -153,7 +128,7 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="text-center mt-12">
           <Button variant="outline" asChild>
             <Link href={`/${locale}/products?featured=true`}>
-              {locale === 'pt' ? 'Ver Todos os Destaques' : locale === 'es' ? 'Ver Todos los Destacados' : 'View All Featured'}
+              {locale === 'pt' ? 'Ver Todos os Destaques' : locale === 'es' ? 'Ver Todos los Destacados' : locale === 'fr' ? 'Voir Toutes les Vedettes' : 'View All Featured'}
             </Link>
           </Button>
         </div>

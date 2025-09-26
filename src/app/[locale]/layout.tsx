@@ -9,12 +9,12 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const resolvedParams = await params;
-  const locale = resolvedParams.locale as 'en' | 'pt' | 'es';
+  const locale = resolvedParams.locale as 'en' | 'pt' | 'es' | 'fr';
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header locale={locale} />
-      <main className="flex-1 pt-16">
+      <main className="flex-1">
         {children}
       </main>
       <Footer locale={locale} />
