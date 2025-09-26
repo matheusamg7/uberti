@@ -1,9 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { ProductCard } from '@/components/shop/ProductCard';
+import { FeaturedCarousel } from '@/components/shop/FeaturedCarousel';
 import { mockCollections, getFeaturedProducts } from '@/lib/mock-data';
 import { HeroCarousel } from '@/components/shop/HeroCarousel';
+import { CollectionsImmersive } from '@/components/shop/CollectionsImmersive';
+import { ExclusiveTailoring } from '@/components/shop/ExclusiveTailoring';
+import { EditorialSection } from '@/components/shop/EditorialSection';
+import { WhereToFind } from '@/components/shop/WhereToFind';
+import { BlogCallout } from '@/components/shop/BlogCallout';
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -12,7 +16,7 @@ interface HomePageProps {
 export default async function HomePage({ params }: HomePageProps) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale as 'en' | 'pt' | 'es' | 'fr';
-  const featuredProducts = getFeaturedProducts().slice(0, 6);
+  const featuredProducts = getFeaturedProducts().slice(0, 4);
 
   const heroContent = {
     title: {
@@ -99,95 +103,48 @@ export default async function HomePage({ params }: HomePageProps) {
   };
 
   return (
-    <div className="space-y-20 sm:space-y-32">
+    <div>
       {/* Hero Carousel Section */}
       <HeroCarousel locale={locale} heroContent={heroContent} />
 
+      {/* Collections Immersive Section */}
+      <CollectionsImmersive locale={locale} />
+
+      <div className="space-y-20 sm:space-y-32">
       {/* Featured Products Section */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-4 mb-12">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20">
+        <div className="text-center mb-12">
           <h2 className="heading-1">
             {sectionsContent.featured.title[locale]}
           </h2>
-          <p className="body-text text-muted-foreground max-w-2xl mx-auto">
-            {sectionsContent.featured.subtitle[locale]}
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {featuredProducts.map((product, index) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              locale={locale}
-              priority={index < 3}
-            />
-          ))}
-        </div>
+        <FeaturedCarousel
+          products={featuredProducts}
+          locale={locale}
+        />
 
         <div className="text-center mt-12">
-          <Button variant="outline" asChild>
-            <Link href={`/${locale}/products?featured=true`}>
-              {locale === 'pt' ? 'Ver Todos os Destaques' : locale === 'es' ? 'Ver Todos los Destacados' : locale === 'fr' ? 'Voir Toutes les Vedettes' : 'View All Featured'}
-            </Link>
-          </Button>
+          <Link
+            href={`/${locale}/products?featured=true`}
+            className="inline-block px-8 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-gray-800 hover:bg-white/20 transition-all duration-300 text-sm uppercase tracking-wider"
+          >
+            {locale === 'pt' ? 'Ver Todos os Destaques' : locale === 'es' ? 'Ver Todos los Destacados' : locale === 'fr' ? 'Voir Toutes les Vedettes' : 'View All Featured'}
+          </Link>
         </div>
       </section>
 
-      {/* Collections Section */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="heading-1">
-            {sectionsContent.collections.title[locale]}
-          </h2>
-          <p className="body-text text-muted-foreground max-w-2xl mx-auto">
-            {sectionsContent.collections.subtitle[locale]}
-          </p>
-        </div>
+      {/* Exclusive Tailoring Section */}
+      <ExclusiveTailoring locale={locale} />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {mockCollections.slice(0, 3).map((collection) => {
-            const collectionName = collection[`name_${locale}` as keyof typeof collection] as string;
-            const collectionDescription = collection[`description_${locale}` as keyof typeof collection] as string;
+      {/* Blog Callout Section */}
+      <BlogCallout locale={locale} />
 
-            return (
-              <Link
-                key={collection.id}
-                href={`/${locale}/collections/${collection.slug}`}
-                className="group block"
-              >
-                <article className="space-y-4">
-                  <div className="aspect-[4/5] overflow-hidden rounded bg-muted/30 hover-lift">
-                    <Image
-                      src={collection.hero_image || '/placeholder-collection.jpg'}
-                      alt={collectionName}
-                      width={400}
-                      height={500}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="space-y-2 text-center">
-                    <h3 className="heading-3 group-hover:text-muted-foreground transition-colors">
-                      {collectionName}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {collectionDescription}
-                    </p>
-                  </div>
-                </article>
-              </Link>
-            );
-          })}
-        </div>
+      {/* Editorial Section */}
+      <EditorialSection locale={locale} />
 
-        <div className="text-center mt-12">
-          <Button variant="outline" asChild>
-            <Link href={`/${locale}/collections`}>
-              {sectionsContent.collections.viewAll[locale]}
-            </Link>
-          </Button>
-        </div>
-      </section>
+      {/* Where to Find Section */}
+      <WhereToFind locale={locale} />
 
       {/* About Section */}
       <section className="bg-muted/20">
@@ -201,11 +158,12 @@ export default async function HomePage({ params }: HomePageProps) {
                 {sectionsContent.about.description[locale]}
               </p>
               <div className="pt-4">
-                <Button variant="outline" asChild>
-                  <Link href={`/${locale}/about`}>
-                    {sectionsContent.about.cta[locale]}
-                  </Link>
-                </Button>
+                <Link
+                  href={`/${locale}/about`}
+                  className="inline-block px-8 py-3 bg-white/10 backdrop-blur-md border border-gray-800/20 text-gray-800 hover:bg-gray-100/20 transition-all duration-300 text-sm uppercase tracking-wider"
+                >
+                  {sectionsContent.about.cta[locale]}
+                </Link>
               </div>
             </div>
             <div className="aspect-[4/5] overflow-hidden rounded bg-muted/30">
@@ -220,6 +178,7 @@ export default async function HomePage({ params }: HomePageProps) {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }
