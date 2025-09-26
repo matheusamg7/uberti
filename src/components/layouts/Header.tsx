@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { Search, ShoppingBag, User, Instagram, MessageCircle } from 'lucide-react';
+import { Search, ShoppingBag, User, Instagram, Phone, X } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import Image from 'next/image';
@@ -239,9 +239,9 @@ export function Header({ locale }: HeaderProps) {
                         <Image
                           src="/logo/logo_marrom.svg"
                           alt="UBERTI"
-                          width={120}
-                          height={40}
-                          className="h-10 w-auto"
+                          width={160}
+                          height={60}
+                          className="h-16 w-auto"
                           priority
                         />
                       </Link>
@@ -286,6 +286,31 @@ export function Header({ locale }: HeaderProps) {
 
                     {/* Footer do Menu */}
                     <div className="border-t border-gray-100 px-8 py-6 space-y-6">
+                      {/* Contatos */}
+                      <div>
+                        <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-4">
+                          {locale === 'pt' ? 'Contato' : locale === 'es' ? 'Contacto' : locale === 'fr' ? 'Contact' : 'Contact'}
+                        </h3>
+                        <div className="flex gap-6">
+                          <a
+                            href="https://instagram.com/uberti"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transition-all duration-300 hover:scale-110 hover:opacity-70"
+                          >
+                            <Instagram className="h-7 w-7 text-gray-700" strokeWidth={1} />
+                          </a>
+                          <a
+                            href="https://wa.me/5511999999999"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="transition-all duration-300 hover:scale-110 hover:opacity-70"
+                          >
+                            <Phone className="h-7 w-7 text-gray-700" strokeWidth={1} />
+                          </a>
+                        </div>
+                      </div>
+
                       {/* Seletor de Idioma */}
                       <div>
                         <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-3">
@@ -307,31 +332,6 @@ export function Header({ locale }: HeaderProps) {
                               {lang.code.toUpperCase()}
                             </Link>
                           ))}
-                        </div>
-                      </div>
-
-                      {/* Contatos */}
-                      <div>
-                        <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-3">
-                          {locale === 'pt' ? 'Contato' : locale === 'es' ? 'Contacto' : locale === 'fr' ? 'Contact' : 'Contact'}
-                        </h3>
-                        <div className="flex gap-4">
-                          <a
-                            href="https://instagram.com/uberti"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                          >
-                            <Instagram className="h-5 w-5 text-gray-700" strokeWidth={1} />
-                          </a>
-                          <a
-                            href="https://wa.me/5511999999999"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                          >
-                            <MessageCircle className="h-5 w-5 text-gray-700" strokeWidth={1} />
-                          </a>
                         </div>
                       </div>
                     </div>

@@ -16,10 +16,10 @@ export default async function HomePage({ params }: HomePageProps) {
 
   const heroContent = {
     title: {
-      en: 'The body wears what the soul asks for',
-      pt: 'O corpo veste, o que a alma pede',
-      es: 'El cuerpo viste lo que el alma pide',
-      fr: 'Le corps porte ce que l\'âme demande',
+      en: 'The body wears,\nwhat the soul asks for',
+      pt: 'O corpo veste,\no que a alma pede',
+      es: 'El cuerpo viste,\nlo que el alma pide',
+      fr: 'Le corps porte,\nce que l\'âme demande',
     },
     subtitle: {
       en: '',
@@ -28,10 +28,10 @@ export default async function HomePage({ params }: HomePageProps) {
       fr: '',
     },
     description: {
-      en: 'Unique pieces crafted with soul and passion',
-      pt: 'Peças únicas criadas com alma e paixão',
-      es: 'Piezas únicas creadas con alma y pasión',
-      fr: 'Pièces uniques créées avec âme et passion',
+      en: '',
+      pt: '',
+      es: '',
+      fr: '',
     },
     cta: {
       en: 'Explore Our Collections',

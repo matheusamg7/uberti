@@ -49,25 +49,22 @@ export function HeroCarousel({ locale, heroContent }: HeroCarouselProps) {
               className="object-cover object-center"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 from-0% via-black/25 via-40% to-transparent to-100%" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 from-0% via-black/60 via-35% to-transparent to-70%" />
           </div>
         ))}
 
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-white">
-        <div className="space-y-8 animate-fade-in-up">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light italic tracking-wide text-white max-w-5xl mx-auto drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+      {/* Content - posicionado na parte inferior */}
+      <div className="absolute bottom-20 left-0 right-0 z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-white">
+        <div className="space-y-6 animate-fade-in-up">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light italic tracking-wide text-white max-w-5xl mx-auto whitespace-pre-line">
             {heroContent.title[locale]}
           </h1>
-          {heroContent.subtitle[locale] && (
-            <p className="text-2xl md:text-3xl font-light max-w-3xl mx-auto opacity-95">
-              {heroContent.subtitle[locale]}
+          {heroContent.description[locale] && (
+            <p className="text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto opacity-80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+              {heroContent.description[locale]}
             </p>
           )}
-          <p className="text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto opacity-80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-            {heroContent.description[locale]}
-          </p>
           <div className="pt-8">
             <a
               href={`/${locale}/collections`}
@@ -79,16 +76,16 @@ export function HeroCarousel({ locale, heroContent }: HeroCarouselProps) {
         </div>
       </div>
 
-      {/* Slide Indicators - Minimal Lines */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+      {/* Slide Indicators - Vertical on the right */}
+      <div className="absolute right-10 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-20">
         {banners.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`h-[2px] transition-all duration-300 ${
+            className={`w-[2px] transition-all duration-300 ${
               index === currentSlide
-                ? 'w-12 bg-white'
-                : 'w-8 bg-white/40 hover:bg-white/60'
+                ? 'h-12 bg-white'
+                : 'h-8 bg-white/40 hover:bg-white/60'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
