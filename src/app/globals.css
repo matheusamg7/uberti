@@ -144,7 +144,7 @@
   }
 
   .heading-1 {
-    @apply text-3xl md:text-4xl lg:text-5xl tracking-tight font-light text-center;
+    @apply text-2xl md:text-3xl lg:text-4xl tracking-tight font-light text-center;
     font-family: 'Cinzel', serif;
   }
 

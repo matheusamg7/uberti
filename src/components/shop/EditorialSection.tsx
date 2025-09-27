@@ -105,17 +105,25 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
   ];
 
   return (
-    <section className="py-20">
+    <section className="py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="heading-1 mb-4">{content.title[locale]}</h2>
-          <p className="body-text text-muted-foreground">
-            {content.subtitle[locale]}
-          </p>
+        {/* Header - Title left, CTA right */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+          <div>
+            <h2 className="heading-1 text-left mb-0">{content.title[locale]}</h2>
+            <p className="body-text text-muted-foreground text-left mt-2">
+              {content.subtitle[locale]}
+            </p>
+          </div>
+          <Link
+            href={`/${locale}/blog`}
+            className="inline-block px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider mt-6 md:mt-0 md:ml-12"
+          >
+            {locale === 'pt' ? 'Ver Todos os Artigos' : locale === 'es' ? 'Ver Todos los Artículos' : locale === 'fr' ? 'Voir Tous les Articles' : 'View All Articles'}
+          </Link>
         </div>
 
-        {/* Articles Grid */}
+        {/* Articles Cards - 3 columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {articles.map((article, index) => (
             <Link
@@ -125,54 +133,36 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
             >
               <article className="space-y-4">
                 {/* Image */}
-                <div className="aspect-[3/4] overflow-hidden bg-gray-100">
+                <div className="aspect-[4/3] overflow-hidden bg-gray-100">
                   <Image
                     src={article.image}
                     alt={article.title[locale]}
                     width={400}
-                    height={533}
-                    className="h-full w-full object-cover transition-transform duration-700"
+                    height={300}
+                    className="h-full w-full object-cover"
                   />
                 </div>
 
                 {/* Content */}
                 <div className="space-y-3">
                   {/* Category & Date */}
-                  <div className="flex items-center justify-between text-xs uppercase tracking-wider text-gray-500">
-                    <span>{article.category[locale]}</span>
-                    <span>{article.date}</span>
+                  <div className="text-xs uppercase tracking-wider text-gray-500">
+                    {article.category[locale]} • {article.date}
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-light tracking-wide group-hover:text-gray-600 transition-colors">
+                  <h3 className="text-lg font-light tracking-wide text-gray-900 group-hover:text-gray-600 transition-colors">
                     {article.title[locale]}
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
                     {article.excerpt[locale]}
                   </p>
-
-                  {/* Read More */}
-                  <div className="pt-2">
-                    <span className="text-xs uppercase tracking-wider border-b border-gray-800 group-hover:border-gray-600 transition-colors">
-                      {content.readMore[locale]}
-                    </span>
-                  </div>
                 </div>
               </article>
             </Link>
           ))}
-        </div>
-
-        {/* View All Articles */}
-        <div className="text-center mt-12">
-          <Link
-            href={`/${locale}/blog`}
-            className="inline-flex items-center justify-center px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider"
-          >
-            {locale === 'pt' ? 'Ver Todos os Artigos' : locale === 'es' ? 'Ver Todos los Artículos' : locale === 'fr' ? 'Voir Tous les Articles' : 'View All Articles'}
-          </Link>
         </div>
       </div>
     </section>

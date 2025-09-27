@@ -88,7 +88,7 @@ export function WhereToFind({ locale }: WhereToFindProps) {
         {/* Map and Locations */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Map */}
-          <div className="lg:col-span-2 order-2 lg:order-1 max-w-2xl mx-auto">
+          <div className="lg:col-span-2 order-2 lg:order-1">
             <WorldMap
               locations={[]}
             />

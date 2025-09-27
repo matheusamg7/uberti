@@ -136,11 +136,11 @@ export default async function HomePage({ params }: HomePageProps) {
 
       <div className="space-y-20 sm:space-y-32">
 
-      {/* Exclusive Tailoring Section */}
-      <ExclusiveTailoring locale={locale} />
-
       {/* Editorial Section */}
       <EditorialSection locale={locale} />
+
+      {/* Exclusive Tailoring Section */}
+      <ExclusiveTailoring locale={locale} />
 
       {/* Where to Find Section */}
       <WhereToFind locale={locale} />
