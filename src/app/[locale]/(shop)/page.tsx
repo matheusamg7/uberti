@@ -163,39 +163,6 @@ export default async function HomePage({ params }: HomePageProps) {
 
       {/* Where to Find Section */}
       <WhereToFind locale={locale} />
-
-      {/* About Section */}
-      <section className="bg-muted/20">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="space-y-6">
-              <h2 className="heading-1">
-                {sectionsContent.about.title[locale]}
-              </h2>
-              <p className="body-text text-muted-foreground leading-relaxed">
-                {sectionsContent.about.description[locale]}
-              </p>
-              <div className="pt-4">
-                <Link
-                  href={`/${locale}/about`}
-                  className="inline-block px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider"
-                >
-                  {sectionsContent.about.cta[locale]}
-                </Link>
-              </div>
-            </div>
-            <div className="aspect-[4/5] overflow-hidden rounded bg-muted/30">
-              <Image
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=750&fit=crop"
-                alt="Helena at work"
-                width={600}
-                height={750}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
       </div>
     </div>
   );

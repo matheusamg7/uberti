@@ -1,5 +1,4 @@
 import { Header } from '@/components/layouts/Header';
-import { Footer } from '@/components/layouts/Footer';
 
 export default async function LocaleLayout({
   children,
@@ -17,7 +16,6 @@ export default async function LocaleLayout({
       <main className="flex-1">
         {children}
       </main>
-      <Footer locale={locale} />
     </div>
   );
 }
