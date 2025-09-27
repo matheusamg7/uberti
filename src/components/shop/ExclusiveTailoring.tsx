@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Phone } from 'lucide-react';
 
 interface ExclusiveTailoringProps {
   locale: 'en' | 'pt' | 'es' | 'fr';
@@ -211,87 +210,22 @@ Gancho: ${formData.gancho}
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20" style={{ backgroundColor: '#FEFDFE' }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="heading-1 mb-4">{content.title[locale]}</h2>
-          <p className="body-text text-muted-foreground max-w-2xl mx-auto">
-            {content.subtitle[locale]}
-          </p>
-        </div>
-
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          {/* Croqui SVG with Interactive Fields */}
-          <div className="order-2 lg:order-1">
-            <div className="relative w-full max-w-lg mx-auto">
-              {/* SVG Background */}
-              <img
-                src="/banners/Frame 49.svg"
-                alt="Fashion Sketch"
-                className="w-full h-auto"
-              />
-
-              {/* Interactive Input Fields Positioned Over SVG */}
-              <div className="absolute inset-0" style={{ width: '100%', height: '100%' }}>
-                {/* Map measurements to SVG positions */}
-                {[
-                  { field: 'alturaBusto', label: content.labels.alturaBusto[locale], position: { top: '8%', left: '5%' } },
-                  { field: 'busto', label: content.labels.busto[locale], position: { top: '16%', left: '5%' } },
-                  { field: 'comprimentoBraco', label: content.labels.comprimentoBraco[locale], position: { top: '24%', left: '5%' } },
-                  { field: 'cintura', label: content.labels.cintura[locale], position: { top: '32%', left: '5%' } },
-                  { field: 'quadril', label: content.labels.quadril[locale], position: { top: '40%', left: '5%' } },
-                  { field: 'alturaJoelho', label: content.labels.alturaJoelho[locale], position: { top: '48%', left: '5%' } },
-                  { field: 'costas', label: content.labels.costas[locale], position: { top: '60%', left: '5%' } },
-                  { field: 'ombro', label: content.labels.ombro[locale], position: { top: '16%', right: '5%', left: 'auto' } },
-                  { field: 'larguraBraco', label: content.labels.larguraBraco[locale], position: { top: '24%', right: '5%', left: 'auto' } },
-                  { field: 'punhoComAbertura', label: content.labels.punhoComAbertura[locale], position: { top: '32%', right: '5%', left: 'auto' } },
-                  { field: 'punhoSemAbertura', label: content.labels.punhoSemAbertura[locale], position: { top: '40%', right: '5%', left: 'auto' } },
-                  { field: 'alturaCalca', label: content.labels.alturaCalca[locale], position: { top: '48%', right: '5%', left: 'auto' } },
-                  { field: 'gancho', label: content.labels.gancho[locale], position: { top: '56%', right: '5%', left: 'auto' } },
-                ].map((item) => (
-                  <div
-                    key={item.field}
-                    className="absolute"
-                    style={{
-                      ...item.position,
-                      width: '25%',
-                    }}
-                  >
-                    <label className="text-[10px] text-gray-600 block mb-1">
-                      {item.label}
-                    </label>
-                    <input
-                      type="text"
-                      name={item.field}
-                      value={formData[item.field as keyof MeasurementData]}
-                      onChange={handleInputChange}
-                      className="w-full px-2 py-1 text-xs border border-gray-300 bg-white/90 focus:border-gray-800 focus:outline-none"
-                      placeholder="cm"
-                    />
-                  </div>
-                ))}
-              </div>
+          {/* Left side - Title, Subtitle and Form */}
+          <div className="order-1 lg:order-1 lg:pt-16">
+            {/* Header */}
+            <div className="mb-12">
+              <h2 className="heading-1 mb-6 text-left" style={{ fontFamily: "'Cinzel', serif" }}>{content.title[locale]}</h2>
+              <p className="body-text text-muted-foreground text-left mb-12">
+                {content.subtitle[locale]}
+              </p>
             </div>
-          </div>
 
-          {/* Form - Personal Info Only */}
-          <div className="order-1 lg:order-2">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Instructions */}
-              <div className="p-4 bg-gray-50 border border-gray-200">
-                <p className="text-sm text-gray-700">
-                  {locale === 'pt'
-                    ? 'Preencha suas medidas diretamente no croqui ao lado. Depois, adicione suas informações pessoais abaixo para enviar o pedido.'
-                    : locale === 'es'
-                    ? 'Complete sus medidas directamente en el croquis al lado. Luego, agregue su información personal a continuación para enviar el pedido.'
-                    : locale === 'fr'
-                    ? 'Remplissez vos mesures directement sur le croquis ci-contre. Ensuite, ajoutez vos informations personnelles ci-dessous pour envoyer la commande.'
-                    : 'Fill in your measurements directly on the sketch beside. Then, add your personal information below to send the order.'}
-                </p>
-              </div>
-
+            {/* Form - Personal Info Only */}
+            <form onSubmit={handleSubmit} className="space-y-6 max-w-md">
               {/* Personal Info */}
               <div className="space-y-4">
                 <h3 className="text-sm uppercase tracking-wider text-gray-600">
@@ -308,57 +242,92 @@ Gancho: ${formData.gancho}
                   className="w-full px-0 py-3 border-0 border-b border-gray-300 focus:border-gray-800 focus:outline-none transition-colors bg-transparent placeholder:text-gray-400"
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder={content.labels.email[locale]}
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-0 py-3 border-0 border-b border-gray-300 focus:border-gray-800 focus:outline-none transition-colors bg-transparent placeholder:text-gray-400"
-                  />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder={content.labels.email[locale]}
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-0 py-3 border-0 border-b border-gray-300 focus:border-gray-800 focus:outline-none transition-colors bg-transparent placeholder:text-gray-400"
+                />
 
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder={content.labels.phone[locale]}
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-0 py-3 border-0 border-b border-gray-300 focus:border-gray-800 focus:outline-none transition-colors bg-transparent placeholder:text-gray-400"
-                  />
-                </div>
-              </div>
-
-              {/* Measurements Summary */}
-              <div className="space-y-3">
-                <h3 className="text-sm uppercase tracking-wider text-gray-600">
-                  {locale === 'pt' ? 'Resumo das Medidas' : locale === 'es' ? 'Resumen de Medidas' : locale === 'fr' ? 'Résumé des Mesures' : 'Measurements Summary'}
-                </h3>
-                <p className="text-xs text-gray-500">
-                  {locale === 'pt'
-                    ? 'As medidas preenchidas no croqui serão enviadas junto com seu pedido.'
-                    : locale === 'es'
-                    ? 'Las medidas completadas en el croquis se enviarán con su pedido.'
-                    : locale === 'fr'
-                    ? 'Les mesures remplies sur le croquis seront envoyées avec votre commande.'
-                    : 'The measurements filled in the sketch will be sent with your order.'}
-                </p>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder={content.labels.phone[locale]}
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-0 py-3 border-0 border-b border-gray-300 focus:border-gray-800 focus:outline-none transition-colors bg-transparent placeholder:text-gray-400"
+                />
               </div>
 
               {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full md:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-green-600 text-white hover:bg-green-700 transition-colors"
-              >
-                <Phone className="h-5 w-5" strokeWidth={1} />
-                <span className="text-sm uppercase tracking-wider">
+              <div className="pt-6">
+                <button
+                  type="submit"
+                  className="inline-block px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider"
+                >
                   {content.button[locale]}
-                </span>
-              </button>
+                </button>
+              </div>
             </form>
           </div>
+
+          {/* Right side - Croqui */}
+          <div className="order-2 lg:order-2">
+            <div className="relative w-full max-w-xl mx-auto">
+              {/* SVG Background */}
+              <img
+                src="/banners/Frame 49.svg"
+                alt="Fashion Sketch"
+                className="w-full h-auto"
+              />
+
+              {/* Interactive Input Fields Positioned Over SVG */}
+              <div className="absolute inset-0" style={{ width: '100%', height: '100%' }}>
+                {/* Map measurements to SVG positions with better spacing */}
+                {[
+                  { field: 'alturaBusto', label: content.labels.alturaBusto[locale], position: { top: '5%', left: '2%' } },
+                  { field: 'busto', label: content.labels.busto[locale], position: { top: '14%', left: '2%' } },
+                  { field: 'comprimentoBraco', label: content.labels.comprimentoBraco[locale], position: { top: '23%', left: '2%' } },
+                  { field: 'cintura', label: content.labels.cintura[locale], position: { top: '32%', left: '2%' } },
+                  { field: 'quadril', label: content.labels.quadril[locale], position: { top: '41%', left: '2%' } },
+                  { field: 'alturaJoelho', label: content.labels.alturaJoelho[locale], position: { top: '50%', left: '2%' } },
+                  { field: 'costas', label: content.labels.costas[locale], position: { top: '65%', left: '2%' } },
+                  { field: 'ombro', label: content.labels.ombro[locale], position: { top: '14%', right: '2%', left: 'auto' } },
+                  { field: 'larguraBraco', label: content.labels.larguraBraco[locale], position: { top: '23%', right: '2%', left: 'auto' } },
+                  { field: 'punhoComAbertura', label: content.labels.punhoComAbertura[locale], position: { top: '32%', right: '2%', left: 'auto' } },
+                  { field: 'punhoSemAbertura', label: content.labels.punhoSemAbertura[locale], position: { top: '41%', right: '2%', left: 'auto' } },
+                  { field: 'alturaCalca', label: content.labels.alturaCalca[locale], position: { top: '50%', right: '2%', left: 'auto' } },
+                  { field: 'gancho', label: content.labels.gancho[locale], position: { top: '62%', right: '2%', left: 'auto' } },
+                ].map((item) => (
+                  <div
+                    key={item.field}
+                    className="absolute"
+                    style={{
+                      ...item.position,
+                      width: '23%',
+                    }}
+                  >
+                    <label className="text-[10px] text-gray-700 font-medium block mb-0.5">
+                      {item.label}
+                    </label>
+                    <input
+                      type="text"
+                      name={item.field}
+                      value={formData[item.field as keyof MeasurementData]}
+                      onChange={handleInputChange}
+                      className="w-full px-2 py-1.5 text-xs border border-gray-200 bg-white/95 rounded-md focus:border-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-200 transition-all shadow-sm hover:border-gray-300"
+                      placeholder="cm"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

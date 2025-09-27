@@ -10,16 +10,16 @@ interface EditorialSectionProps {
 export function EditorialSection({ locale }: EditorialSectionProps) {
   const content = {
     title: {
-      en: 'Editorial',
-      pt: 'Editorial',
-      es: 'Editorial',
-      fr: 'Éditorial',
+      en: 'Culture',
+      pt: 'Cultura',
+      es: 'Cultura',
+      fr: 'Culture',
     },
     subtitle: {
-      en: 'Stories, inspiration and craftsmanship',
-      pt: 'Histórias, inspiração e artesanato',
-      es: 'Historias, inspiración y artesanía',
-      fr: 'Histoires, inspiration et artisanat',
+      en: 'Discover our culture, stories and creative process',
+      pt: 'Conheça nossa cultura, histórias e processo criativo',
+      es: 'Conoce nuestra cultura, historias y proceso creativo',
+      fr: 'Découvrez notre culture, nos histoires et notre processus créatif',
     },
     readMore: {
       en: 'Read More',
@@ -131,7 +131,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
                     alt={article.title[locale]}
                     width={400}
                     height={533}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-700"
                   />
                 </div>
 
@@ -169,7 +169,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
         <div className="text-center mt-12">
           <Link
             href={`/${locale}/blog`}
-            className="inline-flex items-center justify-center px-8 py-3 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm uppercase tracking-wider"
+            className="inline-flex items-center justify-center px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider"
           >
             {locale === 'pt' ? 'Ver Todos os Artigos' : locale === 'es' ? 'Ver Todos los Artículos' : locale === 'fr' ? 'Voir Tous les Articles' : 'View All Articles'}
           </Link>

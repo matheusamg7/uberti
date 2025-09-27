@@ -1,6 +1,7 @@
 'use client';
 
 import { MapPin } from 'lucide-react';
+import { WorldMap } from '@/components/ui/world-map';
 
 interface WhereToFindProps {
   locale: 'en' | 'pt' | 'es' | 'fr';
@@ -87,56 +88,10 @@ export function WhereToFind({ locale }: WhereToFindProps) {
         {/* Map and Locations */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Map */}
-          <div className="lg:col-span-2 order-2 lg:order-1">
-            <div className="relative aspect-[16/10] bg-gradient-to-b from-gray-100 to-gray-200 rounded overflow-hidden">
-              {/* Simple World Map Shape */}
-              <svg
-                viewBox="0 0 1000 500"
-                className="absolute inset-0 w-full h-full opacity-10"
-                fill="currentColor"
-              >
-                {/* Simplified continents */}
-                {/* Europe */}
-                <ellipse cx="500" cy="150" rx="80" ry="60" />
-                {/* Africa */}
-                <ellipse cx="500" cy="280" rx="70" ry="90" />
-                {/* South America */}
-                <ellipse cx="350" cy="350" rx="50" ry="80" />
-                {/* North America */}
-                <ellipse cx="250" cy="150" rx="90" ry="70" />
-                {/* Asia */}
-                <ellipse cx="700" cy="180" rx="120" ry="80" />
-                {/* Australia */}
-                <ellipse cx="800" cy="380" rx="60" ry="40" />
-              </svg>
-
-              {/* Location Pins */}
-              {locations.map((location, index) => (
-                <div
-                  key={index}
-                  className="absolute group"
-                  style={{
-                    top: location.coordinates.top,
-                    left: location.coordinates.left,
-                    transform: 'translate(-50%, -50%)',
-                  }}
-                >
-                  {/* Pin */}
-                  <div className="relative">
-                    <div className="w-3 h-3 bg-[#422B21] rounded-full animate-pulse" />
-                    <div className="absolute inset-0 w-3 h-3 bg-[#422B21] rounded-full animate-ping" />
-                  </div>
-
-                  {/* Tooltip */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                    <div className="bg-white shadow-lg rounded px-3 py-2 whitespace-nowrap">
-                      <p className="text-xs font-medium">{location.city[locale]}</p>
-                      <p className="text-xs text-gray-500">{location.gallery}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="lg:col-span-2 order-2 lg:order-1 max-w-2xl mx-auto">
+            <WorldMap
+              locations={[]}
+            />
           </div>
 
           {/* Locations List */}

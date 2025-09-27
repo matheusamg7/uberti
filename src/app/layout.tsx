@@ -3,24 +3,24 @@ import { fontClasses } from "@/styles/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "UBERTI - Artesanal Fashion",
+  title: "Helena Uberti - Fashion",
   description: "Discover Helena's artisanal fashion collections. Handcrafted pieces that blend elegance with unique storytelling.",
   keywords: ["fashion", "artesanal", "handcrafted", "elegante", "design", "moda"],
-  authors: [{ name: "Helena UBERTI" }],
-  creator: "Helena UBERTI",
-  publisher: "UBERTI",
+  authors: [{ name: "Helena Uberti" }],
+  creator: "Helena Uberti",
+  publisher: "Helena Uberti",
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
   openGraph: {
-    title: "UBERTI - Artesanal Fashion",
+    title: "Helena Uberti - Fashion",
     description: "Discover Helena's artisanal fashion collections",
     url: "/",
-    siteName: "UBERTI",
+    siteName: "Helena Uberti - Fashion",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "UBERTI - Artesanal Fashion",
+    title: "Helena Uberti - Fashion",
     description: "Discover Helena's artisanal fashion collections",
   },
   robots: {

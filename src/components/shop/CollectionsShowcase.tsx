@@ -114,7 +114,7 @@ export function CollectionsShowcase({ locale }: CollectionsShowcaseProps) {
 
                       <Link
                         href={`/${locale}/collections/${collection.slug}`}
-                        className="inline-block px-8 py-3 bg-white/10 backdrop-blur-md border border-gray-800/20 text-gray-800 hover:bg-gray-100/20 transition-all duration-300 text-sm uppercase tracking-wider"
+                        className="inline-block px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider"
                       >
                         {locale === 'pt' ? 'Explorar Coleção' : locale === 'es' ? 'Explorar Colección' : locale === 'fr' ? 'Explorer Collection' : 'Explore Collection'}
                       </Link>

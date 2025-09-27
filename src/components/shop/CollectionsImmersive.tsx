@@ -69,8 +69,10 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
               src={collection.image}
               alt={collection.name[locale]}
               fill
-              className={`object-cover object-center transition-transform duration-700 ease-out ${
-                hoveredCollection === collection.id ? 'scale-[1.03]' : 'scale-100'
+              className={`object-cover ${
+                collection.id === 'favos' ? 'object-[center_22%]' : 'object-[center_20%]'
+              } transition-transform duration-700 ease-out ${
+                hoveredCollection === collection.id ? 'scale-[1.01]' : 'scale-100'
               }`}
               sizes="50vw"
               priority
@@ -95,18 +97,9 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
               {/* Name */}
               <h2 className={`text-3xl md:text-4xl lg:text-5xl font-light tracking-wide mb-3 transition-all duration-300 ${
                 hoveredCollection === collection.id ? 'translate-y-0' : 'translate-y-2'
-              }`}>
+              }`} style={{ fontFamily: "'Cinzel', serif" }}>
                 {collection.name[locale]}
               </h2>
-
-              {/* Description - shows on hover */}
-              <p className={`text-sm md:text-base opacity-90 mb-6 transition-all duration-300 transform ${
-                hoveredCollection === collection.id
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-4'
-              }`}>
-                {collection.description[locale]}
-              </p>
 
               {/* CTA */}
               <div className={`inline-flex items-center gap-2 text-sm uppercase tracking-wider transition-all duration-300 ${

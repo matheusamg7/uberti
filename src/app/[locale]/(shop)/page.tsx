@@ -7,7 +7,6 @@ import { CollectionsImmersive } from '@/components/shop/CollectionsImmersive';
 import { ExclusiveTailoring } from '@/components/shop/ExclusiveTailoring';
 import { EditorialSection } from '@/components/shop/EditorialSection';
 import { WhereToFind } from '@/components/shop/WhereToFind';
-import { BlogCallout } from '@/components/shop/BlogCallout';
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -110,35 +109,35 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* Collections Immersive Section */}
       <CollectionsImmersive locale={locale} />
 
-      <div className="space-y-20 sm:space-y-32">
       {/* Featured Products Section */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20">
-        <div className="text-center mb-12">
-          <h2 className="heading-1">
-            {sectionsContent.featured.title[locale]}
-          </h2>
-        </div>
+      <section className="bg-gray-50 py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="heading-1">
+              {sectionsContent.featured.title[locale]}
+            </h2>
+          </div>
 
-        <FeaturedCarousel
-          products={featuredProducts}
-          locale={locale}
-        />
+          <FeaturedCarousel
+            products={featuredProducts}
+            locale={locale}
+          />
 
-        <div className="text-center mt-12">
-          <Link
-            href={`/${locale}/products?featured=true`}
-            className="inline-block px-8 py-3 bg-white/10 backdrop-blur-md border border-white/20 text-gray-800 hover:bg-white/20 transition-all duration-300 text-sm uppercase tracking-wider"
-          >
-            {locale === 'pt' ? 'Ver Todos os Destaques' : locale === 'es' ? 'Ver Todos los Destacados' : locale === 'fr' ? 'Voir Toutes les Vedettes' : 'View All Featured'}
-          </Link>
+          <div className="text-center mt-12">
+            <Link
+              href={`/${locale}/products`}
+              className="inline-block px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider"
+            >
+              {locale === 'pt' ? 'Explorar Produtos' : locale === 'es' ? 'Explorar Productos' : locale === 'fr' ? 'Explorer les Produits' : 'Explore Products'}
+            </Link>
+          </div>
         </div>
       </section>
 
+      <div className="space-y-20 sm:space-y-32">
+
       {/* Exclusive Tailoring Section */}
       <ExclusiveTailoring locale={locale} />
-
-      {/* Blog Callout Section */}
-      <BlogCallout locale={locale} />
 
       {/* Editorial Section */}
       <EditorialSection locale={locale} />
@@ -160,7 +159,7 @@ export default async function HomePage({ params }: HomePageProps) {
               <div className="pt-4">
                 <Link
                   href={`/${locale}/about`}
-                  className="inline-block px-8 py-3 bg-white/10 backdrop-blur-md border border-gray-800/20 text-gray-800 hover:bg-gray-100/20 transition-all duration-300 text-sm uppercase tracking-wider"
+                  className="inline-block px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider"
                 >
                   {sectionsContent.about.cta[locale]}
                 </Link>

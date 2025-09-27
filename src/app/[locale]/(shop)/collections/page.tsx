@@ -58,7 +58,7 @@ export default function CollectionsPage({ params }: CollectionsPageProps) {
                 }`}
               >
                 {/* Collection Image */}
-                <div className={`aspect-[4/3] overflow-hidden rounded bg-muted/30 hover-lift ${
+                <div className={`aspect-[4/3] overflow-hidden rounded bg-muted/30 ${
                   isEven ? '' : 'lg:col-start-2'
                 }`}>
                   <Link href={`/${locale}/collections/${collection.slug}`}>
@@ -67,7 +67,7 @@ export default function CollectionsPage({ params }: CollectionsPageProps) {
                       alt={collectionName}
                       width={600}
                       height={450}
-                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                      className="h-full w-full object-cover transition-transform duration-700"
                     />
                   </Link>
                 </div>

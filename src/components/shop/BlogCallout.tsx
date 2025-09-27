@@ -11,10 +11,10 @@ interface BlogCalloutProps {
 export function BlogCallout({ locale }: BlogCalloutProps) {
   const content = {
     title: {
-      en: 'Stories & Craftsmanship',
-      pt: 'Histórias & Artesanato',
-      es: 'Historias y Artesanía',
-      fr: 'Histoires et Artisanat',
+      en: 'Blog',
+      pt: 'Blog',
+      es: 'Blog',
+      fr: 'Blog',
     },
     subtitle: {
       en: 'Discover the inspiration behind each piece',
@@ -50,13 +50,8 @@ export function BlogCallout({ locale }: BlogCalloutProps) {
       <div className="relative z-10 h-full flex items-center">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-2xl">
-            {/* Title */}
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white mb-6 tracking-wide">
-              {content.title[locale]}
-            </h2>
-
-            {/* Subtitle */}
-            <p className="text-lg md:text-xl text-white/80 mb-10 font-light">
+            {/* Subtitle Only */}
+            <p className="text-2xl md:text-3xl text-white mb-10 font-light tracking-wide">
               {content.subtitle[locale]}
             </p>
 

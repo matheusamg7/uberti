@@ -49,6 +49,9 @@ export function HeroCarousel({ locale, heroContent }: HeroCarouselProps) {
               className="object-cover object-center"
               sizes="100vw"
             />
+            {/* Gradiente suave de cima */}
+            <div className="absolute inset-x-0 top-0 h-96 bg-gradient-to-b from-black/30 via-black/10 to-transparent" />
+            {/* Gradiente de baixo para o texto */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 from-0% via-black/60 via-35% to-transparent to-70%" />
           </div>
         ))}
@@ -57,7 +60,7 @@ export function HeroCarousel({ locale, heroContent }: HeroCarouselProps) {
       {/* Content - posicionado na parte inferior */}
       <div className="absolute bottom-20 left-0 right-0 z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center text-white">
         <div className="space-y-6 animate-fade-in-up">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light italic tracking-wide text-white max-w-5xl mx-auto whitespace-pre-line">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide text-white max-w-5xl mx-auto whitespace-pre-line" style={{ fontFamily: "'Cinzel', serif" }}>
             {heroContent.title[locale]}
           </h1>
           {heroContent.description[locale] && (

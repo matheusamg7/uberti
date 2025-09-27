@@ -55,7 +55,7 @@ export function ProductCard({ product, locale, priority = false }: ProductCardPr
     >
       <article className="space-y-3">
         {/* Product Images */}
-        <div className="relative aspect-[3/4] overflow-hidden bg-gray-50">
+        <div className="relative aspect-[3/4] overflow-hidden bg-gray-50 group">
           {/* Primary Image */}
           <Image
             src={primaryImage}
@@ -63,10 +63,19 @@ export function ProductCard({ product, locale, priority = false }: ProductCardPr
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={priority}
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="object-cover transition-opacity duration-500 group-hover:opacity-0"
           />
 
-          {/* Secondary Image (Hover) - Removed for cleaner look */}
+          {/* Secondary Image (Hover) */}
+          {secondaryImage && (
+            <Image
+              src={secondaryImage}
+              alt={`${productName} - alternate view`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+            />
+          )}
 
           {/* Out of Stock Overlay */}
           {product.stock_quantity === 0 && (

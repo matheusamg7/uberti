@@ -53,7 +53,7 @@ export function CollectionsGrid({ locale }: CollectionsGridProps) {
                     src={collection.image}
                     alt={collection.name[locale]}
                     fill
-                    className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover object-center transition-transform duration-700"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
                   />
@@ -67,7 +67,7 @@ export function CollectionsGrid({ locale }: CollectionsGridProps) {
                   <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
                     {collection.year}
                   </p>
-                  <h3 className="text-2xl font-light tracking-wide text-gray-900 group-hover:text-gray-600 transition-colors">
+                  <h3 className="text-2xl font-light tracking-wide text-gray-900 group-hover:text-gray-600 transition-colors" style={{ fontFamily: "'Cinzel', serif" }}>
                     {collection.name[locale]}
                   </h3>
                 </div>
