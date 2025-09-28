@@ -1,6 +1,4 @@
 'use client'
-
-import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -108,7 +106,7 @@ export default function ProductDetailPage({
             {product.featured && (
               <Badge variant="secondary">Featured</Badge>
             )}
-            <Badge variant={stockStatus.color as any}>
+            <Badge variant={stockStatus.color as 'default' | 'secondary' | 'destructive' | 'outline'}>
               {stockStatus.text}
             </Badge>
           </div>

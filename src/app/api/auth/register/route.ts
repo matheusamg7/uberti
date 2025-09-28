@@ -49,6 +49,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create user profile
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { data: profileData, error: profileError } = await supabase
       .from('profiles')
       .insert([
@@ -58,7 +59,7 @@ export async function POST(request: NextRequest) {
           phone: phone || null,
           is_admin: false,
         },
-      ])
+      ] as any)
       .select()
       .single();
 

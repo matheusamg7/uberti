@@ -331,19 +331,23 @@ export function Header({ locale }: HeaderProps) {
                         </h3>
                         <div className="flex gap-2 flex-wrap">
                           {languages.map((lang) => (
-                            <Link
+                            <button
                               key={lang.code}
-                              href={`/${lang.code}`}
+                              onClick={() => {
+                                const currentPath = window.location.pathname;
+                                const pathSegments = currentPath.split('/');
+                                pathSegments[1] = lang.code;
+                                window.location.pathname = pathSegments.join('/');
+                              }}
                               className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${
                                 currentLanguage?.code === lang.code
                                   ? 'bg-gray-800 text-white border-gray-800'
                                   : 'border-gray-300 text-gray-700 hover:border-gray-800'
                               }`}
-                              onClick={() => setIsMobileMenuOpen(false)}
                             >
                               <span className="mr-1">{lang.flag}</span>
                               {lang.code.toUpperCase()}
-                            </Link>
+                            </button>
                           ))}
                         </div>
                       </div>

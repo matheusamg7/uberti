@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FeaturedCarousel } from '@/components/shop/FeaturedCarousel';
-import { mockCollections, getFeaturedProducts } from '@/lib/mock-data';
+import { getFeaturedProducts } from '@/lib/mock-data';
 import { HeroCarousel } from '@/components/shop/HeroCarousel';
 import { CollectionsImmersive } from '@/components/shop/CollectionsImmersive';
 import { ExclusiveTailoring } from '@/components/shop/ExclusiveTailoring';

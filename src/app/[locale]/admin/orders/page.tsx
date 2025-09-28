@@ -23,7 +23,6 @@ import {
 } from '@/components/ui/select'
 import {
   Search,
-  Filter,
   Eye,
   Package,
   Clock,
@@ -300,7 +299,7 @@ export default function OrdersPage() {
                   </TableCell>
                   <TableCell>
                     <Badge
-                      variant={getStatusColor(order.status) as any}
+                      variant={getStatusColor(order.status) as 'default' | 'secondary' | 'destructive' | 'outline'}
                       className="flex items-center gap-1 w-fit"
                     >
                       {getStatusIcon(order.status)}
