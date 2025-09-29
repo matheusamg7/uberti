@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 
 interface CollectionsImmersiveProps {
   locale: 'en' | 'pt' | 'es' | 'fr';
@@ -70,7 +69,7 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
               alt={collection.name[locale]}
               fill
               className={`object-cover ${
-                collection.id === 'favos' ? 'object-[center_22%]' : 'object-[center_20%]'
+                collection.id === 'favos' ? 'object-[center_10%]' : 'object-[center_20%]'
               } transition-transform duration-700 ease-out ${
                 hoveredCollection === collection.id ? 'scale-[1.01]' : 'scale-100'
               }`}
@@ -80,37 +79,26 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
           </div>
 
           {/* Gradient Overlay */}
-          <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 transition-opacity duration-500 ${
-            hoveredCollection === collection.id ? 'opacity-90' : 'opacity-70'
+          <div className={`absolute inset-0 bg-black/40 transition-opacity duration-500 ${
+            hoveredCollection === collection.id ? 'bg-black/60' : 'bg-black/40'
           }`} />
 
           {/* Content */}
           <div className="relative z-10 h-full flex items-end p-8 md:p-12">
-            <div className="text-white max-w-lg">
-              {/* Year */}
-              <span className={`text-xs tracking-[0.3em] uppercase opacity-80 mb-3 block transition-all duration-300 ${
-                hoveredCollection === collection.id ? 'opacity-100' : 'opacity-70'
-              }`}>
-                {collection.year}
-              </span>
-
+            <div className="text-white text-center w-full">
               {/* Name */}
-              <h2 className={`text-3xl md:text-4xl lg:text-5xl font-light tracking-wide mb-3 transition-all duration-300 ${
-                hoveredCollection === collection.id ? 'translate-y-0' : 'translate-y-2'
-              }`} style={{ fontFamily: "'Cinzel', serif" }}>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide mb-6 transition-all duration-500"
+                  style={{ fontFamily: "'Cinzel', serif" }}>
                 {collection.name[locale]}
               </h2>
 
               {/* CTA */}
-              <div className={`inline-flex items-center gap-2 text-sm uppercase tracking-wider transition-all duration-300 ${
+              <div className={`text-sm uppercase tracking-[0.2em] transition-all duration-500 ${
                 hoveredCollection === collection.id
-                  ? 'opacity-100 translate-x-0'
-                  : 'opacity-0 -translate-x-4'
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-2'
               }`}>
-                <span>
-                  {locale === 'pt' ? 'Explorar' : locale === 'es' ? 'Explorar' : locale === 'fr' ? 'Explorer' : 'Explore'}
-                </span>
-                <ArrowRight className="h-4 w-4" strokeWidth={1} />
+                {locale === 'pt' ? 'Explorar' : locale === 'es' ? 'Explorar' : locale === 'fr' ? 'Explorer' : 'Explore'}
               </div>
             </div>
           </div>

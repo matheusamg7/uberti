@@ -135,21 +135,33 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       {/* Pampa Banner */}
-      <section className="relative h-[70vh] min-h-[500px] overflow-hidden">
-        <Image
-          src="/banners/pampa_brasileiro.png"
-          alt="Pampa Brasileiro"
-          fill
-          className="object-cover object-[center_70%]"
-          sizes="100vw"
-        />
+      <section className="relative w-full h-[60vh] min-h-[400px] max-h-[600px] overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover object-bottom"
+        >
+          <source src="/banners/pampa_brasileiro_video.mp4" type="video/mp4" />
+        </video>
         {/* Text Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="text-center" style={{ marginTop: '-10%' }}>
-            <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-light tracking-[0.2em] leading-tight" style={{ fontFamily: "'Cinzel', serif" }}>
+            <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-light tracking-[0.2em] leading-tight drop-shadow-lg" style={{ fontFamily: "'Cinzel', serif" }}>
               PAMPA<br/>BRASILEIRO
             </h2>
           </div>
+        </div>
+        {/* Logo no vídeo */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 pointer-events-none">
+          <Image
+            src="/logo/logo_branca.svg"
+            alt="UBERTI"
+            width={60}
+            height={60}
+            className="opacity-80"
+          />
         </div>
       </section>
 

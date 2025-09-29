@@ -53,10 +53,10 @@ export function ExclusiveTailoring({ locale }: ExclusiveTailoringProps) {
       fr: 'Sur Mesure Exclusif',
     },
     subtitle: {
-      en: 'Each body is unique. Send us your measurements and receive a piece made especially for you.',
-      pt: 'Cada corpo é único. Envie suas medidas e receba uma peça feita especialmente para você.',
-      es: 'Cada cuerpo es único. Envía tus medidas y recibe una pieza hecha especialmente para ti.',
-      fr: 'Chaque corps est unique. Envoyez vos mesures et recevez une pièce faite spécialement pour vous.',
+      en: 'Each body is unique. Send us your measurements and receive a piece\nmade especially for you.',
+      pt: 'Cada corpo é único. Envie suas medidas e receba uma peça\nfeita especialmente para você.',
+      es: 'Cada cuerpo es único. Envía tus medidas y recibe una pieza\nhecha especialmente para ti.',
+      fr: 'Chaque corps est unique. Envoyez vos mesures et recevez une pièce\nfaite spécialement pour vous.',
     },
     labels: {
       name: {
@@ -219,7 +219,7 @@ Gancho: ${formData.gancho}
             {/* Header */}
             <div className="mb-12">
               <h2 className="heading-1 mb-6 text-left" style={{ fontFamily: "'Cinzel', serif" }}>{content.title[locale]}</h2>
-              <p className="body-text text-muted-foreground text-left mb-12">
+              <p className="body-text text-muted-foreground text-left mb-12 whitespace-pre-line">
                 {content.subtitle[locale]}
               </p>
             </div>
@@ -311,7 +311,7 @@ Gancho: ${formData.gancho}
                       width: '23%',
                     }}
                   >
-                    <label className="text-[10px] text-gray-700 font-medium block mb-0.5">
+                    <label className="text-xs text-gray-700 font-medium block mb-0.5">
                       {item.label}
                     </label>
                     <input
@@ -319,7 +319,7 @@ Gancho: ${formData.gancho}
                       name={item.field}
                       value={formData[item.field as keyof MeasurementData]}
                       onChange={handleInputChange}
-                      className="w-full px-2 py-1.5 text-xs border border-gray-200 bg-white/95 rounded-md focus:border-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-200 transition-all shadow-sm hover:border-gray-300"
+                      className="w-full px-2 py-1.5 text-sm border border-gray-200 bg-white/95 rounded-md focus:border-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-200 transition-all shadow-sm hover:border-gray-300"
                       placeholder="cm"
                     />
                   </div>

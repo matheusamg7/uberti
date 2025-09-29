@@ -75,7 +75,7 @@ export function WhereToFind({ locale }: WhereToFindProps) {
   ];
 
   return (
-    <section id="where-to-find" className="py-20 bg-gray-50">
+    <section id="where-to-find" className="py-12 bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
