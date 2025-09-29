@@ -7,6 +7,7 @@ import { CollectionsImmersive } from '@/components/shop/CollectionsImmersive';
 import { ExclusiveTailoring } from '@/components/shop/ExclusiveTailoring';
 import { EditorialSection } from '@/components/shop/EditorialSection';
 import { WhereToFind } from '@/components/shop/WhereToFind';
+import { FloatingActions } from '@/components/ui/floating-actions';
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -176,6 +177,9 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* Where to Find Section */}
       <WhereToFind locale={locale} />
       </div>
+
+      {/* Floating Actions - WhatsApp and Scroll to Top */}
+      <FloatingActions />
     </div>
   );
 }

@@ -210,7 +210,7 @@ Gancho: ${formData.gancho}
   };
 
   return (
-    <section className="py-12" style={{ backgroundColor: '#FEFDFE' }}>
+    <section className="py-0" style={{ backgroundColor: '#FEFDFE' }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">

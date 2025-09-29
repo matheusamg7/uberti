@@ -121,14 +121,14 @@ export function Header({ locale }: HeaderProps) {
             <div className="absolute left-8">
               <Link
                 href={`/${locale}`}
-                className="flex items-center hover:opacity-80 transition-opacity"
+                className="flex items-center hover:scale-105 transition-all duration-300"
               >
                 <Image
                   src={isScrolled || !isHomePage ? "/logo/logo_marrom.svg" : "/logo/logo_branca.svg"}
                   alt="UBERTI"
                   width={200}
                   height={75}
-                  className="h-20 w-auto transition-opacity duration-300"
+                  className="h-20 w-auto transition-all duration-300"
                   priority
                 />
               </Link>
@@ -229,7 +229,7 @@ export function Header({ locale }: HeaderProps) {
                     </div>
                   </button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[400px] bg-white p-0">
+                <SheetContent side="right" className="w-[400px] bg-white p-0 data-[state=open]:animate-slide-in-right data-[state=closed]:animate-slide-out-right">
                   <SheetTitle className="sr-only">Menu</SheetTitle>
                   <div className="flex flex-col h-full">
                     {/* Logo no Menu */}
