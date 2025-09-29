@@ -49,7 +49,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Create user profile
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { data: profileData, error: profileError } = await supabase
       .from('profiles')
       .insert([
@@ -59,6 +58,7 @@ export async function POST(request: NextRequest) {
           phone: phone || null,
           is_admin: false,
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ] as any)
       .select()
       .single();
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
           error: {
             code: 'validation_error',
             message: 'Invalid input data',
-            details: error.errors,
+            details: error.issues,
           },
         },
         { status: 400 }

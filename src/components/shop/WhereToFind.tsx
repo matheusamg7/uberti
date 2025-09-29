@@ -75,7 +75,7 @@ export function WhereToFind({ locale }: WhereToFindProps) {
   ];
 
   return (
-    <section id="where-to-find" className="py-12 bg-gray-50">
+    <section id="where-to-find" className="py-16 bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -104,11 +104,11 @@ export function WhereToFind({ locale }: WhereToFindProps) {
                 <div className="flex items-start gap-3">
                   <MapPin className="h-4 w-4 text-[#422B21] mt-1 flex-shrink-0" strokeWidth={1} />
                   <div className="space-y-1">
-                    <h3 className="font-medium text-gray-900">
+                    <h3 className="font-medium text-gray-900" style={{ fontFamily: "'Cinzel', serif" }}>
                       {location.city[locale]}, {location.country}
                     </h3>
-                    <p className="text-sm text-gray-700">{location.gallery}</p>
-                    <p className="text-xs text-gray-500">{location.address}</p>
+                    <p className="text-sm text-gray-700" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>{location.gallery}</p>
+                    <p className="text-xs text-gray-500" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>{location.address}</p>
                   </div>
                 </div>
               </div>

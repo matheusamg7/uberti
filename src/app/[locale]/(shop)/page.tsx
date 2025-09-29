@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FeaturedCarousel } from '@/components/shop/FeaturedCarousel';
+import { FeaturedGrid } from '@/components/shop/FeaturedGrid';
 import { getFeaturedProducts } from '@/lib/mock-data';
 import { HeroCarousel } from '@/components/shop/HeroCarousel';
 import { CollectionsImmersive } from '@/components/shop/CollectionsImmersive';
@@ -16,7 +16,7 @@ interface HomePageProps {
 export default async function HomePage({ params }: HomePageProps) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale as 'en' | 'pt' | 'es' | 'fr';
-  const featuredProducts = getFeaturedProducts().slice(0, 4);
+  const featuredProducts = getFeaturedProducts().slice(0, 3);
 
   const heroContent = {
     title: {
@@ -111,15 +111,15 @@ export default async function HomePage({ params }: HomePageProps) {
       <CollectionsImmersive locale={locale} />
 
       {/* Featured Products Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="heading-1">
+      <section className="bg-[#FEFDFE] py-24">
+        <div className="mx-auto max-w-[1800px] px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight" style={{ fontFamily: "'Cinzel', serif" }}>
               {sectionsContent.featured.title[locale]}
             </h2>
           </div>
 
-          <FeaturedCarousel
+          <FeaturedGrid
             products={featuredProducts}
             locale={locale}
           />
@@ -129,7 +129,7 @@ export default async function HomePage({ params }: HomePageProps) {
               href={`/${locale}/products`}
               className="inline-block px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider"
             >
-              {locale === 'pt' ? 'Explorar Produtos' : locale === 'es' ? 'Explorar Productos' : locale === 'fr' ? 'Explorer les Produits' : 'Explore Products'}
+              {locale === 'pt' ? 'Ver Todos os Produtos' : locale === 'es' ? 'Ver Todos los Productos' : locale === 'fr' ? 'Voir Tous les Produits' : 'View All Products'}
             </Link>
           </div>
         </div>
@@ -166,16 +166,15 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
       </section>
 
-      <div className="space-y-20 sm:space-y-32">
+      <div className="space-y-12" style={{ backgroundColor: '#FEFDFE' }}>
+        {/* Editorial Section */}
+        <EditorialSection locale={locale} />
 
-      {/* Editorial Section */}
-      <EditorialSection locale={locale} />
+        {/* Exclusive Tailoring Section */}
+        <ExclusiveTailoring locale={locale} />
 
-      {/* Exclusive Tailoring Section */}
-      <ExclusiveTailoring locale={locale} />
-
-      {/* Where to Find Section */}
-      <WhereToFind locale={locale} />
+        {/* Where to Find Section */}
+        <WhereToFind locale={locale} />
       </div>
 
       {/* Floating Actions - WhatsApp and Scroll to Top */}

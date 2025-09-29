@@ -13,12 +13,12 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
 
   const collections = [
     {
-      id: 'junho',
+      id: 'raizes',
       name: {
-        en: 'Junho Collection',
-        pt: 'Coleção Junho',
-        es: 'Colección Junho',
-        fr: 'Collection Junho',
+        en: 'Raízes',
+        pt: 'Raízes',
+        es: 'Raízes',
+        fr: 'Raízes',
       },
       description: {
         en: 'Natural fibers and timeless silhouettes',
@@ -28,15 +28,15 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
       },
       year: '2024',
       image: '/coleção 1/capa_collection_1.jpg',
-      slug: 'junho',
+      slug: 'raizes',
     },
     {
       id: 'favos',
       name: {
-        en: 'Favos Collection',
-        pt: 'Coleção Favos',
-        es: 'Colección Favos',
-        fr: 'Collection Favos',
+        en: 'Favos',
+        pt: 'Favos',
+        es: 'Favos',
+        fr: 'Favos',
       },
       description: {
         en: 'Organic patterns and bold statements',
@@ -78,14 +78,19 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
             />
           </div>
 
-          {/* Gradient Overlay */}
-          <div className={`absolute inset-0 bg-black/40 transition-opacity duration-500 ${
-            hoveredCollection === collection.id ? 'bg-black/60' : 'bg-black/40'
+          {/* Gradient Overlay - Bottom to top */}
+          <div className={`absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-500 ${
+            hoveredCollection === collection.id ? 'opacity-100' : 'opacity-90'
           }`} />
 
           {/* Content */}
           <div className="relative z-10 h-full flex items-end p-8 md:p-12">
             <div className="text-white text-center w-full">
+              {/* Collection label */}
+              <p className="text-sm font-normal mb-4 opacity-80 uppercase tracking-wider">
+                {locale === 'pt' ? 'coleção' : locale === 'es' ? 'colección' : locale === 'fr' ? 'collection' : 'collection'}
+              </p>
+
               {/* Name */}
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide mb-6 transition-all duration-500"
                   style={{ fontFamily: "'Cinzel', serif" }}>
