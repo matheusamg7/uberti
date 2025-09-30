@@ -15,7 +15,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ArrowLeft, Upload, X } from 'lucide-react'
+import { ArrowLeft, Upload } from 'lucide-react'
 import Link from 'next/link'
 
 export default function NewProductPage({

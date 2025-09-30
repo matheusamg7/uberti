@@ -125,7 +125,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
 
         {/* Articles Cards - 3 columns */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {articles.map((article, index) => (
+          {articles.map((article) => (
             <Link
               key={article.id}
               href={`/${locale}/blog/${article.slug}`}

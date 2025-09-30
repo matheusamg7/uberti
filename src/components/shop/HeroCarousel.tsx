@@ -23,7 +23,7 @@ export function HeroCarousel({ locale, heroContent }: HeroCarouselProps) {
     }, 12000); // Change slide every 12 seconds - more time to appreciate each image
 
     return () => clearInterval(timer);
-  }, []);
+  }, [banners.length]);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);

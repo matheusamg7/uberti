@@ -247,6 +247,91 @@
     @apply bg-primary/10 text-foreground;
   }
 
+  /* Cursor pointer for all interactive elements */
+  button:not([disabled]),
+  a,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select,
+  .cursor-pointer,
+  [onclick],
+  [data-clickable="true"] {
+    cursor: pointer !important;
+  }
+
+  /* Ensure disabled elements don't have pointer cursor */
+  button:disabled,
+  input:disabled,
+  select:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed !important;
+  }
+
+  /* Links that look like buttons should have pointer */
+  a[class*="btn"],
+  a[class*="button"],
+  a[class*="inline-block"] {
+    cursor: pointer !important;
+  }
+
+  /* Dropdown triggers */
+  [aria-haspopup="true"],
+  [aria-expanded] {
+    cursor: pointer !important;
+  }
+
+  /* Interactive images and cards */
+  .group:has(a),
+  [class*="hover:"]:not(input):not(textarea),
+  [class*="transition"]:has(a),
+  img[onclick],
+  div[onclick],
+  [class*="card"] a,
+  [class*="Card"] a,
+  .group {
+    cursor: pointer !important;
+  }
+
+  /* SVG icons that are clickable */
+  svg[onclick],
+  svg[role="button"],
+  button svg,
+  a svg {
+    cursor: pointer !important;
+  }
+
+  /* Ensure all Next.js Link components have pointer */
+  a[href] {
+    cursor: pointer !important;
+  }
+
+  /* Elements with click handlers or transitions */
+  [class*="hover:scale"],
+  [class*="hover:opacity"],
+  [class*="hover:bg"],
+  [class*="hover:text"],
+  [class*="hover:border"],
+  [class*="hover:shadow"],
+  [class*="hover:rotate"],
+  [class*="hover:translate"],
+  [class*="group-hover"],
+  .transition-all,
+  .transition-colors,
+  .transition-transform,
+  .transition-opacity {
+    cursor: pointer;
+  }
+
+  /* Specific overrides for non-clickable elements */
+  p.transition-colors:not([onclick]),
+  div.transition-colors:not([onclick]):not(:has(a)),
+  span.transition-colors:not([onclick]):not(:has(a)) {
+    cursor: auto;
+  }
+
   /* Hamburger menu slide animation */
   @keyframes slideInRight {
     from {

@@ -8,6 +8,33 @@ const collectionProductsSchema = z.object({
   offset: z.coerce.number().int().min(0).optional().default(0),
 });
 
+interface Collection {
+  id: string;
+  slug: string;
+  name_en?: string;
+  name_pt?: string;
+  name_es?: string;
+  [key: string]: unknown;
+}
+
+interface DatabaseError {
+  code?: string;
+  message?: string;
+}
+
+interface Category {
+  id: string;
+  slug: string;
+  name_en?: string;
+  name_pt?: string;
+  name_es?: string;
+}
+
+interface ProductWithCategory {
+  categories?: Category;
+  [key: string]: unknown;
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
@@ -38,7 +65,7 @@ export async function GET(
       .select('*')
       .eq('slug', slug)
       .eq('is_active', true)
-      .single();
+      .single() as { data: Collection | null; error: DatabaseError | null };
 
     if (collectionError) {
       if (collectionError.code === 'PGRST116') {
@@ -64,6 +91,19 @@ export async function GET(
           },
         },
         { status: 500 }
+      );
+    }
+
+    if (!collection) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: {
+            code: 'collection_not_found',
+            message: 'Collection not found',
+          },
+        },
+        { status: 404 }
       );
     }
 
@@ -116,7 +156,7 @@ export async function GET(
     }
 
     // Get available categories in this collection
-    const { data: categories, error: categoriesError } = await supabase
+    const { data: categories } = await supabase
       .from('products')
       .select(`
         categories (
@@ -133,10 +173,10 @@ export async function GET(
     const uniqueCategories = categories
       ? Array.from(
           new Map(
-            categories
-              .map(p => p.categories)
-              .filter(Boolean)
-              .map(cat => [cat!.id, cat])
+            (categories as ProductWithCategory[])
+              .map((p) => p.categories)
+              .filter((cat): cat is Category => Boolean(cat))
+              .map((cat) => [cat.id, cat] as const)
           ).values()
         )
       : [];
@@ -167,7 +207,7 @@ export async function GET(
           error: {
             code: 'validation_error',
             message: 'Invalid query parameters',
-            details: error.errors,
+            details: error.issues,
           },
         },
         { status: 400 }

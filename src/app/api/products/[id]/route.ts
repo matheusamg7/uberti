@@ -76,6 +76,19 @@ export async function GET(
       );
     }
 
+    if (!product) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: {
+            code: 'product_not_found',
+            message: 'Product not found',
+          },
+        },
+        { status: 404 }
+      );
+    }
+
     // Get related products from the same collection
     const { data: relatedProducts } = await supabase
       .from('products')
@@ -90,7 +103,8 @@ export async function GET(
         images,
         featured
       `)
-      .eq('collection_id', product.collection_id)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .eq('collection_id', (product as any).collection_id)
       .eq('is_active', true)
       .neq('id', id)
       .limit(4)

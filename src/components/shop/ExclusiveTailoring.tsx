@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface ExclusiveTailoringProps {
   locale: 'en' | 'pt' | 'es' | 'fr';
@@ -279,9 +280,11 @@ Gancho: ${formData.gancho}
           <div className="order-2 lg:order-2">
             <div className="relative w-full max-w-xl mx-auto">
               {/* SVG Background */}
-              <img
+              <Image
                 src="/banners/Frame 49.svg"
                 alt="Fashion Sketch"
+                width={800}
+                height={600}
                 className="w-full h-auto"
               />
 

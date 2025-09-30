@@ -43,7 +43,7 @@ export function FeaturedGrid({ products, locale }: FeaturedGridProps) {
             {/* Product Image - Only this has hover */}
             <Link
               href={`/${locale}/products/${product.id}`}
-              className="block group"
+              className="block group cursor-pointer"
               onMouseEnter={() => setHoveredProduct(product.id)}
               onMouseLeave={() => setHoveredProduct(null)}
             >

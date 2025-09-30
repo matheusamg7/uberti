@@ -52,11 +52,11 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
 
   return (
     <section className="relative h-[80vh] min-h-[600px] flex">
-      {collections.map((collection, index) => (
+      {collections.map((collection) => (
         <Link
           key={collection.id}
           href={`/${locale}/collections/${collection.slug}`}
-          className={`relative flex-1 overflow-hidden group transition-all duration-500 ease-out ${
+          className={`relative flex-1 overflow-hidden group cursor-pointer transition-all duration-500 ease-out ${
             hoveredCollection === collection.id ? 'flex-[1.1]' : 'flex-1'
           }`}
           onMouseEnter={() => setHoveredCollection(collection.id)}

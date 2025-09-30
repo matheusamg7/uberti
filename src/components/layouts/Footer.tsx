@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { Instagram, Facebook, Mail, Phone, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
 
 interface FooterProps {
   locale: 'en' | 'pt' | 'es';

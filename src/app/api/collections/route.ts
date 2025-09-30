@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
           error: {
             code: 'validation_error',
             message: 'Invalid query parameters',
-            details: error.errors,
+            details: error.issues,
           },
         },
         { status: 400 }

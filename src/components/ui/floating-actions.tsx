@@ -29,7 +29,7 @@ export function FloatingActions() {
       {isScrolled && (
         <button
           onClick={scrollToTop}
-          className="w-12 h-12 rounded-full bg-black transition-all duration-300 opacity-90 cursor-pointer flex items-center justify-center"
+          className="w-12 h-12 rounded-full bg-black transition-all duration-300 opacity-90 cursor-pointer flex items-center justify-center hover:opacity-100"
           aria-label="Scroll to top"
         >
           <ChevronUp className="h-6 w-6 text-white" strokeWidth={1.5} />
@@ -41,7 +41,7 @@ export function FloatingActions() {
         href="https://wa.me/5511999999999"
         target="_blank"
         rel="noopener noreferrer"
-        className="w-14 h-14 rounded-full bg-black transition-all duration-300 opacity-90 cursor-pointer flex items-center justify-center"
+        className="w-14 h-14 rounded-full bg-black transition-all duration-300 opacity-90 cursor-pointer flex items-center justify-center hover:opacity-100"
         aria-label="Send Message"
       >
         <svg

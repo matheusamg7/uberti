@@ -191,16 +191,16 @@ export function CartDrawer({ locale, trigger }: CartDrawerProps) {
                 <div className="space-y-4">
                   {cartItems.map((item) => {
                     const isUpdating = updatingItems.has(item.id);
-                    const productName = item.products[`name_${locale}` as keyof typeof item.products] as string;
+                    const productName = item.product[`name_${locale}` as keyof typeof item.product] as string;
 
                     return (
                       <div key={item.id} className={`flex gap-4 ${isUpdating ? 'opacity-50' : ''}`}>
                         {/* Product Image */}
                         <div className="flex-shrink-0">
                           <div className="h-20 w-20 overflow-hidden rounded bg-muted">
-                            {item.products.images?.[0] && (
+                            {item.product.images?.[0] && (
                               <Image
-                                src={item.products.images[0]}
+                                src={item.product.images[0]}
                                 alt={productName}
                                 width={80}
                                 height={80}
@@ -216,7 +216,7 @@ export function CartDrawer({ locale, trigger }: CartDrawerProps) {
                             {productName}
                           </h4>
                           <p className="text-xs text-muted-foreground mt-1">
-                            {item.products.sku}
+                            {item.product.sku}
                           </p>
                           {item.size && (
                             <p className="text-xs text-muted-foreground">
@@ -224,7 +224,7 @@ export function CartDrawer({ locale, trigger }: CartDrawerProps) {
                             </p>
                           )}
                           <p className="text-sm font-medium text-foreground mt-1">
-                            {formatPrice(item.products.price)}
+                            {formatPrice(item.product.price)}
                           </p>
 
                           {/* Quantity Controls */}

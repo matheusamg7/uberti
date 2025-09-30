@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -11,7 +11,6 @@ interface CollectionsShowcaseProps {
 
 export function CollectionsShowcase({ locale }: CollectionsShowcaseProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   const collections = [
     {
