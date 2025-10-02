@@ -13,9 +13,7 @@ interface HeaderProps {
   locale: 'en' | 'pt' | 'es' | 'fr';
 }
 
-const navigation = [
-  { name: { en: 'Home', pt: 'Início', es: 'Inicio', fr: 'Accueil' }, href: '' },
-  { name: { en: 'Collections', pt: 'Coleções', es: 'Colecciones', fr: 'Collections' }, href: '/collections' },
+const staticNavigation = [
   { name: { en: 'About', pt: 'Sobre', es: 'Acerca', fr: 'À propos' }, href: '/about' },
   { name: { en: 'Blog', pt: 'Blog', es: 'Blog', fr: 'Blog' }, href: '/blog' },
   { name: { en: 'Where to Find', pt: 'Onde Encontrar', es: 'Dónde Encontrar', fr: 'Où Trouver' }, href: '/#where-to-find' },
@@ -245,7 +243,7 @@ export function Header({ locale }: HeaderProps) {
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
         locale={locale}
-        navigation={navigation}
+        staticNavigation={staticNavigation}
         languages={languages}
         currentLanguage={currentLanguage}
         onLanguageChange={(lang) => {

@@ -55,7 +55,73 @@ export const mockCollections: Collection[] = [
   },
 ];
 
-// Mock Categories Data
+// Hierarchical Navigation Structure (Editorial Model - McQueen Style)
+export const navigationMenu = [
+  {
+    id: 'women',
+    slug: 'women',
+    name: { en: 'WOMEN', pt: 'MULHER', es: 'MUJER', fr: 'FEMME' },
+    subcategories: [
+      { slug: 'coats', name: { en: 'Coats', pt: 'Casacos', es: 'Abrigos', fr: 'Manteaux' } },
+      { slug: 'blouses', name: { en: 'Blouses', pt: 'Blusas', es: 'Blusas', fr: 'Chemisiers' } },
+      { slug: 'sweaters', name: { en: 'Sweaters', pt: 'Blusões', es: 'Suéteres', fr: 'Pulls' } },
+      { slug: 'pants', name: { en: 'Pants', pt: 'Calças', es: 'Pantalones', fr: 'Pantalons' } },
+      { slug: 'shirts', name: { en: 'Shirts', pt: 'Camisas', es: 'Camisas', fr: 'Chemises' } },
+      { slug: 'dresses', name: { en: 'Dresses', pt: 'Vestidos', es: 'Vestidos', fr: 'Robes' } },
+      { slug: 'tunics', name: { en: 'Tunics', pt: 'Túnicas', es: 'Túnicas', fr: 'Tuniques' } },
+      { slug: 'kimonos', name: { en: 'Kimonos', pt: 'Kimonos', es: 'Kimonos', fr: 'Kimonos' } },
+      { slug: 'skirts', name: { en: 'Skirts', pt: 'Saias', es: 'Faldas', fr: 'Jupes' } },
+    ]
+  },
+  {
+    id: 'men',
+    slug: 'men',
+    name: { en: 'MEN', pt: 'HOMEM', es: 'HOMBRE', fr: 'HOMME' },
+    subcategories: [
+      { slug: 'shirts', name: { en: 'Shirts', pt: 'Camisas', es: 'Camisas', fr: 'Chemises' } },
+      { slug: 'pants', name: { en: 'Pants', pt: 'Calças', es: 'Pantalones', fr: 'Pantalons' } },
+      { slug: 'coats', name: { en: 'Coats', pt: 'Casacos', es: 'Abrigos', fr: 'Manteaux' } },
+      { slug: 'sweaters', name: { en: 'Sweaters', pt: 'Blusões', es: 'Suéteres', fr: 'Pulls' } },
+      { slug: 'kimonos', name: { en: 'Kimonos', pt: 'Kimonos', es: 'Kimonos', fr: 'Kimonos' } },
+    ]
+  },
+  {
+    id: 'accessories',
+    slug: 'accessories',
+    name: { en: 'ACCESSORIES', pt: 'ACESSÓRIOS', es: 'ACCESORIOS', fr: 'ACCESSOIRES' },
+    subcategories: [
+      { slug: 'necklaces', name: { en: 'Necklaces', pt: 'Colares', es: 'Collares', fr: 'Colliers' } },
+      { slug: 'scarves', name: { en: 'Scarves', pt: 'Cachecóis', es: 'Bufandas', fr: 'Écharpes' } },
+      { slug: 'pashminas', name: { en: 'Pashminas', pt: 'Pashminas', es: 'Pashminas', fr: 'Pashminas' } },
+      { slug: 'blankets', name: { en: 'Blankets', pt: 'Mantas', es: 'Mantas', fr: 'Couvertures' } },
+      { slug: 'leg-warmers', name: { en: 'Leg Warmers', pt: 'Polainas', es: 'Calentadores', fr: 'Jambières' } },
+      { slug: 'bracelets', name: { en: 'Bracelets', pt: 'Pulseiras', es: 'Pulseras', fr: 'Bracelets' } },
+    ]
+  },
+  {
+    id: 'home',
+    slug: 'home',
+    name: { en: 'HOME', pt: 'CASA', es: 'HOGAR', fr: 'MAISON' },
+    subcategories: [
+      { slug: 'pillows', name: { en: 'Pillows', pt: 'Almofadas', es: 'Almohadas', fr: 'Coussins' } },
+      { slug: 'table-runners', name: { en: 'Table Runners', pt: 'Trilhos de Mesa', es: 'Caminos de Mesa', fr: 'Chemins de Table' } },
+      { slug: 'lamps', name: { en: 'Lamps', pt: 'Luminárias', es: 'Lámparas', fr: 'Lampes' } },
+      { slug: 'table-necklaces', name: { en: 'Table Necklaces', pt: 'Colares de Mesa', es: 'Collares de Mesa', fr: 'Colliers de Table' } },
+    ]
+  },
+  {
+    id: 'art',
+    slug: 'art',
+    name: { en: 'ART', pt: 'ARTE', es: 'ARTE', fr: 'ART' },
+    subcategories: [
+      { slug: 'paintings', name: { en: 'Paintings', pt: 'Quadros', es: 'Cuadros', fr: 'Tableaux' } },
+      { slug: 'textile-installations', name: { en: 'Textile Installations', pt: 'Instalações Têxteis', es: 'Instalaciones Textiles', fr: 'Installations Textiles' } },
+      { slug: 'hybrid-sculptures', name: { en: 'Hybrid Sculptures', pt: 'Esculturas Híbridas', es: 'Esculturas Híbridas', fr: 'Sculptures Hybrides' } },
+    ]
+  },
+];
+
+// Mock Categories Data (kept for backward compatibility)
 export const mockCategories: Category[] = [
   {
     id: 'cat-1',

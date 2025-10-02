@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect } from 'react';
-import { X, Instagram } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { X, Instagram, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { navigationMenu } from '@/lib/mock-data';
 
 interface MobileMenuOverlayProps {
   isOpen: boolean;
   onClose: () => void;
   locale: 'en' | 'pt' | 'es' | 'fr';
-  navigation: Array<{
+  staticNavigation: Array<{
     name: { en: string; pt: string; es: string; fr: string };
     href: string;
   }>;
@@ -26,23 +27,29 @@ export function MobileMenuOverlay({
   isOpen,
   onClose,
   locale,
-  navigation,
+  staticNavigation,
   languages,
   currentLanguage,
   onLanguageChange
 }: MobileMenuOverlayProps) {
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
+      setExpandedCategory(null); // Reset expanded state when menu closes
     }
 
     return () => {
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
+  };
 
   return (
     <>
@@ -54,11 +61,11 @@ export function MobileMenuOverlay({
         onClick={onClose}
       />
 
-      {/* Menu Panel - Slides from right with same animation as search */}
+      {/* Menu Panel - Slides from right */}
       <div
         className={`fixed top-0 right-0 h-full bg-white z-50 transition-transform duration-500 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
-        } w-full md:w-[400px]`}
+        } w-full md:w-[480px]`}
       >
         <div className="h-full flex flex-col">
           {/* Header with Logo and Close */}
@@ -89,13 +96,62 @@ export function MobileMenuOverlay({
 
           {/* Main Navigation - Scrollable */}
           <nav className="flex-1 overflow-y-auto">
-            <div className="px-8 py-8">
-              {navigation.map((item) => (
+            {/* Hierarchical Categories */}
+            <div className="px-8 py-6">
+              {navigationMenu.map((category) => (
+                <div key={category.id} className="border-b border-gray-100">
+                  {/* Category Header */}
+                  <button
+                    onClick={() => toggleCategory(category.id)}
+                    className="w-full flex items-center justify-between py-4 text-left group"
+                  >
+                    <span
+                      className="text-lg font-light tracking-wide text-gray-800 group-hover:text-black transition-colors"
+                      style={{ fontFamily: "'Cinzel', serif" }}
+                    >
+                      {category.name[locale]}
+                    </span>
+                    <ChevronRight
+                      className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                        expandedCategory === category.id ? 'rotate-90' : ''
+                      }`}
+                      strokeWidth={1.5}
+                    />
+                  </button>
+
+                  {/* Subcategories */}
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      expandedCategory === category.id ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="pl-6 pb-3">
+                      {category.subcategories.map((subcategory) => (
+                        <Link
+                          key={subcategory.slug}
+                          href={`/${locale}/${category.slug}/${subcategory.slug}`}
+                          className="block py-2.5 text-base font-light text-gray-600 hover:text-black transition-colors"
+                          onClick={onClose}
+                          style={{ fontFamily: "'Inter', sans-serif" }}
+                        >
+                          {subcategory.name[locale]}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Static Navigation (About, Blog, etc.) */}
+            <div className="px-8 py-4 border-t border-gray-100">
+              {staticNavigation.map((item) => (
                 <Link
                   key={item.href}
                   href={`/${locale}${item.href}`}
-                  className="block py-4 text-lg font-light text-gray-800 hover:text-black transition-colors border-b border-gray-100 last:border-0"
+                  className="block py-3 text-base font-light text-gray-700 hover:text-black transition-colors"
                   onClick={onClose}
+                  style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   {item.name[locale]}
                 </Link>
@@ -103,7 +159,7 @@ export function MobileMenuOverlay({
             </div>
 
             {/* Account Links */}
-            <div className="px-8 pb-8 border-t border-gray-100 pt-8">
+            <div className="px-8 pb-8 border-t border-gray-100 pt-6">
               <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-4">
                 {locale === 'pt' ? 'Conta' : locale === 'es' ? 'Cuenta' : locale === 'fr' ? 'Compte' : 'Account'}
               </h3>
