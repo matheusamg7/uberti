@@ -77,6 +77,7 @@ const config: Config = {
         "slide-in-right": "slideInRight 0.3s ease-out",
         "scale-in": "scaleIn 0.2s ease-out",
         "float": "float 3s ease-in-out infinite",
+        "spin-slow": "spin 20s linear infinite",
       },
       keyframes: {
         fadeIn: {

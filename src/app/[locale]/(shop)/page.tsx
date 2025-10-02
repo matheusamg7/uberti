@@ -8,6 +8,7 @@ import { ExclusiveTailoring } from '@/components/shop/ExclusiveTailoring';
 import { EditorialSection } from '@/components/shop/EditorialSection';
 import { WhereToFind } from '@/components/shop/WhereToFind';
 import { FloatingActions } from '@/components/ui/floating-actions';
+import { WoolFeatures } from '@/components/shop/WoolFeatures';
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -16,14 +17,18 @@ interface HomePageProps {
 export default async function HomePage({ params }: HomePageProps) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale as 'en' | 'pt' | 'es' | 'fr';
-  const featuredProducts = getFeaturedProducts().slice(0, 3);
+
+  // Randomize featured products on each visit
+  const allFeaturedProducts = getFeaturedProducts();
+  const shuffled = [...allFeaturedProducts].sort(() => Math.random() - 0.5);
+  const featuredProducts = shuffled.slice(0, 3);
 
   const heroContent = {
     title: {
-      en: 'The body wears,\nwhat the soul asks for',
-      pt: 'O corpo veste,\no que a alma pede',
-      es: 'El cuerpo viste,\nlo que el alma pide',
-      fr: 'Le corps porte,\nce que l\'âme demande',
+      en: 'The body wears\nwhat the soul asks for',
+      pt: 'O corpo veste\no que a alma pede',
+      es: 'El cuerpo viste\nlo que el alma pide',
+      fr: 'Le corps porte\nce que l\'âme demande',
     },
     subtitle: {
       en: '',
@@ -165,6 +170,9 @@ export default async function HomePage({ params }: HomePageProps) {
           />
         </div>
       </section>
+
+      {/* Wool Features Section */}
+      <WoolFeatures locale={locale} />
 
       <div className="space-y-12" style={{ backgroundColor: '#FEFDFE' }}>
         {/* Editorial Section */}

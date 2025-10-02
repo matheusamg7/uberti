@@ -63,7 +63,7 @@ export function ProductCard({ product, locale, priority = false }: ProductCardPr
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={priority}
-            className="object-cover transition-opacity duration-500 group-hover:opacity-0"
+            className="object-cover object-top transition-opacity duration-500 group-hover:opacity-0"
           />
 
           {/* Secondary Image (Hover) */}
@@ -73,7 +73,7 @@ export function ProductCard({ product, locale, priority = false }: ProductCardPr
               alt={`${productName} - alternate view`}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+              className="object-cover object-top transition-opacity duration-500 opacity-0 group-hover:opacity-100"
             />
           )}
 

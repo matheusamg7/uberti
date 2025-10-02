@@ -109,8 +109,7 @@ export const mockProducts: Product[] = [
     price: 890.00,
     stock_quantity: 12,
     images: [
-      'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=1000&fit=crop',
-      'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800&h=1000&fit=crop'
+      '/Helena_uberti_0158.jpg',
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     is_active: true,
@@ -156,7 +155,7 @@ export const mockProducts: Product[] = [
     price: 280.00,
     stock_quantity: 25,
     images: [
-      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&h=800&fit=crop'
+      '/Helena_uberti_0421.jpg',
     ],
     sizes: null,
     is_active: true,
@@ -181,7 +180,7 @@ export const mockProducts: Product[] = [
     price: 1200.00,
     stock_quantity: 8,
     images: [
-      'https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=800&h=1000&fit=crop'
+      '/Helena_uberti_0477.jpg',
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     is_active: true,

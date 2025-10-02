@@ -105,7 +105,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
   ];
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="pt-12 pb-24 bg-[#FEFDFE]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header - Title left, CTA right */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">

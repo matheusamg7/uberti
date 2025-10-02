@@ -114,8 +114,8 @@ export function Header({ locale }: HeaderProps) {
         }
       `}</style>
 
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBackground()}`}>
-        <nav className="mx-auto px-4 sm:px-6 lg:px-8">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 cursor-default ${headerBackground()}`}>
+        <nav className="mx-auto px-4 sm:px-6 lg:px-8 cursor-default">
           <div className="relative flex h-24 items-center justify-between">
             {/* Logo na esquerda - sempre visível */}
             <div className="absolute left-8">
