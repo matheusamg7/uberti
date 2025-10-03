@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 interface HeroCarouselProps {
@@ -14,47 +13,23 @@ interface HeroCarouselProps {
 }
 
 export function HeroCarousel({ locale, heroContent }: HeroCarouselProps) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const banners = ['/banners/hero_banner_1.png', '/banners/hero_banner_2.png'];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % banners.length);
-    }, 12000); // Change slide every 12 seconds - more time to appreciate each image
-
-    return () => clearInterval(timer);
-  }, [banners.length]);
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
-
   return (
     <section className="min-h-screen relative overflow-hidden flex items-center justify-center">
-        {/* Banner Images with Fade Transition Only */}
-        {banners.map((banner, index) => (
-          <div
-            key={banner}
-            className={`absolute inset-0 transition-opacity duration-[2500ms] ease-in-out ${
-              index === currentSlide
-                ? 'opacity-100 z-10'
-                : 'opacity-0 z-0'
-            }`}
-          >
-            <Image
-              src={banner}
-              alt="Helena's atelier"
-              fill
-              priority={index === 0}
-              className="object-cover object-center"
-              sizes="100vw"
-            />
-            {/* Gradiente suave de cima */}
-            <div className="absolute inset-x-0 top-0 h-96 bg-gradient-to-b from-black/30 via-black/10 to-transparent" />
-            {/* Gradiente de baixo para o texto */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 from-0% via-black/60 via-35% to-transparent to-70%" />
-          </div>
-        ))}
+        {/* Banner Image - Banner 2 fixo */}
+        <div className="absolute inset-0 z-10">
+          <Image
+            src="/banners/hero_banner_2.png"
+            alt="Helena's atelier"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+          {/* Gradiente suave de cima */}
+          <div className="absolute inset-x-0 top-0 h-96 bg-gradient-to-b from-black/30 via-black/10 to-transparent" />
+          {/* Gradiente de baixo para o texto */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 from-0% via-black/60 via-35% to-transparent to-70%" />
+        </div>
 
 
       {/* Content - posicionado na parte inferior */}
@@ -77,22 +52,6 @@ export function HeroCarousel({ locale, heroContent }: HeroCarouselProps) {
             </a>
           </div>
         </div>
-      </div>
-
-      {/* Slide Indicators - Vertical on the right */}
-      <div className="absolute right-10 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-20">
-        {banners.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-[2px] transition-all duration-300 ${
-              index === currentSlide
-                ? 'h-12 bg-white'
-                : 'h-8 bg-white/40 hover:bg-white/60'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
       </div>
     </section>
   );

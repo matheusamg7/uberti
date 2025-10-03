@@ -27,7 +27,7 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
         fr: 'Fibres naturelles et silhouettes intemporelles',
       },
       year: '2024',
-      image: '/coleção 1/capa_collection_1.jpg',
+      image: '/coleção 1/capa_raizes_colecao.png',
       slug: 'raizes',
     },
     {
@@ -45,7 +45,7 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
         fr: 'Motifs organiques et déclarations audacieuses',
       },
       year: '2025',
-      image: '/coleção 2/capa_collection_2.jpg',
+      image: '/coleção 2/capa_favos_colecao.png',
       slug: 'favos',
     },
   ];
@@ -68,10 +68,8 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
               src={collection.image}
               alt={collection.name[locale]}
               fill
-              className={`object-cover ${
-                collection.id === 'favos' ? 'object-[center_10%]' : 'object-[center_20%]'
-              } transition-transform duration-700 ease-out ${
-                hoveredCollection === collection.id ? 'scale-[1.01]' : 'scale-100'
+              className={`object-cover object-center transition-transform duration-700 ease-out ${
+                hoveredCollection === collection.id ? 'scale-[1.26]' : 'scale-125'
               }`}
               sizes="50vw"
               priority

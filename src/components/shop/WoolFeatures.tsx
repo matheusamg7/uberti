@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 interface WoolFeaturesProps {
@@ -7,6 +8,19 @@ interface WoolFeaturesProps {
 }
 
 export function WoolFeatures({ locale }: WoolFeaturesProps) {
+  const [scrollRotation, setScrollRotation] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Pega a posição do scroll e converte em graus de rotação
+      // A cada 10 pixels de scroll, roda 1 grau
+      const rotation = window.scrollY / 10;
+      setScrollRotation(rotation);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const content = {
     title: {
       en: 'Our Raw Material',
@@ -66,7 +80,10 @@ export function WoolFeatures({ locale }: WoolFeaturesProps) {
         <div className="flex flex-col md:flex-row items-start gap-20 md:pl-16 lg:pl-32">
 
           {/* Left - Image */}
-          <div className="w-[400px] h-[400px] md:w-[500px] md:h-[500px] flex-shrink-0 group wool-spin">
+          <div
+            className="w-[400px] h-[400px] md:w-[500px] md:h-[500px] flex-shrink-0 transition-transform duration-100 ease-linear"
+            style={{ transform: `rotate(${scrollRotation}deg)` }}
+          >
             <Image
               src="/banners/cor_las.png"
               alt="Wool Colors"
@@ -76,24 +93,6 @@ export function WoolFeatures({ locale }: WoolFeaturesProps) {
               priority
             />
           </div>
-
-          <style jsx>{`
-            .wool-spin {
-              animation: spin 8s linear infinite;
-              animation-play-state: paused;
-            }
-            .wool-spin:hover {
-              animation-play-state: running;
-            }
-            @keyframes spin {
-              from {
-                transform: rotate(0deg);
-              }
-              to {
-                transform: rotate(360deg);
-              }
-            }
-          `}</style>
 
           {/* Right - Content */}
           <div className="flex-1 flex flex-col space-y-8 mt-12 md:mt-20 md:pl-16 lg:pl-24">

@@ -1,4 +1,4 @@
-import { Header } from '@/components/layouts/Header';
+import { LocaleLayoutClient } from '@/components/layouts/LocaleLayoutClient';
 
 export default async function LocaleLayout({
   children,
@@ -8,14 +8,11 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const resolvedParams = await params;
-  const locale = resolvedParams.locale as 'en' | 'pt' | 'es' | 'fr';
+  const locale = resolvedParams.locale;
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header locale={locale} />
-      <main className="flex-1">
-        {children}
-      </main>
-    </div>
+    <LocaleLayoutClient locale={locale}>
+      {children}
+    </LocaleLayoutClient>
   );
 }

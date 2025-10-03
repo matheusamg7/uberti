@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { X, Instagram, ChevronRight } from 'lucide-react';
+import { X, Instagram, ChevronRight, Globe, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { navigationMenu } from '@/lib/mock-data';
@@ -33,6 +33,7 @@ export function MobileMenuOverlay({
   onLanguageChange
 }: MobileMenuOverlayProps) {
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -40,6 +41,7 @@ export function MobileMenuOverlay({
     } else {
       document.body.style.overflow = 'unset';
       setExpandedCategory(null); // Reset expanded state when menu closes
+      setIsLanguageDropdownOpen(false); // Reset language dropdown
     }
 
     return () => {
@@ -68,9 +70,9 @@ export function MobileMenuOverlay({
         } w-full md:w-[480px]`}
       >
         <div className="h-full flex flex-col">
-          {/* Header with Logo and Close */}
+          {/* Header with Logo, Language Selector and Close */}
           <div className="px-8 py-8 border-b border-gray-100">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-4">
               <Link
                 href={`/${locale}`}
                 onClick={onClose}
@@ -84,9 +86,54 @@ export function MobileMenuOverlay({
                   priority
                 />
               </Link>
+
+              {/* Language Selector Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+                  className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:border-gray-400 transition-colors"
+                  aria-label="Select language"
+                >
+                  <Globe className="h-4 w-4 text-gray-600" strokeWidth={1.5} />
+                  <span className="text-sm font-light text-gray-800">{currentLanguage?.code.toUpperCase()}</span>
+                  <ChevronDown
+                    className={`h-4 w-4 text-gray-600 transition-transform duration-200 ${
+                      isLanguageDropdownOpen ? 'rotate-180' : ''
+                    }`}
+                    strokeWidth={1.5}
+                  />
+                </button>
+
+                {/* Language Dropdown */}
+                {isLanguageDropdownOpen && (
+                  <div className="absolute top-full right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-10">
+                    {languages.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          onLanguageChange(lang);
+                          setIsLanguageDropdownOpen(false);
+                          onClose();
+                        }}
+                        className={`w-full flex items-center justify-center px-4 py-2.5 hover:bg-gray-50 transition-colors ${
+                          currentLanguage?.code === lang.code ? 'bg-gray-50' : ''
+                        }`}
+                      >
+                        <span
+                          className="text-sm font-light text-gray-800"
+                          style={{ fontFamily: "'Inter', sans-serif" }}
+                        >
+                          {lang.name}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <button
                 onClick={onClose}
-                className="p-0 -mr-2 transition-all duration-300 hover:opacity-70"
+                className="p-0 transition-all duration-300 hover:opacity-70"
                 aria-label="Close menu"
               >
                 <X className="h-8 w-8" strokeWidth={1} />
@@ -180,8 +227,8 @@ export function MobileMenuOverlay({
             </div>
           </nav>
 
-          {/* Footer with Contact and Language */}
-          <div className="border-t border-gray-100 px-8 py-6 space-y-6">
+          {/* Footer with Contact */}
+          <div className="border-t border-gray-100 px-8 py-6">
             {/* Contact */}
             <div>
               <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-4">
@@ -218,32 +265,6 @@ export function MobileMenuOverlay({
                     />
                   </svg>
                 </a>
-              </div>
-            </div>
-
-            {/* Language Selector */}
-            <div>
-              <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-3">
-                {locale === 'pt' ? 'Idioma' : locale === 'es' ? 'Idioma' : locale === 'fr' ? 'Langue' : 'Language'}
-              </h3>
-              <div className="flex gap-2 flex-wrap">
-                {languages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => {
-                      onLanguageChange(lang);
-                      onClose();
-                    }}
-                    className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${
-                      currentLanguage?.code === lang.code
-                        ? 'bg-gray-800 text-white border-gray-800'
-                        : 'border-gray-300 text-gray-700 hover:border-gray-800'
-                    }`}
-                  >
-                    <span className="mr-1">{lang.flag}</span>
-                    {lang.code.toUpperCase()}
-                  </button>
-                ))}
               </div>
             </div>
           </div>
