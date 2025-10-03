@@ -27,7 +27,7 @@ function CartContent({ locale }: { locale: 'en' | 'pt' | 'es' | 'fr' }) {
       quantity: 1,
       size: 'M',
       color: 'Natural',
-      image: '/coleção 1/1.jpg',
+      image: '/Helena_uberti_0158.jpg',
     },
     {
       id: '2',
@@ -36,7 +36,7 @@ function CartContent({ locale }: { locale: 'en' | 'pt' | 'es' | 'fr' }) {
       quantity: 2,
       size: 'P',
       color: 'Branco',
-      image: '/coleção 2/2.jpg',
+      image: '/Helena_uberti_0421.jpg',
     },
   ]);
 
