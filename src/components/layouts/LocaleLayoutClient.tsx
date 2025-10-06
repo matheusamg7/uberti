@@ -1,6 +1,7 @@
 'use client';
 
 import { Header } from '@/components/layouts/Header';
+import { Footer } from '@/components/layouts/Footer';
 import { LanguageWelcomeModal } from '@/components/ui/language-welcome-modal';
 
 interface LocaleLayoutClientProps {
@@ -17,6 +18,7 @@ export function LocaleLayoutClient({ locale, children }: LocaleLayoutClientProps
         <main className="flex-1">
           {children}
         </main>
+        <Footer locale={locale as 'en' | 'pt' | 'es' | 'fr'} />
       </div>
     </>
   );

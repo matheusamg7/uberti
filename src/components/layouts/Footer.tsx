@@ -1,295 +1,222 @@
+'use client';
+
 import Link from 'next/link';
-import { Instagram, Facebook, Mail, Phone, MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import Image from 'next/image';
 
 interface FooterProps {
-  locale: 'en' | 'pt' | 'es';
+  locale: 'en' | 'pt' | 'es' | 'fr';
 }
 
-const footerLinks = {
-  collections: {
-    title: { en: 'Collections', pt: 'Coleções', es: 'Colecciones' },
-    links: [
-      { name: { en: 'Bergamot', pt: 'Bergamota', es: 'Bergamota' }, href: '/collections/bergamota' },
-      { name: { en: 'Storm', pt: 'Tempestade', es: 'Tormenta' }, href: '/collections/tempestade' },
-      { name: { en: 'Aurora', pt: 'Aurora', es: 'Aurora' }, href: '/collections/aurora' },
-    ]
-  },
-  categories: {
-    title: { en: 'Categories', pt: 'Categorias', es: 'Categorías' },
-    links: [
-      { name: { en: 'Clothing', pt: 'Vestuário', es: 'Ropa' }, href: '/products?category=clothing' },
-      { name: { en: 'Decoration', pt: 'Decoração', es: 'Decoración' }, href: '/products?category=decoration' },
-      { name: { en: 'Necklaces', pt: 'Colares', es: 'Collares' }, href: '/products?category=necklaces' },
-      { name: { en: 'Accessories', pt: 'Acessórios', es: 'Accesorios' }, href: '/products?category=accessories' },
-    ]
-  },
-  support: {
-    title: { en: 'Support', pt: 'Suporte', es: 'Soporte' },
-    links: [
-      { name: { en: 'Contact Us', pt: 'Contato', es: 'Contacto' }, href: '/contact' },
-      { name: { en: 'Size Guide', pt: 'Guia de Tamanhos', es: 'Guía de Tallas' }, href: '/size-guide' },
-      { name: { en: 'Shipping', pt: 'Envios', es: 'Envío' }, href: '/shipping' },
-      { name: { en: 'Returns', pt: 'Devoluções', es: 'Devoluciones' }, href: '/returns' },
-    ]
-  },
-  company: {
-    title: { en: 'Company', pt: 'Empresa', es: 'Empresa' },
-    links: [
-      { name: { en: 'About Helena', pt: 'Sobre Helena', es: 'Sobre Helena' }, href: '/about' },
-      { name: { en: 'Our Story', pt: 'Nossa História', es: 'Nuestra Historia' }, href: '/about#story' },
-      { name: { en: 'Sustainability', pt: 'Sustentabilidade', es: 'Sostenibilidad' }, href: '/sustainability' },
-      { name: { en: 'Press', pt: 'Imprensa', es: 'Prensa' }, href: '/press' },
-    ]
-  }
-};
-
-const contactInfo = {
-  email: 'hello@uberti.com',
-  phone: '+55 11 99999-9999',
-  address: {
-    en: 'São Paulo, Brazil',
-    pt: 'São Paulo, Brasil',
-    es: 'São Paulo, Brasil'
-  }
-};
-
-const socialLinks = [
-  { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/uberti' },
-  { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/uberti' },
-];
-
-const newsletterText = {
-  title: {
-    en: 'Subscribe to our newsletter',
-    pt: 'Assine nossa newsletter',
-    es: 'Suscríbete a nuestro boletín'
-  },
-  description: {
-    en: 'Be the first to know about new collections and exclusive events.',
-    pt: 'Seja o primeiro a saber sobre novas coleções e eventos exclusivos.',
-    es: 'Sé el primero en conocer las nuevas colecciones y eventos exclusivos.'
-  },
-  placeholder: {
-    en: 'Enter your email',
-    pt: 'Digite seu email',
-    es: 'Ingresa tu email'
-  },
-  button: {
-    en: 'Subscribe',
-    pt: 'Assinar',
-    es: 'Suscribirse'
-  }
-};
-
 export function Footer({ locale }: FooterProps) {
+  const content = {
+    shop: {
+      title: {
+        en: 'Shop',
+        pt: 'Loja',
+        es: 'Tienda',
+        fr: 'Boutique',
+      },
+      links: [
+        {
+          label: { en: 'All Products', pt: 'Todos os Produtos', es: 'Todos los Productos', fr: 'Tous les Produits' },
+          href: '/products',
+        },
+        {
+          label: { en: 'Collections', pt: 'Coleções', es: 'Colecciones', fr: 'Collections' },
+          href: '/collections',
+        },
+        {
+          label: { en: 'New Arrivals', pt: 'Novidades', es: 'Novedades', fr: 'Nouveautés' },
+          href: '/products?filter=new',
+        },
+      ],
+    },
+    about: {
+      title: {
+        en: 'About',
+        pt: 'Sobre',
+        es: 'Acerca de',
+        fr: 'À Propos',
+      },
+      links: [
+        {
+          label: { en: 'Our Story', pt: 'Nossa História', es: 'Nuestra Historia', fr: 'Notre Histoire' },
+          href: '/about',
+        },
+        {
+          label: { en: 'Sustainability', pt: 'Sustentabilidade', es: 'Sostenibilidad', fr: 'Durabilité' },
+          href: '/sustainability',
+        },
+        {
+          label: { en: 'Press', pt: 'Imprensa', es: 'Prensa', fr: 'Presse' },
+          href: '/press',
+        },
+        {
+          label: { en: 'Journal', pt: 'Diário', es: 'Diario', fr: 'Journal' },
+          href: '/blog',
+        },
+      ],
+    },
+    support: {
+      title: {
+        en: 'Support',
+        pt: 'Suporte',
+        es: 'Soporte',
+        fr: 'Support',
+      },
+      links: [
+        {
+          label: { en: 'Contact', pt: 'Contato', es: 'Contacto', fr: 'Contact' },
+          href: '/contact',
+        },
+        {
+          label: { en: 'Size Guide', pt: 'Guia de Tamanhos', es: 'Guía de Tallas', fr: 'Guide des Tailles' },
+          href: '/size-guide',
+        },
+        {
+          label: { en: 'Shipping', pt: 'Envio', es: 'Envío', fr: 'Livraison' },
+          href: '/shipping',
+        },
+        {
+          label: { en: 'Returns', pt: 'Devoluções', es: 'Devoluciones', fr: 'Retours' },
+          href: '/returns',
+        },
+      ],
+    },
+    legal: {
+      title: {
+        en: 'Legal',
+        pt: 'Legal',
+        es: 'Legal',
+        fr: 'Légal',
+      },
+      links: [
+        {
+          label: { en: 'Privacy Policy', pt: 'Política de Privacidade', es: 'Política de Privacidad', fr: 'Politique de Confidentialité' },
+          href: '/privacy',
+        },
+        {
+          label: { en: 'Terms of Service', pt: 'Termos de Serviço', es: 'Términos de Servicio', fr: 'Conditions d\'Utilisation' },
+          href: '/terms',
+        },
+      ],
+    },
+  };
+
   return (
-    <footer className="bg-muted/30 border-t border-border/50">
-      {/* Main Footer Content */}
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          {/* Brand Section */}
-          <div className="space-y-8 xl:col-span-1">
-            <Link
-              href={`/${locale}`}
-              className="font-serif text-2xl font-light tracking-wider text-foreground"
-            >
-              UBERTI
-            </Link>
-
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-              {locale === 'pt'
-                ? 'Peças artesanais que misturam elegância com narrativas únicas, criadas por Helena com paixão e dedicação.'
-                : locale === 'es'
-                ? 'Piezas artesanales que mezclan elegancia con narrativas únicas, creadas por Helena con pasión y dedicación.'
-                : 'Handcrafted pieces that blend elegance with unique storytelling, created by Helena with passion and dedication.'
-              }
-            </p>
-
-            {/* Contact Info */}
-            <div className="space-y-3">
-              <div className="flex items-center text-sm text-muted-foreground">
-                <Mail className="h-4 w-4 mr-3" />
-                <a href={`mailto:${contactInfo.email}`} className="hover:text-foreground transition-colors">
-                  {contactInfo.email}
-                </a>
-              </div>
-              <div className="flex items-center text-sm text-muted-foreground">
-                <Phone className="h-4 w-4 mr-3" />
-                <a href={`tel:${contactInfo.phone}`} className="hover:text-foreground transition-colors">
-                  {contactInfo.phone}
-                </a>
-              </div>
-              <div className="flex items-center text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4 mr-3" />
-                <span>{contactInfo.address[locale]}</span>
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex space-x-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label={social.name}
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Links Section */}
-          <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              {/* Collections */}
-              <div>
-                <h3 className="text-sm font-medium text-foreground tracking-wide uppercase">
-                  {footerLinks.collections.title[locale]}
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {footerLinks.collections.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={`/${locale}${link.href}`}
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        {link.name[locale]}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Categories */}
-              <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-medium text-foreground tracking-wide uppercase">
-                  {footerLinks.categories.title[locale]}
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {footerLinks.categories.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={`/${locale}${link.href}`}
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        {link.name[locale]}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              {/* Support */}
-              <div>
-                <h3 className="text-sm font-medium text-foreground tracking-wide uppercase">
-                  {footerLinks.support.title[locale]}
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {footerLinks.support.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={`/${locale}${link.href}`}
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        {link.name[locale]}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Company */}
-              <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-medium text-foreground tracking-wide uppercase">
-                  {footerLinks.company.title[locale]}
-                </h3>
-                <ul className="mt-4 space-y-3">
-                  {footerLinks.company.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={`/${locale}${link.href}`}
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        {link.name[locale]}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Newsletter Section */}
-        <div className="mt-12 border-t border-border/50 pt-8">
-          <div className="max-w-md">
-            <h3 className="text-sm font-medium text-foreground tracking-wide uppercase">
-              {newsletterText.title[locale]}
-            </h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {newsletterText.description[locale]}
-            </p>
-            <form className="mt-4 flex gap-2">
-              <Input
-                type="email"
-                placeholder={newsletterText.placeholder[locale]}
-                className="flex-1"
-                required
+    <footer className="bg-black text-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        {/* Top Section - Logo + Links Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-8 mb-16">
+          {/* Logo Column */}
+          <div className="md:col-span-1">
+            <Link href={`/${locale}`} className="inline-block">
+              <Image
+                src="/logo/logo_branca.svg"
+                alt="Helena Uberti"
+                width={80}
+                height={80}
+                className="opacity-90 hover:opacity-100 transition-opacity"
               />
-              <Button type="submit" className="btn-minimal">
-                {newsletterText.button[locale]}
-              </Button>
-            </form>
+            </Link>
+          </div>
+
+          {/* Shop */}
+          <div>
+            <h3 className="text-sm font-light uppercase tracking-wider mb-4" style={{ fontFamily: "'Cinzel', serif" }}>
+              {content.shop.title[locale]}
+            </h3>
+            <ul className="space-y-3">
+              {content.shop.links.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={`/${locale}${link.href}`}
+                    className="text-sm text-gray-400 hover:text-white transition-colors font-light"
+                  >
+                    {link.label[locale]}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* About */}
+          <div>
+            <h3 className="text-sm font-light uppercase tracking-wider mb-4" style={{ fontFamily: "'Cinzel', serif" }}>
+              {content.about.title[locale]}
+            </h3>
+            <ul className="space-y-3">
+              {content.about.links.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={`/${locale}${link.href}`}
+                    className="text-sm text-gray-400 hover:text-white transition-colors font-light"
+                  >
+                    {link.label[locale]}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h3 className="text-sm font-light uppercase tracking-wider mb-4" style={{ fontFamily: "'Cinzel', serif" }}>
+              {content.support.title[locale]}
+            </h3>
+            <ul className="space-y-3">
+              {content.support.links.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={`/${locale}${link.href}`}
+                    className="text-sm text-gray-400 hover:text-white transition-colors font-light"
+                  >
+                    {link.label[locale]}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="text-sm font-light uppercase tracking-wider mb-4" style={{ fontFamily: "'Cinzel', serif" }}>
+              {content.legal.title[locale]}
+            </h3>
+            <ul className="space-y-3">
+              {content.legal.links.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={`/${locale}${link.href}`}
+                    className="text-sm text-gray-400 hover:text-white transition-colors font-light"
+                  >
+                    {link.label[locale]}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Section */}
-      <div className="border-t border-border/50">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <div className="md:flex md:items-center md:justify-between">
-            <div className="text-sm text-muted-foreground">
-              <p>
-                © {new Date().getFullYear()} UBERTI. {' '}
-                {locale === 'pt'
-                  ? 'Todos os direitos reservados.'
-                  : locale === 'es'
-                  ? 'Todos los derechos reservados.'
-                  : 'All rights reserved.'
-                }
-              </p>
-            </div>
-            <div className="mt-4 flex space-x-6 md:mt-0">
-              <Link
-                href={`/${locale}/privacy`}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+        {/* Bottom Section - Copyright */}
+        <div className="border-t border-gray-800 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-gray-500 font-light">
+              © {new Date().getFullYear()} Helena Uberti. {locale === 'pt' ? 'Todos os direitos reservados.' : locale === 'es' ? 'Todos los derechos reservados.' : locale === 'fr' ? 'Tous droits réservés.' : 'All rights reserved.'}
+            </p>
+            <div className="flex items-center gap-6">
+              {/* Social Media Links */}
+              <a
+                href="https://instagram.com/helenauberti"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-white transition-colors"
+                aria-label="Instagram"
               >
-                {locale === 'pt'
-                  ? 'Política de Privacidade'
-                  : locale === 'es'
-                  ? 'Política de Privacidad'
-                  : 'Privacy Policy'
-                }
-              </Link>
-              <Link
-                href={`/${locale}/terms`}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {locale === 'pt'
-                  ? 'Termos de Uso'
-                  : locale === 'es'
-                  ? 'Términos de Uso'
-                  : 'Terms of Service'
-                }
-              </Link>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
