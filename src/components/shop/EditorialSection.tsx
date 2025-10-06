@@ -159,6 +159,13 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
                   <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
                     {article.excerpt[locale]}
                   </p>
+
+                  {/* Read More Link */}
+                  <div className="pt-2">
+                    <span className="text-sm text-gray-900 border-b border-gray-900 group-hover:text-gray-600 group-hover:border-gray-600 transition-colors">
+                      {content.readMore[locale]}
+                    </span>
+                  </div>
                 </div>
               </article>
             </Link>

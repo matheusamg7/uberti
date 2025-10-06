@@ -104,7 +104,7 @@ export default async function CollectionsPage({ params }: CollectionsPageProps) 
             <Link
               key={collection.id}
               href={`/${locale}/collections/${collection.slug}`}
-              className="group relative aspect-[3/4] overflow-hidden rounded-lg bg-gray-100"
+              className="group relative aspect-[3/4] overflow-hidden bg-gray-100"
             >
               {/* Collection Image */}
               <Image

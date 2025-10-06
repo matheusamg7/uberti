@@ -195,8 +195,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       {/* Article Content */}
       <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 -mt-32 relative z-10">
         {/* Article Header */}
-        <header className="bg-white p-8 sm:p-10 md:p-12 rounded-lg shadow-lg mb-12">
-          <div className="flex items-center gap-3 mb-4 text-xs uppercase tracking-wider text-gray-500">
+        <header className="bg-white px-6 py-8 sm:px-8 sm:py-10 shadow-lg mb-12 text-center">
+          <div className="flex items-center justify-center gap-3 mb-3 text-xs uppercase tracking-wider text-gray-500 font-light">
             <span>{article.category[localeKey]}</span>
             <span>•</span>
             <time dateTime={article.date}>
@@ -210,11 +210,16 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           </div>
 
           <h1
-            className="text-3xl sm:text-4xl md:text-5xl font-light tracking-wide mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl font-light tracking-wide mb-4"
             style={{ fontFamily: "'Cinzel', serif" }}
           >
             {article.title[localeKey]}
           </h1>
+
+          <p className="text-sm text-gray-600 font-light">
+            {localeKey === 'pt' ? 'por' : localeKey === 'es' ? 'por' : localeKey === 'fr' ? 'par' : 'by'}{' '}
+            <span className="text-gray-900">Helena Uberti</span>
+          </p>
         </header>
 
         {/* Article Body */}
@@ -224,7 +229,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               return (
                 <p
                   key={index}
-                  className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6"
+                  className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6 font-light"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   {block.text}
@@ -244,19 +249,20 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               );
             }
 
-            if (block.type === 'image' && block.src) {
-              return (
-                <div key={index} className="relative aspect-[16/10] overflow-hidden rounded-lg my-12">
-                  <Image
-                    src={block.src}
-                    alt={block.alt || ''}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 896px) 100vw, 896px"
-                  />
-                </div>
-              );
-            }
+            // Imagens removidas do artigo
+            // if (block.type === 'image' && block.src) {
+            //   return (
+            //     <div key={index} className="relative aspect-[16/10] overflow-hidden my-12">
+            //       <Image
+            //         src={block.src}
+            //         alt={block.alt || ''}
+            //         fill
+            //         className="object-cover"
+            //         sizes="(max-width: 896px) 100vw, 896px"
+            //       />
+            //     </div>
+            //   );
+            // }
 
             return null;
           })}
@@ -266,21 +272,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <div className="border-t border-gray-200 pt-8 mb-16">
           <Link
             href={`/${locale}/blog`}
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors text-sm"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
             {labels.backToBlog[localeKey]}
           </Link>
         </div>

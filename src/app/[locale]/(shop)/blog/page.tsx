@@ -20,10 +20,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
         fr: 'L\'Art de la Laine du Pampa',
       },
       excerpt: {
-        en: 'Discover how we transform natural Pampa wool into unique pieces of wearable art, preserving ancestral techniques.',
-        pt: 'Descubra como transformamos a lã natural do Pampa em peças únicas de arte vestível, preservando técnicas ancestrais.',
-        es: 'Descubre cómo transformamos la lana natural del Pampa en piezas únicas de arte usable, preservando técnicas ancestrales.',
-        fr: 'Découvrez comment nous transformons la laine naturelle du Pampa en pièces uniques d\'art portable, en préservant les techniques ancestrales.',
+        en: 'Transforming natural Pampa wool into wearable art.',
+        pt: 'Transformando lã do Pampa em arte vestível.',
+        es: 'Transformando lana del Pampa en arte usable.',
+        fr: 'Transformer la laine du Pampa en art portable.',
       },
       category: {
         en: 'Craftsmanship',
@@ -44,10 +44,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
         fr: 'Collection Racines: L\'Inspiration',
       },
       excerpt: {
-        en: 'A deep dive into the creative process behind our Roots collection, celebrating gaucho culture and southern traditions.',
-        pt: 'Um mergulho profundo no processo criativo por trás da nossa coleção Raízes, celebrando a cultura gaúcha e as tradições do sul.',
-        es: 'Una inmersión profunda en el proceso creativo detrás de nuestra colección Raíces, celebrando la cultura gaucha y las tradiciones del sur.',
-        fr: 'Une plongée profonde dans le processus créatif derrière notre collection Racines, célébrant la culture gaucho et les traditions du sud.',
+        en: 'Celebrating gaucho culture and southern traditions.',
+        pt: 'Celebrando a cultura gaúcha e tradições do sul.',
+        es: 'Celebrando la cultura gaucha y tradiciones del sur.',
+        fr: 'Célébrant la culture gaucho et les traditions du sud.',
       },
       category: {
         en: 'Collections',
@@ -68,10 +68,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
         fr: 'Durabilité dans la Mode Artisanale',
       },
       excerpt: {
-        en: 'How traditional craftsmanship and sustainable practices come together to create timeless, eco-friendly pieces.',
-        pt: 'Como o artesanato tradicional e práticas sustentáveis se unem para criar peças atemporais e ecológicas.',
-        es: 'Cómo la artesanía tradicional y las prácticas sostenibles se unen para crear piezas atemporales y ecológicas.',
-        fr: 'Comment l\'artisanat traditionnel et les pratiques durables se rejoignent pour créer des pièces intemporelles et écologiques.',
+        en: 'Traditional craftsmanship meets sustainable practices.',
+        pt: 'Artesanato tradicional encontra práticas sustentáveis.',
+        es: 'Artesanía tradicional encuentra prácticas sostenibles.',
+        fr: 'L\'artisanat traditionnel rencontre les pratiques durables.',
       },
       category: {
         en: 'Sustainability',
@@ -92,10 +92,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
         fr: 'La Géométrie Parfaite des Rayons',
       },
       excerpt: {
-        en: 'Exploring how nature\'s most perfect structures inspired our Honeycombs collection and its unique design language.',
-        pt: 'Explorando como as estruturas mais perfeitas da natureza inspiraram nossa coleção Favos e sua linguagem de design única.',
-        es: 'Explorando cómo las estructuras más perfectas de la naturaleza inspiraron nuestra colección Panales y su lenguaje de diseño único.',
-        fr: 'Explorer comment les structures les plus parfaites de la nature ont inspiré notre collection Rayons et son langage de design unique.',
+        en: 'Nature\'s perfect geometry inspires unique design.',
+        pt: 'A geometria perfeita da natureza inspira design único.',
+        es: 'La geometría perfecta de la naturaleza inspira diseño único.',
+        fr: 'La géométrie parfaite de la nature inspire un design unique.',
       },
       category: {
         en: 'Collections',
@@ -116,10 +116,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
         fr: 'Techniques Ancestrales de Tissage',
       },
       excerpt: {
-        en: 'Meet the master artisans who keep centuries-old weaving traditions alive through their dedicated craftsmanship.',
-        pt: 'Conheça os mestres artesãos que mantêm vivas as tradições de tecelagem centenárias através de seu artesanato dedicado.',
-        es: 'Conoce a los maestros artesanos que mantienen vivas las tradiciones de tejido centenarias a través de su artesanía dedicada.',
-        fr: 'Rencontrez les maîtres artisans qui maintiennent vivantes les traditions de tissage séculaires grâce à leur artisanat dévoué.',
+        en: 'Master artisans keeping centuries-old traditions alive.',
+        pt: 'Mestres artesãos mantendo tradições centenárias vivas.',
+        es: 'Maestros artesanos manteniendo tradiciones centenarias vivas.',
+        fr: 'Maîtres artisans gardant vivantes les traditions séculaires.',
       },
       category: {
         en: 'Craftsmanship',
@@ -140,10 +140,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
         fr: 'Helena Uberti: Un Voyage Créatif',
       },
       excerpt: {
-        en: 'From childhood in southern Brazil to creating a sustainable fashion brand - the story behind Helena Uberti.',
-        pt: 'Da infância no sul do Brasil à criação de uma marca de moda sustentável - a história por trás de Helena Uberti.',
-        es: 'Desde la infancia en el sur de Brasil hasta la creación de una marca de moda sostenible - la historia detrás de Helena Uberti.',
-        fr: 'De l\'enfance dans le sud du Brésil à la création d\'une marque de mode durable - l\'histoire derrière Helena Uberti.',
+        en: 'The story behind a sustainable fashion brand.',
+        pt: 'A história por trás de uma marca sustentável.',
+        es: 'La historia detrás de una marca sostenible.',
+        fr: 'L\'histoire derrière une marque durable.',
       },
       category: {
         en: 'Behind the Scenes',
@@ -181,7 +181,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   return (
     <div className="min-h-screen bg-[#FEFDFE]">
       {/* Header */}
-      <section className="relative h-[40vh] sm:h-[50vh] min-h-[300px] sm:min-h-[400px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[60vh] min-h-[400px] sm:min-h-[500px] flex items-end overflow-hidden">
         <Image
           src="/banners/pampa_banner.png"
           alt="Blog"
@@ -190,27 +190,29 @@ export default async function BlogPage({ params }: BlogPageProps) {
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-wide mb-4"
-            style={{ fontFamily: "'Cinzel', serif" }}
-          >
-            {content.title[locale]}
-          </h1>
-          <p
-            className="text-base sm:text-lg md:text-xl font-light max-w-2xl mx-auto"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
-            {content.subtitle[locale]}
-          </p>
+        <div className="relative z-10 w-full text-center text-white px-4 pb-12 sm:pb-16 lg:pb-20">
+          <div className="max-w-4xl mx-auto">
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-wide mb-4"
+              style={{ fontFamily: "'Cinzel', serif" }}
+            >
+              {content.title[locale]}
+            </h1>
+            <p
+              className="text-base sm:text-lg md:text-xl font-light max-w-2xl mx-auto"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              {content.subtitle[locale]}
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Articles Grid */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16 lg:gap-20">
           {articles.map((article) => (
             <Link
               key={article.slug}
@@ -219,7 +221,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
             >
               <article className="h-full flex flex-col">
                 {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg mb-4">
+                <div className="relative aspect-[4/3] overflow-hidden mb-4">
                   <Image
                     src={article.image}
                     alt={article.title[locale]}
@@ -230,53 +232,30 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 flex flex-col">
+                <div className="space-y-3">
                   {/* Category & Date */}
-                  <div className="flex items-center gap-3 mb-3 text-xs uppercase tracking-wider text-gray-500">
-                    <span>{article.category[locale]}</span>
-                    <span>•</span>
-                    <time dateTime={article.date}>
-                      {new Date(article.date).toLocaleDateString(
-                        locale === 'pt' ? 'pt-BR' : locale === 'es' ? 'es-ES' : locale === 'fr' ? 'fr-FR' : 'en-US',
-                        { year: 'numeric', month: 'long', day: 'numeric' }
-                      )}
-                    </time>
+                  <div className="text-xs uppercase tracking-wider text-gray-500">
+                    {article.category[locale]} • {new Date(article.date).toLocaleDateString(
+                      locale === 'pt' ? 'pt-BR' : locale === 'es' ? 'es-ES' : locale === 'fr' ? 'fr-FR' : 'en-US',
+                      { day: 'numeric', month: 'short', year: 'numeric' }
+                    ).toUpperCase()}
                   </div>
 
                   {/* Title */}
-                  <h2
-                    className="text-xl sm:text-2xl font-light tracking-wide mb-3 group-hover:text-gray-600 transition-colors"
-                    style={{ fontFamily: "'Cinzel', serif" }}
-                  >
+                  <h2 className="text-lg font-light tracking-wide text-gray-900 group-hover:text-gray-600 transition-colors">
                     {article.title[locale]}
                   </h2>
 
                   {/* Excerpt */}
-                  <p
-                    className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 flex-1"
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                  >
+                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
                     {article.excerpt[locale]}
                   </p>
 
-                  {/* Read More */}
-                  <div className="flex items-center gap-2 text-sm font-light uppercase tracking-wider">
-                    <span className="border-b border-black pb-1 group-hover:border-gray-400 transition-colors">
+                  {/* Read More Link */}
+                  <div className="pt-2">
+                    <span className="text-sm text-gray-900 border-b border-gray-900 group-hover:text-gray-600 group-hover:border-gray-600 transition-colors">
                       {content.readMore[locale]}
                     </span>
-                    <svg
-                      className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
                   </div>
                 </div>
               </article>

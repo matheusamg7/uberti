@@ -164,7 +164,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
             </p>
           </div>
 
-          <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+          <div className="relative aspect-[4/5] overflow-hidden">
             <Image
               src={currentCollection.secondaryBanner}
               alt="Collection detail"
