@@ -1,180 +1,287 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { FileText } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 interface BlogPageProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
-export default function BlogPage({ params }: BlogPageProps) {
-  const locale = params.locale as 'en' | 'pt' | 'es';
+export default async function BlogPage({ params }: BlogPageProps) {
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale as 'en' | 'pt' | 'es' | 'fr';
+
+  // Artigos do blog
+  const articles = [
+    {
+      slug: 'a-arte-da-la-do-pampa',
+      title: {
+        en: 'The Art of Pampa Wool',
+        pt: 'A Arte da Lã do Pampa',
+        es: 'El Arte de la Lana del Pampa',
+        fr: 'L\'Art de la Laine du Pampa',
+      },
+      excerpt: {
+        en: 'Discover how we transform natural Pampa wool into unique pieces of wearable art, preserving ancestral techniques.',
+        pt: 'Descubra como transformamos a lã natural do Pampa em peças únicas de arte vestível, preservando técnicas ancestrais.',
+        es: 'Descubre cómo transformamos la lana natural del Pampa en piezas únicas de arte usable, preservando técnicas ancestrales.',
+        fr: 'Découvrez comment nous transformons la laine naturelle du Pampa en pièces uniques d\'art portable, en préservant les techniques ancestrales.',
+      },
+      category: {
+        en: 'Craftsmanship',
+        pt: 'Artesanato',
+        es: 'Artesanía',
+        fr: 'Artisanat',
+      },
+      image: '/banners/pampa_banner.png',
+      date: '2024-09-15',
+      readTime: '8 min',
+    },
+    {
+      slug: 'colecao-raizes-inspiracao',
+      title: {
+        en: 'Roots Collection: The Inspiration',
+        pt: 'Coleção Raízes: A Inspiração',
+        es: 'Colección Raíces: La Inspiración',
+        fr: 'Collection Racines: L\'Inspiration',
+      },
+      excerpt: {
+        en: 'A deep dive into the creative process behind our Roots collection, celebrating gaucho culture and southern traditions.',
+        pt: 'Um mergulho profundo no processo criativo por trás da nossa coleção Raízes, celebrando a cultura gaúcha e as tradições do sul.',
+        es: 'Una inmersión profunda en el proceso creativo detrás de nuestra colección Raíces, celebrando la cultura gaucha y las tradiciones del sur.',
+        fr: 'Une plongée profonde dans le processus créatif derrière notre collection Racines, célébrant la culture gaucho et les traditions du sud.',
+      },
+      category: {
+        en: 'Collections',
+        pt: 'Coleções',
+        es: 'Colecciones',
+        fr: 'Collections',
+      },
+      image: '/coleção 1/capa_raizes_colecao.png',
+      date: '2024-09-01',
+      readTime: '6 min',
+    },
+    {
+      slug: 'sustentabilidade-moda-artesanal',
+      title: {
+        en: 'Sustainability in Artisanal Fashion',
+        pt: 'Sustentabilidade na Moda Artesanal',
+        es: 'Sostenibilidad en la Moda Artesanal',
+        fr: 'Durabilité dans la Mode Artisanale',
+      },
+      excerpt: {
+        en: 'How traditional craftsmanship and sustainable practices come together to create timeless, eco-friendly pieces.',
+        pt: 'Como o artesanato tradicional e práticas sustentáveis se unem para criar peças atemporais e ecológicas.',
+        es: 'Cómo la artesanía tradicional y las prácticas sostenibles se unen para crear piezas atemporales y ecológicas.',
+        fr: 'Comment l\'artisanat traditionnel et les pratiques durables se rejoignent pour créer des pièces intemporelles et écologiques.',
+      },
+      category: {
+        en: 'Sustainability',
+        pt: 'Sustentabilidade',
+        es: 'Sostenibilidad',
+        fr: 'Durabilité',
+      },
+      image: '/banners/hero_banner_1.png',
+      date: '2024-08-20',
+      readTime: '10 min',
+    },
+    {
+      slug: 'geometria-perfeita-favos',
+      title: {
+        en: 'The Perfect Geometry of Honeycombs',
+        pt: 'A Geometria Perfeita dos Favos',
+        es: 'La Geometría Perfecta de los Panales',
+        fr: 'La Géométrie Parfaite des Rayons',
+      },
+      excerpt: {
+        en: 'Exploring how nature\'s most perfect structures inspired our Honeycombs collection and its unique design language.',
+        pt: 'Explorando como as estruturas mais perfeitas da natureza inspiraram nossa coleção Favos e sua linguagem de design única.',
+        es: 'Explorando cómo las estructuras más perfectas de la naturaleza inspiraron nuestra colección Panales y su lenguaje de diseño único.',
+        fr: 'Explorer comment les structures les plus parfaites de la nature ont inspiré notre collection Rayons et son langage de design unique.',
+      },
+      category: {
+        en: 'Collections',
+        pt: 'Coleções',
+        es: 'Colecciones',
+        fr: 'Collections',
+      },
+      image: '/coleção 2/capa_favos_colecao.png',
+      date: '2024-08-05',
+      readTime: '7 min',
+    },
+    {
+      slug: 'tecnicas-ancestrais-tecelagem',
+      title: {
+        en: 'Ancestral Weaving Techniques',
+        pt: 'Técnicas Ancestrais de Tecelagem',
+        es: 'Técnicas Ancestrales de Tejido',
+        fr: 'Techniques Ancestrales de Tissage',
+      },
+      excerpt: {
+        en: 'Meet the master artisans who keep centuries-old weaving traditions alive through their dedicated craftsmanship.',
+        pt: 'Conheça os mestres artesãos que mantêm vivas as tradições de tecelagem centenárias através de seu artesanato dedicado.',
+        es: 'Conoce a los maestros artesanos que mantienen vivas las tradiciones de tejido centenarias a través de su artesanía dedicada.',
+        fr: 'Rencontrez les maîtres artisans qui maintiennent vivantes les traditions de tissage séculaires grâce à leur artisanat dévoué.',
+      },
+      category: {
+        en: 'Craftsmanship',
+        pt: 'Artesanato',
+        es: 'Artesanía',
+        fr: 'Artisanat',
+      },
+      image: '/banners/hero_banner_2.png',
+      date: '2024-07-18',
+      readTime: '12 min',
+    },
+    {
+      slug: 'helena-uberti-jornada',
+      title: {
+        en: 'Helena Uberti: A Creative Journey',
+        pt: 'Helena Uberti: Uma Jornada Criativa',
+        es: 'Helena Uberti: Un Viaje Creativo',
+        fr: 'Helena Uberti: Un Voyage Créatif',
+      },
+      excerpt: {
+        en: 'From childhood in southern Brazil to creating a sustainable fashion brand - the story behind Helena Uberti.',
+        pt: 'Da infância no sul do Brasil à criação de uma marca de moda sustentável - a história por trás de Helena Uberti.',
+        es: 'Desde la infancia en el sur de Brasil hasta la creación de una marca de moda sostenible - la historia detrás de Helena Uberti.',
+        fr: 'De l\'enfance dans le sud du Brésil à la création d\'une marque de mode durable - l\'histoire derrière Helena Uberti.',
+      },
+      category: {
+        en: 'Behind the Scenes',
+        pt: 'Bastidores',
+        es: 'Detrás de Escenas',
+        fr: 'Coulisses',
+      },
+      image: '/Helena_uberti_0158.jpg',
+      date: '2024-07-01',
+      readTime: '15 min',
+    },
+  ];
 
   const content = {
     title: {
-      en: 'The UBERTI Journal',
-      pt: 'O Diário UBERTI',
-      es: 'El Diario UBERTI',
+      en: 'Journal',
+      pt: 'Diário',
+      es: 'Diario',
+      fr: 'Journal',
     },
     subtitle: {
-      en: 'Stories, inspiration, and insights from Helena\'s creative journey',
-      pt: 'Histórias, inspiração e insights da jornada criativa de Helena',
-      es: 'Historias, inspiración y perspectivas del viaje creativo de Helena',
+      en: 'Stories, inspiration, and insights from our creative journey',
+      pt: 'Histórias, inspiração e insights da nossa jornada criativa',
+      es: 'Historias, inspiración y perspectivas de nuestro viaje creativo',
+      fr: 'Histoires, inspiration et perspectives de notre voyage créatif',
     },
-    comingSoon: {
-      title: {
-        en: 'Coming Soon',
-        pt: 'Em Breve',
-        es: 'Próximamente',
-      },
-      description: {
-        en: 'We\'re preparing beautiful stories about our creative process, behind-the-scenes moments, and the inspiration behind each collection. Stay tuned for updates.',
-        pt: 'Estamos preparando belas histórias sobre nosso processo criativo, momentos dos bastidores e a inspiração por trás de cada coleção. Fique atento às novidades.',
-        es: 'Estamos preparando hermosas historias sobre nuestro proceso creativo, momentos detrás de escena y la inspiración detrás de cada colección. Mantente atento a las novedades.',
-      },
+    readMore: {
+      en: 'Read More',
+      pt: 'Ler Mais',
+      es: 'Leer Más',
+      fr: 'Lire Plus',
     },
-    newsletter: {
-      title: {
-        en: 'Get Notified',
-        pt: 'Seja Notificado',
-        es: 'Recibe Notificaciones',
-      },
-      description: {
-        en: 'Subscribe to our newsletter to be the first to know when we publish new stories.',
-        pt: 'Assine nossa newsletter para ser o primeiro a saber quando publicarmos novas histórias.',
-        es: 'Suscríbete a nuestro boletín para ser el primero en saber cuándo publiquemos nuevas historias.',
-      },
-    },
-    topics: [
-      {
-        title: {
-          en: 'Behind the Scenes',
-          pt: 'Bastidores',
-          es: 'Detrás de Escenas',
-        },
-        description: {
-          en: 'Glimpses into Helena\'s atelier and the creative process',
-          pt: 'Vislumbres do ateliê de Helena e do processo criativo',
-          es: 'Vislumbres del taller de Helena y el proceso creativo',
-        },
-      },
-      {
-        title: {
-          en: 'Collection Stories',
-          pt: 'Histórias das Coleções',
-          es: 'Historias de Colecciones',
-        },
-        description: {
-          en: 'The inspiration and journey behind each collection',
-          pt: 'A inspiração e jornada por trás de cada coleção',
-          es: 'La inspiración y el viaje detrás de cada colección',
-        },
-      },
-      {
-        title: {
-          en: 'Craftsmanship',
-          pt: 'Artesanato',
-          es: 'Artesanía',
-        },
-        description: {
-          en: 'Traditional techniques and sustainable practices',
-          pt: 'Técnicas tradicionais e práticas sustentáveis',
-          es: 'Técnicas tradicionales y prácticas sostenibles',
-        },
-      },
-      {
-        title: {
-          en: 'Style & Inspiration',
-          pt: 'Estilo e Inspiração',
-          es: 'Estilo e Inspiración',
-        },
-        description: {
-          en: 'Styling tips and creative inspiration from Helena',
-          pt: 'Dicas de estilo e inspiração criativa de Helena',
-          es: 'Consejos de estilo e inspiración creativa de Helena',
-        },
-      },
-    ],
   };
 
   return (
-    <div className="space-y-16">
+    <div className="min-h-screen bg-[#FEFDFE]">
       {/* Header */}
-      <section className="mx-auto max-w-4xl px-4 pt-16 sm:px-6 lg:px-8 text-center">
-        <div className="space-y-6">
-          <h1 className="display-2">{content.title[locale]}</h1>
-          <p className="heading-3 font-light text-muted-foreground">
+      <section className="relative h-[40vh] sm:h-[50vh] min-h-[300px] sm:min-h-[400px] flex items-center justify-center overflow-hidden">
+        <Image
+          src="/banners/pampa_banner.png"
+          alt="Blog"
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
+          <h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-wide mb-4"
+            style={{ fontFamily: "'Cinzel', serif" }}
+          >
+            {content.title[locale]}
+          </h1>
+          <p
+            className="text-base sm:text-lg md:text-xl font-light max-w-2xl mx-auto"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
             {content.subtitle[locale]}
           </p>
         </div>
       </section>
 
-      {/* Coming Soon */}
-      <section className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center">
-        <div className="bg-muted/20 rounded-lg p-8 lg:p-12">
-          <div className="space-y-6">
-            <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-              <FileText className="w-8 h-8 text-primary" />
-            </div>
+      {/* Articles Grid */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          {articles.map((article) => (
+            <Link
+              key={article.slug}
+              href={`/${locale}/blog/${article.slug}`}
+              className="group"
+            >
+              <article className="h-full flex flex-col">
+                {/* Image */}
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg mb-4">
+                  <Image
+                    src={article.image}
+                    alt={article.title[locale]}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
 
-            <div className="space-y-4">
-              <h2 className="heading-2">{content.comingSoon.title[locale]}</h2>
-              <p className="body-text text-muted-foreground leading-relaxed">
-                {content.comingSoon.description[locale]}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+                {/* Content */}
+                <div className="flex-1 flex flex-col">
+                  {/* Category & Date */}
+                  <div className="flex items-center gap-3 mb-3 text-xs uppercase tracking-wider text-gray-500">
+                    <span>{article.category[locale]}</span>
+                    <span>•</span>
+                    <time dateTime={article.date}>
+                      {new Date(article.date).toLocaleDateString(
+                        locale === 'pt' ? 'pt-BR' : locale === 'es' ? 'es-ES' : locale === 'fr' ? 'fr-FR' : 'en-US',
+                        { year: 'numeric', month: 'long', day: 'numeric' }
+                      )}
+                    </time>
+                  </div>
 
-      {/* What to Expect */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="heading-2 mb-4">
-            {locale === 'pt' ? 'O que Esperar' : locale === 'es' ? 'Qué Esperar' : 'What to Expect'}
-          </h2>
-          <p className="body-text text-muted-foreground max-w-2xl mx-auto">
-            {locale === 'pt'
-              ? 'Nosso blog será um espaço para compartilhar as histórias por trás de cada criação.'
-              : locale === 'es'
-              ? 'Nuestro blog será un espacio para compartir las historias detrás de cada creación.'
-              : 'Our blog will be a space to share the stories behind each creation.'
-            }
-          </p>
-        </div>
+                  {/* Title */}
+                  <h2
+                    className="text-xl sm:text-2xl font-light tracking-wide mb-3 group-hover:text-gray-600 transition-colors"
+                    style={{ fontFamily: "'Cinzel', serif" }}
+                  >
+                    {article.title[locale]}
+                  </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {content.topics.map((topic, index) => (
-            <div key={index} className="space-y-4 p-6 border border-border/50 rounded-lg hover-lift">
-              <h3 className="heading-3">{topic.title[locale]}</h3>
-              <p className="body-text text-muted-foreground">
-                {topic.description[locale]}
-              </p>
-            </div>
+                  {/* Excerpt */}
+                  <p
+                    className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 flex-1"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
+                    {article.excerpt[locale]}
+                  </p>
+
+                  {/* Read More */}
+                  <div className="flex items-center gap-2 text-sm font-light uppercase tracking-wider">
+                    <span className="border-b border-black pb-1 group-hover:border-gray-400 transition-colors">
+                      {content.readMore[locale]}
+                    </span>
+                    <svg
+                      className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </article>
+            </Link>
           ))}
-        </div>
-      </section>
-
-      {/* Newsletter CTA */}
-      <section className="bg-muted/20">
-        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 text-center">
-          <div className="space-y-6">
-            <h2 className="heading-2">{content.newsletter.title[locale]}</h2>
-            <p className="body-text text-muted-foreground">
-              {content.newsletter.description[locale]}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <Link href={`/${locale}/collections`}>
-                  {locale === 'pt' ? 'Explorar Coleções' : locale === 'es' ? 'Explorar Colecciones' : 'Explore Collections'}
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link href={`/${locale}/about`}>
-                  {locale === 'pt' ? 'Sobre Helena' : locale === 'es' ? 'Sobre Helena' : 'About Helena'}
-                </Link>
-              </Button>
-            </div>
-          </div>
         </div>
       </section>
     </div>

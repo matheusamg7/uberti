@@ -8,7 +8,10 @@
       "Bash(ls:*)",
       "Bash(find:*)",
       "Bash(xargs basename:*)",
-      "Read(//c/Users/matheus/.claude/**)"
+      "Read(//c/Users/matheus/.claude/**)",
+      "Bash(tasklist)",
+      "Bash(taskkill:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []
