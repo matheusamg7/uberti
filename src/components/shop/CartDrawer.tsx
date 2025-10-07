@@ -122,12 +122,12 @@ export function CartDrawer({ locale, trigger }: CartDrawerProps) {
   };
 
   const labels = {
-    cart: { en: 'Shopping Cart', pt: 'Carrinho de Compras', es: 'Carrito de Compras' },
-    empty: { en: 'Your cart is empty', pt: 'Seu carrinho está vazio', es: 'Tu carrito está vacío' },
+    cart: { en: 'Shopping Bag', pt: 'Sacola de Compras', es: 'Bolsa de Compras' },
+    empty: { en: 'Your bag is empty', pt: 'Sua sacola está vazia', es: 'Tu bolsa está vacía' },
     emptyDescription: {
-      en: 'Discover our collections and add some beautiful pieces to your cart.',
-      pt: 'Descubra nossas coleções e adicione algumas peças lindas ao seu carrinho.',
-      es: 'Descubre nuestras colecciones y añade algunas piezas hermosas a tu carrito.',
+      en: 'Discover our collections and add some beautiful pieces to your bag.',
+      pt: 'Descubra nossas coleções e adicione algumas peças lindas à sua sacola.',
+      es: 'Descubre nuestras colecciones y añade algunas piezas hermosas a tu bolsa.',
     },
     browseCatalog: { en: 'Browse Catalog', pt: 'Ver Catálogo', es: 'Ver Catálogo' },
     subtotal: { en: 'Subtotal', pt: 'Subtotal', es: 'Subtotal' },
@@ -135,7 +135,7 @@ export function CartDrawer({ locale, trigger }: CartDrawerProps) {
     free: { en: 'Free', pt: 'Grátis', es: 'Gratis' },
     total: { en: 'Total', pt: 'Total', es: 'Total' },
     checkout: { en: 'Checkout', pt: 'Finalizar Compra', es: 'Finalizar Compra' },
-    viewCart: { en: 'View Cart', pt: 'Ver Carrinho', es: 'Ver Carrito' },
+    viewCart: { en: 'View Bag', pt: 'Ver Sacola', es: 'Ver Bolsa' },
     remove: { en: 'Remove', pt: 'Remover', es: 'Remover' },
     quantity: { en: 'Quantity', pt: 'Quantidade', es: 'Cantidad' },
   };

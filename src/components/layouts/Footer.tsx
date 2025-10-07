@@ -9,6 +9,42 @@ interface FooterProps {
 
 export function Footer({ locale }: FooterProps) {
   const content = {
+    newsletter: {
+      title: {
+        en: 'Newsletter',
+        pt: 'Newsletter',
+        es: 'Newsletter',
+        fr: 'Newsletter',
+      },
+      description: {
+        en: 'Subscribe to receive news about collections and exclusive events.',
+        pt: 'Inscreva-se para receber novidades sobre coleções e eventos exclusivos.',
+        es: 'Suscríbete para recibir noticias sobre colecciones y eventos exclusivos.',
+        fr: 'Abonnez-vous pour recevoir des nouvelles sur les collections et les événements exclusifs.',
+      },
+      placeholder: {
+        en: 'Your email',
+        pt: 'Seu email',
+        es: 'Tu email',
+        fr: 'Votre email',
+      },
+      button: {
+        en: 'Subscribe',
+        pt: 'Inscrever',
+        es: 'Suscribirse',
+        fr: 'S\'abonner',
+      },
+    },
+    contact: {
+      email: 'contato@helenauberti.com',
+      phone: '+55 54 99999-9999',
+      address: {
+        en: 'Porto Alegre, RS - Brazil',
+        pt: 'Porto Alegre, RS - Brasil',
+        es: 'Porto Alegre, RS - Brasil',
+        fr: 'Porto Alegre, RS - Brésil',
+      },
+    },
     shop: {
       title: {
         en: 'Shop',
@@ -106,11 +142,37 @@ export function Footer({ locale }: FooterProps) {
   return (
     <footer className="bg-black text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-        {/* Top Section - Logo + Links Grid */}
+        {/* Newsletter Section - Full Width Top */}
+        <div className="mb-16 pb-16 border-b border-gray-800">
+          <div className="max-w-2xl mx-auto text-center">
+            <h3 className="text-2xl font-light mb-3" style={{ fontFamily: "'Cinzel', serif" }}>
+              {content.newsletter.title[locale]}
+            </h3>
+            <p className="text-sm text-gray-400 mb-6 font-light">
+              {content.newsletter.description[locale]}
+            </p>
+            <form className="flex gap-3 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder={content.newsletter.placeholder[locale]}
+                className="flex-1 px-4 py-3 bg-transparent border border-gray-700 text-white placeholder:text-gray-500 focus:outline-none focus:border-white transition-colors text-sm font-light"
+                required
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 bg-white text-black hover:bg-gray-200 transition-colors text-sm uppercase tracking-wider font-light"
+              >
+                {content.newsletter.button[locale]}
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* Links Grid */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-8 mb-16">
-          {/* Logo Column */}
+          {/* Logo + Contact Column */}
           <div className="md:col-span-1">
-            <Link href={`/${locale}`} className="inline-block">
+            <Link href={`/${locale}`} className="inline-block mb-6">
               <Image
                 src="/logo/logo_branca.svg"
                 alt="Helena Uberti"
@@ -119,6 +181,33 @@ export function Footer({ locale }: FooterProps) {
                 className="opacity-90 hover:opacity-100 transition-opacity"
               />
             </Link>
+
+            {/* Contact Info */}
+            <div className="space-y-2 text-sm text-gray-400 font-light">
+              <p className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <a href={`mailto:${content.contact.email}`} className="hover:text-white transition-colors">
+                  {content.contact.email}
+                </a>
+              </p>
+              <p className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <a href={`tel:${content.contact.phone.replace(/\s/g, '')}`} className="hover:text-white transition-colors">
+                  {content.contact.phone}
+                </a>
+              </p>
+              <p className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                {content.contact.address[locale]}
+              </p>
+            </div>
           </div>
 
           {/* Shop */}

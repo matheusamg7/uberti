@@ -3,11 +3,12 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 interface AboutPageProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
-export default function AboutPage({ params }: AboutPageProps) {
-  const locale = params.locale as 'en' | 'pt' | 'es';
+export default async function AboutPage({ params }: AboutPageProps) {
+  const { locale: localeParam } = await params;
+  const locale = localeParam as 'en' | 'pt' | 'es';
 
   const content = {
     hero: {

@@ -45,13 +45,13 @@ function CartContent({ locale }: { locale: 'en' | 'pt' | 'es' | 'fr' }) {
       en: 'Shopping Bag',
       pt: 'Sacola de Compras',
       es: 'Bolsa de Compras',
-      fr: 'Panier',
+      fr: 'Sac d\'Achats',
     },
     empty: {
-      en: 'Your cart is empty',
+      en: 'Your bag is empty',
       pt: 'Sua sacola está vazia',
       es: 'Tu bolsa está vacía',
-      fr: 'Votre panier est vide',
+      fr: 'Votre sac est vide',
     },
     continueShopping: {
       en: 'Continue Shopping',
@@ -183,13 +183,13 @@ function CartContent({ locale }: { locale: 'en' | 'pt' | 'es' | 'fr' }) {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-20">
           {/* Cart Items - Left Side */}
           <div className="lg:col-span-2">
-            <div className="space-y-8">
+            <div className="space-y-12">
               {cartItems.map((item) => (
-                <div key={item.id} className="flex gap-6 pb-8 border-b border-gray-100 last:border-0">
+                <div key={item.id} className="flex gap-8 pb-12 border-b border-gray-100 last:border-0">
                   {/* Product Image */}
                   <div className="relative w-32 h-40 bg-gray-100 flex-shrink-0">
                     <Image
@@ -213,7 +213,7 @@ function CartContent({ locale }: { locale: 'en' | 'pt' | 'es' | 'fr' }) {
                       </div>
                       <button
                         onClick={() => removeItem(item.id)}
-                        className="p-2 h-fit hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+                        className="p-2 h-fit hover:bg-gray-100 transition-colors cursor-pointer"
                         aria-label={content.remove[locale]}
                       >
                         <X className="h-4 w-4" strokeWidth={1} />
@@ -222,10 +222,10 @@ function CartContent({ locale }: { locale: 'en' | 'pt' | 'es' | 'fr' }) {
 
                     <div className="flex items-center justify-between mt-4">
                       {/* Quantity Selector */}
-                      <div className="flex items-center gap-3 border border-gray-200 rounded-full px-3 py-1">
+                      <div className="flex items-center gap-3 border border-gray-200 px-3 py-1">
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+                          className="p-1 hover:bg-gray-100 transition-colors cursor-pointer"
                           aria-label="Decrease quantity"
                         >
                           <Minus className="h-3 w-3" strokeWidth={1.5} />
@@ -233,7 +233,7 @@ function CartContent({ locale }: { locale: 'en' | 'pt' | 'es' | 'fr' }) {
                         <span className="text-sm min-w-[30px] text-center">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="p-1 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+                          className="p-1 hover:bg-gray-100 transition-colors cursor-pointer"
                           aria-label="Increase quantity"
                         >
                           <Plus className="h-3 w-3" strokeWidth={1.5} />
@@ -250,9 +250,9 @@ function CartContent({ locale }: { locale: 'en' | 'pt' | 'es' | 'fr' }) {
           </div>
 
           {/* Right Side - Summary and Promotional */}
-          <div className="space-y-8">
+          <div className="space-y-12">
             {/* Order Summary */}
-            <div className="bg-gray-50 p-8">
+            <div className="bg-gray-50 p-10">
               <h2 className="text-xl font-light mb-6 tracking-wide" style={{ fontFamily: "'Cinzel', serif" }}>
                 {locale === 'pt' ? 'Resumo' : locale === 'es' ? 'Resumen' : locale === 'fr' ? 'Résumé' : 'Summary'}
               </h2>

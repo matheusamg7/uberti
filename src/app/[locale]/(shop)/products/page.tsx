@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ProductCard } from '@/components/shop/ProductCard';
 import { Button } from '@/components/ui/button';
@@ -8,11 +8,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { mockProducts, mockCollections, mockCategories } from '@/lib/mock-data';
 
 interface ProductsPageProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
 export default function ProductsPage({ params }: ProductsPageProps) {
-  const locale = params.locale as 'en' | 'pt' | 'es';
+  const { locale: localeParam } = use(params);
+  const locale = localeParam as 'en' | 'pt' | 'es';
   const searchParams = useSearchParams();
 
   const [selectedCollection, setSelectedCollection] = useState<string | null>(
@@ -135,12 +136,15 @@ export default function ProductsPage({ params }: ProductsPageProps) {
           <div className="flex flex-wrap gap-4 items-center">
             {/* Collection Filter */}
             <div className="min-w-[150px]">
-              <Select value={selectedCollection || ''} onValueChange={(value) => setSelectedCollection(value || null)}>
+              <Select
+                value={selectedCollection || 'all'}
+                onValueChange={(value) => setSelectedCollection(value === 'all' ? null : value)}
+              >
                 <SelectTrigger className="btn-minimal">
                   <SelectValue placeholder={pageContent.filters.collection[locale]} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">{pageContent.filters.all[locale]}</SelectItem>
+                  <SelectItem value="all">{pageContent.filters.all[locale]}</SelectItem>
                   {mockCollections.map((collection) => (
                     <SelectItem key={collection.id} value={collection.slug}>
                       {collection[`name_${locale}` as keyof typeof collection] as string}
@@ -152,12 +156,15 @@ export default function ProductsPage({ params }: ProductsPageProps) {
 
             {/* Category Filter */}
             <div className="min-w-[150px]">
-              <Select value={selectedCategory || ''} onValueChange={(value) => setSelectedCategory(value || null)}>
+              <Select
+                value={selectedCategory || 'all'}
+                onValueChange={(value) => setSelectedCategory(value === 'all' ? null : value)}
+              >
                 <SelectTrigger className="btn-minimal">
                   <SelectValue placeholder={pageContent.filters.category[locale]} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">{pageContent.filters.all[locale]}</SelectItem>
+                  <SelectItem value="all">{pageContent.filters.all[locale]}</SelectItem>
                   {mockCategories.map((category) => (
                     <SelectItem key={category.id} value={category.slug}>
                       {category[`name_${locale}` as keyof typeof category] as string}

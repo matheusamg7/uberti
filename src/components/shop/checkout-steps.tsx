@@ -5,10 +5,10 @@ interface CheckoutStepsProps {
 
 export function CheckoutSteps({ currentStep, locale }: CheckoutStepsProps) {
   const steps = {
-    en: ['Cart', 'Checkout', 'Confirmation'],
-    pt: ['Carrinho', 'Checkout', 'Confirmação'],
-    es: ['Carrito', 'Checkout', 'Confirmación'],
-    fr: ['Panier', 'Checkout', 'Confirmation'],
+    en: ['Bag', 'Checkout', 'Confirmation'],
+    pt: ['Sacola', 'Checkout', 'Confirmação'],
+    es: ['Bolsa', 'Checkout', 'Confirmación'],
+    fr: ['Sac', 'Checkout', 'Confirmation'],
   };
 
   return (

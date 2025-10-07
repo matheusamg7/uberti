@@ -183,7 +183,7 @@ export function Header({ locale }: HeaderProps) {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Carrinho - Quarta */}
+              {/* Sacola - Quarta */}
               <div
                 className={`relative group ${
                   isLoaded ? 'animate-fade-in-up' : 'opacity-0'
