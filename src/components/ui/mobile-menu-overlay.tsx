@@ -192,17 +192,87 @@ export function MobileMenuOverlay({
 
             {/* Static Navigation (About, Blog, etc.) */}
             <div className="px-8 py-4 border-t border-gray-100">
-              {staticNavigation.map((item) => (
-                <Link
-                  key={item.href}
-                  href={`/${locale}${item.href}`}
-                  className="block py-3 text-base font-light text-gray-700 hover:text-black transition-colors"
-                  onClick={onClose}
-                  style={{ fontFamily: "'Inter', sans-serif" }}
-                >
-                  {item.name[locale]}
-                </Link>
-              ))}
+              {staticNavigation.map((item) => {
+                // Special handling for About - make it expandable
+                if (item.href === '/about') {
+                  const aboutSubcategories = [
+                    {
+                      name: {
+                        en: 'About Helena',
+                        pt: 'Sobre Helena',
+                        es: 'Sobre Helena',
+                        fr: 'À Propos d\'Helena'
+                      },
+                      href: '/sobre-helena'
+                    },
+                    {
+                      name: {
+                        en: 'About UBERTI',
+                        pt: 'Sobre UBERTI',
+                        es: 'Sobre UBERTI',
+                        fr: 'À Propos d\'UBERTI'
+                      },
+                      href: '/sobre-uberti'
+                    }
+                  ];
+
+                  return (
+                    <div key={item.href} className="border-b border-gray-100">
+                      <button
+                        onClick={() => toggleCategory(item.href)}
+                        className="w-full flex items-center justify-between py-3 text-left group"
+                      >
+                        <span
+                          className="text-base font-light text-gray-700 group-hover:text-black transition-colors"
+                          style={{ fontFamily: "'Inter', sans-serif" }}
+                        >
+                          {item.name[locale]}
+                        </span>
+                        <ChevronRight
+                          className={`h-4 w-4 text-gray-600 transition-transform duration-300 ${
+                            expandedCategory === item.href ? 'rotate-90' : ''
+                          }`}
+                          strokeWidth={1.5}
+                        />
+                      </button>
+
+                      {/* About Subcategories */}
+                      <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          expandedCategory === item.href ? 'max-h-[200px] opacity-100' : 'max-h-0 opacity-0'
+                        }`}
+                      >
+                        <div className="pl-6 pb-3">
+                          {aboutSubcategories.map((subcategory) => (
+                            <Link
+                              key={subcategory.href}
+                              href={`/${locale}${subcategory.href}`}
+                              className="block py-2 text-sm font-light text-gray-600 hover:text-black transition-colors"
+                              onClick={onClose}
+                              style={{ fontFamily: "'Inter', sans-serif" }}
+                            >
+                              {subcategory.name[locale]}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+
+                // Regular static navigation items
+                return (
+                  <Link
+                    key={item.href}
+                    href={`/${locale}${item.href}`}
+                    className="block py-3 text-base font-light text-gray-700 hover:text-black transition-colors"
+                    onClick={onClose}
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
+                    {item.name[locale]}
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Account Links */}

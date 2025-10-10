@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -29,33 +30,110 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
     },
   };
 
-  const articles = [
+  // All 7 educational blog articles
+  const allArticles = [
     {
       id: 1,
       category: {
-        en: 'Heritage',
-        pt: 'Patrimônio',
-        es: 'Patrimonio',
-        fr: 'Patrimoine',
+        en: 'Animal Welfare',
+        pt: 'Bem-Estar Animal',
+        es: 'Bienestar Animal',
+        fr: 'Bien-être Animal',
       },
       title: {
-        en: 'The Art of Pampa in Haute Couture',
-        pt: 'A Arte do Pampa na Alta Costura',
-        es: 'El Arte de la Pampa en la Alta Costura',
-        fr: "L'Art de la Pampa dans la Haute Couture",
+        en: 'The Importance of Shearing for Sheep Welfare',
+        pt: 'A Importância da Tosquia para o Bem-Estar das Ovelhas',
+        es: 'La Importancia del Esquileo para el Bienestar de las Ovejas',
+        fr: 'L\'Importance de la Tonte pour le Bien-être des Moutons',
       },
       excerpt: {
-        en: 'Exploring the rich cultural heritage of the South American plains and its influence on contemporary fashion.',
-        pt: 'Explorando o rico patrimônio cultural das planícies sul-americanas e sua influência na moda contemporânea.',
-        es: 'Explorando el rico patrimonio cultural de las llanuras sudamericanas y su influencia en la moda contemporánea.',
-        fr: 'Explorer le riche patrimoine culturel des plaines sud-américaines et son influence sur la mode contemporaine.',
+        en: 'Understanding how proper shearing practices ensure the health and comfort of sheep throughout the year.',
+        pt: 'Entenda como práticas adequadas de tosquia garantem a saúde e o conforto das ovelhas durante todo o ano.',
+        es: 'Comprenda cómo las prácticas adecuadas de esquileo garantizan la salud y comodidad de las ovejas durante todo el año.',
+        fr: 'Comprendre comment les bonnes pratiques de tonte garantissent la santé et le confort des moutons tout au long de l\'année.',
       },
       date: '15 Nov 2024',
-      image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&h=800&fit=crop',
-      slug: 'pampa-haute-couture',
+      readTime: '8 min',
+      image: '/banners/pampa_banner.png',
+      slug: 'importancia-tosquia-bem-estar-ovelhas',
     },
     {
       id: 2,
+      category: {
+        en: 'Benefits',
+        pt: 'Benefícios',
+        es: 'Beneficios',
+        fr: 'Avantages',
+      },
+      title: {
+        en: 'Benefits of Wool Pieces',
+        pt: 'Benefícios das Peças Feitas em Lã',
+        es: 'Beneficios de las Piezas de Lana',
+        fr: 'Avantages des Pièces en Laine',
+      },
+      excerpt: {
+        en: 'Discover the unique properties of wool that make it a superior natural fiber for clothing and accessories.',
+        pt: 'Descubra as propriedades únicas da lã que a tornam uma fibra natural superior para roupas e acessórios.',
+        es: 'Descubra las propiedades únicas de la lana que la convierten en una fibra natural superior para ropa y accesorios.',
+        fr: 'Découvrez les propriétés uniques de la laine qui en font une fibre naturelle supérieure pour les vêtements et accessoires.',
+      },
+      date: '12 Nov 2024',
+      readTime: '6 min',
+      image: '/banners/pampa_banner.png',
+      slug: 'beneficios-pecas-feitas-la',
+    },
+    {
+      id: 3,
+      category: {
+        en: 'Care',
+        pt: 'Cuidados',
+        es: 'Cuidado',
+        fr: 'Entretien',
+      },
+      title: {
+        en: 'How to Care for Wool Pieces',
+        pt: 'Como Cuidar de Peças em Lã',
+        es: 'Cómo Cuidar Piezas de Lana',
+        fr: 'Comment Entretenir les Pièces en Laine',
+      },
+      excerpt: {
+        en: 'Essential tips for washing, storing, and maintaining your wool garments to ensure their longevity and beauty.',
+        pt: 'Dicas essenciais para lavar, armazenar e manter suas peças de lã, garantindo sua longevidade e beleza.',
+        es: 'Consejos esenciales para lavar, guardar y mantener sus prendas de lana para asegurar su longevidad y belleza.',
+        fr: 'Conseils essentiels pour laver, ranger et entretenir vos vêtements en laine afin d\'assurer leur longévité et leur beauté.',
+      },
+      date: '10 Nov 2024',
+      readTime: '7 min',
+      image: '/banners/pampa_banner.png',
+      slug: 'como-cuidar-pecas-la',
+    },
+    {
+      id: 4,
+      category: {
+        en: 'Technique',
+        pt: 'Técnica',
+        es: 'Técnica',
+        fr: 'Technique',
+      },
+      title: {
+        en: 'The Felting Technique',
+        pt: 'A Técnica de Feltragem',
+        es: 'La Técnica del Fieltro',
+        fr: 'La Technique du Feutrage',
+      },
+      excerpt: {
+        en: 'Explore the ancient art of felting and how this traditional technique creates unique, durable wool pieces.',
+        pt: 'Explore a arte ancestral da feltragem e como essa técnica tradicional cria peças únicas e duráveis em lã.',
+        es: 'Explore el arte ancestral del fieltro y cómo esta técnica tradicional crea piezas únicas y duraderas de lana.',
+        fr: 'Explorez l\'art ancestral du feutrage et comment cette technique traditionnelle crée des pièces uniques et durables en laine.',
+      },
+      date: '08 Nov 2024',
+      readTime: '9 min',
+      image: '/banners/pampa_banner.png',
+      slug: 'tecnica-feltragem',
+    },
+    {
+      id: 5,
       category: {
         en: 'Sustainability',
         pt: 'Sustentabilidade',
@@ -63,46 +141,79 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
         fr: 'Durabilité',
       },
       title: {
-        en: 'Sustainability and Artisanal Fashion',
-        pt: 'Sustentabilidade e Moda Artesanal',
-        es: 'Sostenibilidad y Moda Artesanal',
-        fr: 'Durabilité et Mode Artisanale',
+        en: 'Slow Fashion vs Fast Fashion',
+        pt: 'Slow Fashion vs Fast Fashion',
+        es: 'Slow Fashion vs Fast Fashion',
+        fr: 'Slow Fashion vs Fast Fashion',
       },
       excerpt: {
-        en: 'How traditional craftsmanship techniques contribute to a more sustainable future in fashion.',
-        pt: 'Como técnicas tradicionais de artesanato contribuem para um futuro mais sustentável na moda.',
-        es: 'Cómo las técnicas artesanales tradicionales contribuyen a un futuro más sostenible en la moda.',
-        fr: "Comment les techniques artisanales traditionnelles contribuent à un avenir plus durable dans la mode.",
-      },
-      date: '10 Nov 2024',
-      image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&h=800&fit=crop',
-      slug: 'sustainable-fashion',
-    },
-    {
-      id: 3,
-      category: {
-        en: 'Profile',
-        pt: 'Perfil',
-        es: 'Perfil',
-        fr: 'Profil',
-      },
-      title: {
-        en: 'Helena Uberti: 30 Years of History',
-        pt: 'Helena Uberti: 30 Anos de História',
-        es: 'Helena Uberti: 30 Años de Historia',
-        fr: "Helena Uberti: 30 Ans d'Histoire",
-      },
-      excerpt: {
-        en: 'A journey through three decades of dedication to art and fashion, creating timeless pieces.',
-        pt: 'Uma jornada através de três décadas de dedicação à arte e moda, criando peças atemporais.',
-        es: 'Un viaje a través de tres décadas de dedicación al arte y la moda, creando piezas atemporales.',
-        fr: "Un voyage à travers trois décennies de dévouement à l'art et à la mode, créant des pièces intemporelles.",
+        en: 'Understanding the differences between slow and fast fashion and why conscious choices matter for our planet.',
+        pt: 'Compreenda as diferenças entre slow fashion e fast fashion e por que escolhas conscientes importam para o planeta.',
+        es: 'Comprenda las diferencias entre slow fashion y fast fashion y por qué las elecciones conscientes importan para el planeta.',
+        fr: 'Comprendre les différences entre slow fashion et fast fashion et pourquoi les choix conscients sont importants pour notre planète.',
       },
       date: '05 Nov 2024',
-      image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=800&fit=crop',
-      slug: 'helena-uberti-history',
+      readTime: '10 min',
+      image: '/banners/pampa_banner.png',
+      slug: 'slow-fashion-vs-fast-fashion',
+    },
+    {
+      id: 6,
+      category: {
+        en: 'Lifestyle',
+        pt: 'Estilo de Vida',
+        es: 'Estilo de Vida',
+        fr: 'Style de Vie',
+      },
+      title: {
+        en: 'The Power of Clothing in Self-Esteem',
+        pt: 'O Poder das Roupas na Autoestima',
+        es: 'El Poder de la Ropa en la Autoestima',
+        fr: 'Le Pouvoir des Vêtements sur l\'Estime de Soi',
+      },
+      excerpt: {
+        en: 'How the clothes we wear influence our confidence, mood, and the way we present ourselves to the world.',
+        pt: 'Como as roupas que usamos influenciam nossa confiança, humor e a forma como nos apresentamos ao mundo.',
+        es: 'Cómo la ropa que usamos influye en nuestra confianza, estado de ánimo y la forma en que nos presentamos al mundo.',
+        fr: 'Comment les vêtements que nous portons influencent notre confiance, notre humeur et la façon dont nous nous présentons au monde.',
+      },
+      date: '01 Nov 2024',
+      readTime: '8 min',
+      image: '/banners/pampa_banner.png',
+      slug: 'poder-roupas-autoestima',
+    },
+    {
+      id: 7,
+      category: {
+        en: 'Materials',
+        pt: 'Materiais',
+        es: 'Materiales',
+        fr: 'Matériaux',
+      },
+      title: {
+        en: 'Synthetic Fabrics vs Wool',
+        pt: 'Tecidos Sintéticos vs Lã',
+        es: 'Tejidos Sintéticos vs Lana',
+        fr: 'Tissus Synthétiques vs Laine',
+      },
+      excerpt: {
+        en: 'A comprehensive comparison between synthetic fabrics and natural wool, examining sustainability and performance.',
+        pt: 'Uma comparação abrangente entre tecidos sintéticos e lã natural, analisando sustentabilidade e desempenho.',
+        es: 'Una comparación integral entre tejidos sintéticos y lana natural, analizando sostenibilidad y rendimiento.',
+        fr: 'Une comparaison complète entre les tissus synthétiques et la laine naturelle, examinant la durabilité et la performance.',
+      },
+      date: '28 Oct 2024',
+      readTime: '9 min',
+      image: '/banners/pampa_banner.png',
+      slug: 'tecidos-sinteticos-vs-la',
     },
   ];
+
+  // Randomly select 3 articles on each render
+  const articles = useMemo(() => {
+    const shuffled = [...allArticles].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 3);
+  }, []);
 
   return (
     <section className="pt-12 pb-24 bg-[#FEFDFE]">
