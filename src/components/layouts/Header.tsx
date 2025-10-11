@@ -170,14 +170,17 @@ export function Header({ locale }: HeaderProps) {
                     />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="bg-white border-gray-200 min-w-[160px]">
-                  <DropdownMenuItem asChild>
-                    <Link href={`/${locale}/account`} className="text-gray-800 hover:text-black">
+                <DropdownMenuContent
+                  align="end"
+                  className="bg-white border border-gray-200 min-w-[180px] rounded-none shadow-lg p-0 mt-2"
+                >
+                  <DropdownMenuItem asChild className="rounded-none px-6 py-3 text-sm font-light tracking-wide hover:bg-gray-50 focus:bg-gray-50 cursor-pointer">
+                    <Link href={`/${locale}/account`} className="text-gray-800 hover:text-black transition-colors">
                       {locale === 'pt' ? 'Minha Conta' : locale === 'es' ? 'Mi Cuenta' : locale === 'fr' ? 'Mon Compte' : 'My Account'}
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href={`/${locale}/login`} className="text-gray-800 hover:text-black">
+                  <DropdownMenuItem asChild className="rounded-none px-6 py-3 text-sm font-light tracking-wide hover:bg-gray-50 focus:bg-gray-50 cursor-pointer border-t border-gray-100">
+                    <Link href={`/${locale}/login`} className="text-gray-800 hover:text-black transition-colors">
                       {locale === 'pt' ? 'Entrar' : locale === 'es' ? 'Iniciar Sesión' : locale === 'fr' ? 'Connexion' : 'Sign In'}
                     </Link>
                   </DropdownMenuItem>
