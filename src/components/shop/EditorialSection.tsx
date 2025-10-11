@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -54,7 +54,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
       },
       date: '15 Nov 2024',
       readTime: '8 min',
-      image: '/banners/pampa_banner.png',
+      image: '/blog/blog_tosquia_bem_estar_ovelhas.jpg',
       slug: 'importancia-tosquia-bem-estar-ovelhas',
     },
     {
@@ -79,7 +79,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
       },
       date: '12 Nov 2024',
       readTime: '6 min',
-      image: '/banners/pampa_banner.png',
+      image: '/blog/blog_beneficios_das_pecas.jpg',
       slug: 'beneficios-pecas-feitas-la',
     },
     {
@@ -104,7 +104,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
       },
       date: '10 Nov 2024',
       readTime: '7 min',
-      image: '/banners/pampa_banner.png',
+      image: '/blog/blog_cuidados_peca_de_la.png',
       slug: 'como-cuidar-pecas-la',
     },
     {
@@ -129,7 +129,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
       },
       date: '08 Nov 2024',
       readTime: '9 min',
-      image: '/banners/pampa_banner.png',
+      image: '/blog/blog_tecnica_de_feltragem.avif',
       slug: 'tecnica-feltragem',
     },
     {
@@ -154,7 +154,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
       },
       date: '05 Nov 2024',
       readTime: '10 min',
-      image: '/banners/pampa_banner.png',
+      image: '/blog/blog_diferenca_slow_fast_fashion.jpg',
       slug: 'slow-fashion-vs-fast-fashion',
     },
     {
@@ -179,7 +179,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
       },
       date: '01 Nov 2024',
       readTime: '8 min',
-      image: '/banners/pampa_banner.png',
+      image: '/blog/blog_o_poder_que_as_roupas_tem_na_autoestima.jpg',
       slug: 'poder-roupas-autoestima',
     },
     {
@@ -204,15 +204,18 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
       },
       date: '28 Oct 2024',
       readTime: '9 min',
-      image: '/banners/pampa_banner.png',
+      image: '/blog/blog_tecido_sintetico.avif',
       slug: 'tecidos-sinteticos-vs-la',
     },
   ];
 
-  // Randomly select 3 articles on each render
-  const articles = useMemo(() => {
+  // Initialize with first 3 articles (for SSR)
+  const [articles, setArticles] = useState(allArticles.slice(0, 3));
+
+  // Randomize articles only on client side after mount
+  useEffect(() => {
     const shuffled = [...allArticles].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 3);
+    setArticles(shuffled.slice(0, 3));
   }, []);
 
   return (
@@ -250,7 +253,9 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
                     alt={article.title[locale]}
                     width={400}
                     height={300}
-                    className="h-full w-full object-cover"
+                    className={`h-full w-full object-cover ${
+                      article.slug === 'poder-roupas-autoestima' ? 'object-top' : ''
+                    }`}
                   />
                 </div>
 

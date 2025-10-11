@@ -119,14 +119,15 @@ export function Header({ locale }: HeaderProps) {
             <div className="absolute left-8">
               <Link
                 href={`/${locale}`}
+                prefetch={true}
                 className="flex items-center hover:scale-105 transition-all duration-300 cursor-pointer"
               >
                 <Image
-                  src={isScrolled || !isHomePage ? "/logo/logo_marrom.svg" : "/logo/logo_branca.svg"}
+                  src={isScrolled || !isHomePage ? "/logo/LOGO_UBERTI_MARROM_COMP.svg" : "/logo/LOGO_UBERTI_BRANCA_COMP.svg"}
                   alt="UBERTI"
-                  width={200}
-                  height={75}
-                  className="h-20 w-auto transition-all duration-300"
+                  width={280}
+                  height={80}
+                  className="h-16 w-auto transition-all duration-300"
                   priority
                 />
               </Link>

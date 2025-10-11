@@ -31,7 +31,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         es: 'Bienestar Animal',
         fr: 'Bien-Être Animal',
       },
-      image: '/banners/pampa_banner.png',
+      image: '/blog/blog_tosquia_bem_estar_ovelhas.jpg',
       date: '2024-10-15',
       readTime: '8 min',
     },
@@ -55,7 +55,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         es: 'Beneficios de la Lana',
         fr: 'Avantages de la Laine',
       },
-      image: '/banners/hero_banner_1.png',
+      image: '/blog/blog_beneficios_das_pecas.jpg',
       date: '2024-10-10',
       readTime: '6 min',
     },
@@ -79,7 +79,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         es: 'Guía de Cuidado',
         fr: 'Guide d\'Entretien',
       },
-      image: '/banners/hero_banner_2.png',
+      image: '/blog/blog_cuidados_peca_de_la.png',
       date: '2024-10-05',
       readTime: '7 min',
     },
@@ -103,7 +103,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         es: 'Técnicas',
         fr: 'Techniques',
       },
-      image: '/coleção 1/capa_raizes_colecao.png',
+      image: '/blog/blog_tecnica_de_feltragem.avif',
       date: '2024-09-28',
       readTime: '9 min',
     },
@@ -127,7 +127,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         es: 'Sostenibilidad',
         fr: 'Durabilité',
       },
-      image: '/coleção 2/capa_favos_colecao.png',
+      image: '/blog/blog_diferenca_slow_fast_fashion.jpg',
       date: '2024-09-20',
       readTime: '10 min',
     },
@@ -151,7 +151,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         es: 'Bienestar',
         fr: 'Bien-Être',
       },
-      image: '/Helena_uberti_0158.jpg',
+      image: '/blog/blog_o_poder_que_as_roupas_tem_na_autoestima.jpg',
       date: '2024-09-12',
       readTime: '8 min',
     },
@@ -175,7 +175,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         es: 'Educación',
         fr: 'Éducation',
       },
-      image: '/Helena_uberti_0421.jpg',
+      image: '/blog/blog_tecido_sintetico.avif',
       date: '2024-09-05',
       readTime: '11 min',
     },
@@ -183,16 +183,16 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
   const content = {
     title: {
-      en: 'Journal',
-      pt: 'Diário',
-      es: 'Diario',
-      fr: 'Journal',
+      en: 'Blog',
+      pt: 'Blog',
+      es: 'Blog',
+      fr: 'Blog',
     },
     subtitle: {
-      en: 'Stories, inspiration, and insights from our creative journey',
-      pt: 'Histórias, inspiração e insights da nossa jornada criativa',
-      es: 'Historias, inspiración y perspectivas de nuestro viaje creativo',
-      fr: 'Histoires, inspiration et perspectives de notre voyage créatif',
+      en: 'Articles about our culture, wool craftsmanship, and sustainable fashion',
+      pt: 'Artigos sobre nossa cultura, artesanato em lã e moda sustentável',
+      es: 'Artículos sobre nuestra cultura, artesanía en lana y moda sostenible',
+      fr: 'Articles sur notre culture, artisanat en laine et mode durable',
     },
     readMore: {
       en: 'Read More',
@@ -207,7 +207,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       {/* Header */}
       <section className="relative h-[50vh] sm:h-[60vh] min-h-[400px] sm:min-h-[500px] flex items-end overflow-hidden">
         <Image
-          src="/banners/pampa_banner.png"
+          src="/blog/banner_blog.png"
           alt="Blog"
           fill
           className="object-cover object-center"
@@ -218,6 +218,17 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
         <div className="relative z-10 w-full text-center text-white px-4 pb-12 sm:pb-16 lg:pb-20">
           <div className="max-w-4xl mx-auto">
+            {/* Logo */}
+            <div className="mb-6 flex justify-center">
+              <Image
+                src="/logo/logo_branca.svg"
+                alt="UBERTI"
+                width={120}
+                height={120}
+                className="h-20 sm:h-24 w-auto"
+              />
+            </div>
+
             <h1
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-wide mb-4"
               style={{ fontFamily: "'Cinzel', serif" }}
@@ -250,15 +261,17 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     src={article.image}
                     alt={article.title[locale]}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className={`object-cover transition-transform duration-500 group-hover:scale-105 ${
+                      article.slug === 'poder-roupas-autoestima' ? 'object-top' : ''
+                    }`}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
 
                 {/* Content */}
-                <div className="space-y-3">
+                <div className="flex-1 flex flex-col">
                   {/* Category & Date */}
-                  <div className="text-xs uppercase tracking-wider text-gray-500">
+                  <div className="text-xs uppercase tracking-wider text-gray-500 mb-3">
                     {article.category[locale]} • {new Date(article.date).toLocaleDateString(
                       locale === 'pt' ? 'pt-BR' : locale === 'es' ? 'es-ES' : locale === 'fr' ? 'fr-FR' : 'en-US',
                       { day: 'numeric', month: 'short', year: 'numeric' }
@@ -266,17 +279,17 @@ export default async function BlogPage({ params }: BlogPageProps) {
                   </div>
 
                   {/* Title */}
-                  <h2 className="text-lg font-light tracking-wide text-gray-900 group-hover:text-gray-600 transition-colors">
+                  <h2 className="text-lg font-light tracking-wide text-gray-900 group-hover:text-gray-600 transition-colors mb-3">
                     {article.title[locale]}
                   </h2>
 
                   {/* Excerpt */}
-                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
+                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-2 mb-3">
                     {article.excerpt[locale]}
                   </p>
 
-                  {/* Read More Link */}
-                  <div className="pt-2">
+                  {/* Read More Link - pushed to bottom */}
+                  <div className="mt-auto pt-2">
                     <span className="text-sm text-gray-900 border-b border-gray-900 group-hover:text-gray-600 group-hover:border-gray-600 transition-colors">
                       {content.readMore[locale]}
                     </span>

@@ -43,7 +43,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       },
       date: '2024-10-15',
       readTime: '8 min',
-      heroImage: '/banners/pampa_banner.png',
+      heroImage: '/blog/blog_tosquia_bem_estar_ovelhas.jpg',
       content: {
         en: [
           { type: 'paragraph', text: 'Shearing is not merely a step in wool production - it is an essential practice for the health and comfort of sheep. Domestic sheep, unlike their wild ancestors, have been bred over thousands of years to produce wool continuously. Without regular shearing, this natural fiber would continue to grow unchecked, creating serious health and welfare issues.' },
@@ -114,7 +114,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       },
       date: '2024-10-10',
       readTime: '6 min',
-      heroImage: '/banners/hero_banner_1.png',
+      heroImage: '/blog/blog_beneficios_das_pecas.jpg',
       content: {
         en: [
           { type: 'paragraph', text: 'Wool has been humanity\'s companion through millennia, and for good reason. This remarkable natural fiber possesses properties that modern synthetic materials struggle to replicate, even with advanced technology. Understanding wool\'s benefits helps us appreciate why it remains an exceptional choice for clothing.' },
@@ -193,7 +193,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       },
       date: '2024-10-05',
       readTime: '7 min',
-      heroImage: '/banners/hero_banner_2.png',
+      heroImage: '/blog/blog_cuidados_peca_de_la.png',
       content: {
         en: [
           { type: 'paragraph', text: 'Wool garments, when properly cared for, can last for decades - becoming more beautiful with time and developing a unique character that tells the story of your journey together. Understanding how to care for wool ensures your investment in quality continues to reward you for years to come.' },
@@ -268,7 +268,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       },
       date: '2024-09-28',
       readTime: '9 min',
-      heroImage: '/coleção 1/capa_raizes_colecao.png',
+      heroImage: '/blog/blog_tecnica_de_feltragem.avif',
       content: {
         en: [
           { type: 'paragraph', text: 'Felting is one of humanity\'s oldest textile techniques, predating both spinning and weaving. This ancient art transforms loose wool fibers into a dense, matted fabric through the application of moisture, heat, and friction. The resulting material is warm, durable, and water-resistant - qualities that made felt essential to nomadic peoples across Central Asia for millennia.' },
@@ -347,7 +347,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       },
       date: '2024-09-20',
       readTime: '10 min',
-      heroImage: '/coleção 2/capa_favos_colecao.png',
+      heroImage: '/blog/blog_diferenca_slow_fast_fashion.jpg',
       content: {
         en: [
           { type: 'paragraph', text: 'The fashion industry stands at a crossroads. On one path lies fast fashion - a model built on rapid production, constant consumption, and planned obsolescence. On the other stands slow fashion - a philosophy that values quality, longevity, and ethical production. Understanding this distinction is crucial for anyone who wants their clothing choices to reflect their values.' },
@@ -430,7 +430,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       },
       date: '2024-09-15',
       readTime: '8 min',
-      heroImage: '/Helena_uberti_0158.jpg',
+      heroImage: '/blog/blog_o_poder_que_as_roupas_tem_na_autoestima.jpg',
       content: {
         en: [
           { type: 'paragraph', text: 'What we wear is never just about covering our bodies. Clothing is a language we speak without words - a form of self-expression that shapes not only how others see us, but fundamentally how we see ourselves. The relationship between clothing and self-esteem runs deep, touching on psychology, culture, and our most intimate sense of identity.' },
@@ -513,7 +513,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       },
       date: '2024-09-10',
       readTime: '9 min',
-      heroImage: '/banners/pampa_banner.png',
+      heroImage: '/blog/blog_tecido_sintetico.avif',
       content: {
         en: [
           { type: 'paragraph', text: 'Walk into any clothing store and you\'ll find racks dominated by polyester, nylon, acrylic, and other synthetic fabrics. These materials have become ubiquitous in modern fashion, praised for their low cost and easy care. But understanding what these fabrics actually are - and how they compare to natural fibers like wool - reveals profound differences that affect not just garment performance, but environmental health and human wellbeing.' },
@@ -622,7 +622,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   return (
     <div className="min-h-screen bg-[#FEFDFE]">
       {/* Hero Image */}
-      <section className="relative h-[60vh] sm:h-[70vh] min-h-[500px] overflow-hidden">
+      <section className="relative h-[45vh] sm:h-[50vh] min-h-[350px] overflow-hidden">
         <Image
           src={article.heroImage}
           alt={article.title[localeKey]}
@@ -631,7 +631,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-black/40" />
       </section>
 
       {/* Article Content */}
