@@ -1,14 +1,23 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { ChevronDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 interface AboutUbertiPageProps {
   params: Promise<{ locale: string }>;
 }
 
-export default async function AboutUbertiPage({ params }: AboutUbertiPageProps) {
-  const { locale: localeParam } = await params;
-  const locale = localeParam as 'en' | 'pt' | 'es' | 'fr';
+export default function AboutUbertiPage({ params }: AboutUbertiPageProps) {
+  const [locale, setLocale] = useState<'en' | 'pt' | 'es' | 'fr'>('pt');
+
+  useEffect(() => {
+    params.then(({ locale: localeParam }) => {
+      setLocale(localeParam as 'en' | 'pt' | 'es' | 'fr');
+    });
+  }, [params]);
 
   const content = {
     hero: {
@@ -63,10 +72,17 @@ export default async function AboutUbertiPage({ params }: AboutUbertiPageProps) 
     },
   };
 
+  const scrollToContent = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="hero-section relative">
+      {/* Hero Section - Full Screen */}
+      <section className="relative h-[100vh] w-full flex items-center justify-center -mt-24 pt-24">
         <div className="absolute inset-0">
           <Image
             src="/banners/pampa_banner.png"
@@ -86,6 +102,15 @@ export default async function AboutUbertiPage({ params }: AboutUbertiPageProps) 
             </h1>
           </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <button
+          onClick={scrollToContent}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-white animate-bounce cursor-pointer hover:scale-110 transition-transform"
+          aria-label="Scroll to content"
+        >
+          <ChevronDown size={40} strokeWidth={1.5} />
+        </button>
       </section>
 
       {/* Main Content */}

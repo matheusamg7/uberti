@@ -1,14 +1,23 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { ChevronDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 interface AboutHelenaPageProps {
   params: Promise<{ locale: string }>;
 }
 
-export default async function AboutHelenaPage({ params }: AboutHelenaPageProps) {
-  const { locale: localeParam } = await params;
-  const locale = localeParam as 'en' | 'pt' | 'es' | 'fr';
+export default function AboutHelenaPage({ params }: AboutHelenaPageProps) {
+  const [locale, setLocale] = useState<'en' | 'pt' | 'es' | 'fr'>('pt');
+
+  useEffect(() => {
+    params.then(({ locale: localeParam }) => {
+      setLocale(localeParam as 'en' | 'pt' | 'es' | 'fr');
+    });
+  }, [params]);
 
   const content = {
     hero: {
@@ -26,7 +35,7 @@ export default async function AboutHelenaPage({ params }: AboutHelenaPageProps) 
         'Today, each piece I create is 100% handmade, using natural fibers and sustainable processes. I believe in slow fashion, in valuing what is unique and authentic.',
       ],
       pt: [
-        'Nasci em Garibaldi, Rio Grande do Sul, mas minhas raízes estão profundamente ligadas a Bagé, onde minha família sempre teve conexão com a pecuária e a agricultura. Desde pequena, aprendi o valor do trabalho manual com minha mãe e minha avó, que me transmitiram o amor por criar com as próprias mãos.',
+        'Nasci em Garibaldi, interior do Rio Grande do sul, mas minhas raízes estão profundamente ligadas a Bagé, onde a família sempre teve conexão com a pecuária e a agricultura. Desde pequena, aprendi o valor do trabalho manual com minha mãe e minha avó, que me transmitiram o amor por criar com as próprias mãos.',
         'Morei em Porto Alegre e Florianópolis, onde expandi meus horizontes artísticos. Foi nessa jornada que descobri a técnica de feltragem, aprendendo com uma designer de São Paulo que me apresentou às possibilidades únicas da lã. Passei dois anos pesquisando e experimentando antes de lançar minha primeira coleção.',
         'Hoje, cada peça que crio é 100% feita à mão, utilizando fibras naturais e processos sustentáveis. Acredito na slow fashion, em valorizar o que é único e autêntico.',
       ],
@@ -63,10 +72,17 @@ export default async function AboutHelenaPage({ params }: AboutHelenaPageProps) 
     },
   };
 
+  const scrollToContent = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="hero-section relative">
+      {/* Hero Section - Full Screen */}
+      <section className="relative h-[100vh] w-full flex items-center justify-center -mt-24 pt-24">
         <div className="absolute inset-0">
           <Image
             src="/Helena_uberti_0158.jpg"
@@ -86,92 +102,70 @@ export default async function AboutHelenaPage({ params }: AboutHelenaPageProps) 
             </h1>
           </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <button
+          onClick={scrollToContent}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-white animate-bounce cursor-pointer hover:scale-110 transition-transform"
+          aria-label="Scroll to content"
+        >
+          <ChevronDown size={40} strokeWidth={1.5} />
+        </button>
       </section>
 
       {/* Main Content */}
       <section className="py-32">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-16">
-            {/* Text Content */}
-            <div className="space-y-8">
-              {content.paragraphs[locale].map((paragraph, index) => (
-                <p key={index} className="body-text text-lg leading-relaxed text-muted-foreground">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            {/* Text and Photo Side by Side */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+              {/* Text Content */}
+              <div className="space-y-12">
+                {/* Paragraphs */}
+                <div className="space-y-8">
+                  {content.paragraphs[locale].map((paragraph, index) => (
+                    <p key={index} className="body-text text-lg leading-relaxed text-muted-foreground">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
 
-            {/* Photo Placeholder 1 */}
-            <div className="max-w-2xl mx-auto">
-              <div className="aspect-[3/4] bg-muted/30 border border-muted-foreground/10 flex items-center justify-center">
-                <div className="text-center space-y-3">
-                  <svg
-                    className="mx-auto h-16 w-16 text-muted-foreground/30"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <p className="text-sm text-muted-foreground/60 font-light">
-                    {content.photoPlaceholder[locale]} 1
-                  </p>
+                {/* Quote - Below Text */}
+                <div className="pt-8">
+                  <blockquote className="border-l-2 border-gray-300 pl-6">
+                    <p className="text-xl font-light italic text-muted-foreground leading-relaxed">
+                      "{content.quote[locale]}"
+                    </p>
+                    <cite className="block text-sm font-medium mt-6 not-italic text-muted-foreground/70">
+                      — Helena Uberti
+                    </cite>
+                  </blockquote>
+                </div>
+
+                {/* CTA Button */}
+                <div className="pt-8">
+                  <Button size="lg" asChild className="min-w-[200px]">
+                    <Link href={`/${locale}/collections`}>
+                      {content.cta.button[locale]}
+                    </Link>
+                  </Button>
                 </div>
               </div>
-            </div>
 
-            {/* Quote */}
-            <div className="py-16">
-              <blockquote className="text-center max-w-3xl mx-auto">
-                <p className="text-2xl font-light italic text-muted-foreground leading-relaxed">
-                  "{content.quote[locale]}"
-                </p>
-                <cite className="block text-sm font-medium mt-8 not-italic text-muted-foreground/70">
-                  — Helena Uberti
-                </cite>
-              </blockquote>
-            </div>
-
-            {/* Photo Placeholder 2 */}
-            <div className="max-w-2xl mx-auto">
-              <div className="aspect-[3/4] bg-muted/30 border border-muted-foreground/10 flex items-center justify-center">
-                <div className="text-center space-y-3">
-                  <svg
-                    className="mx-auto h-16 w-16 text-muted-foreground/30"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <p className="text-sm text-muted-foreground/60 font-light">
-                    {content.photoPlaceholder[locale]} 2
-                  </p>
+              {/* Photo */}
+              <div>
+                <div className="relative aspect-[3/4] overflow-hidden sticky top-24">
+                  <Image
+                    src="/about_helena/foto_dela.jpg"
+                    alt={content.photoPlaceholder[locale]}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-muted/10">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <Button size="lg" asChild className="min-w-[200px]">
-            <Link href={`/${locale}/collections`}>
-              {content.cta.button[locale]}
-            </Link>
-          </Button>
         </div>
       </section>
     </div>
