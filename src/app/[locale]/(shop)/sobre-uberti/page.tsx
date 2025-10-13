@@ -35,9 +35,9 @@ export default function AboutUbertiPage({ params }: AboutUbertiPageProps) {
         'Each UBERTI piece is unique. There are no mass productions or repetitions. What you acquire is an exclusive creation, made especially to be part of your story.',
       ],
       pt: [
-        'A UBERTI nasceu da minha visão artística e da paixão pela lã. Mais do que uma marca de moda, é um projeto de expressão artística, onde cada peça conta uma história e carrega parte da minha alma.',
-        'Trabalho com slow fashion, valorizando a produção artesanal e o respeito ao tempo. A lã que utilizo vem da região de Bagé, diretamente de produtores locais que compartilham do mesmo compromisso com a qualidade e a sustentabilidade.',
-        'Cada peça UBERTI é única. Não há produções em massa nem repetições. O que você adquire é uma criação exclusiva, feita especialmente para fazer parte da sua história.',
+        'A Uberti nasceu do olhar artístico de Helena e de sua paixão pela lã, uma fibra viva, sustentável e carregada de significado. Mais do que uma marca, a Uberti é um projeto de expressão artística, que une moda, arte e natureza em criações autorais que valorizam o tempo, o fazer manual e a cultura dos pampas.',
+        'Todas as peças são produzidas artesanalmente, dentro do conceito de slow fashion, respeitando o meio ambiente e o bem-estar animal. A lã utilizada é processada em Bagé e região, a partir de produtores locais, conectando cada criação às origens e à tradição dos pampas que inspiram a marca.',
+        'Cada peça é única, resultado da fusão entre uma técnica ancestral e um olhar contemporâneo. A Uberti acredita que cada pessoa é única e deve se vestir como tal, expressando sua identidade de forma autêntica, consciente e sustentável.',
       ],
       es: [
         'UBERTI nació de mi visión artística y mi pasión por la lana. Más que una marca de moda, es un proyecto de expresión artística, donde cada pieza cuenta una historia y lleva parte de mi alma.',
@@ -85,7 +85,7 @@ export default function AboutUbertiPage({ params }: AboutUbertiPageProps) {
       <section className="relative h-[100vh] w-full flex items-center justify-center -mt-24 pt-24">
         <div className="absolute inset-0">
           <Image
-            src="/banners/pampa_banner.png"
+            src="/about_uberti/foto_uberti.jpg"
             alt="UBERTI"
             fill
             priority
@@ -115,64 +115,57 @@ export default function AboutUbertiPage({ params }: AboutUbertiPageProps) {
 
       {/* Main Content */}
       <section className="py-32">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-16">
-            {/* Text Content */}
-            <div className="space-y-8">
-              {content.paragraphs[locale].map((paragraph, index) => (
-                <p key={index} className="body-text text-lg leading-relaxed text-muted-foreground">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            {/* Photo and Text Side by Side - Reversed Order */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+              {/* Photo - Left Side */}
+              <div>
+                <div className="relative aspect-[3/4] overflow-hidden sticky top-24">
+                  <Image
+                    src="/about_uberti/foto_uberti.jpg"
+                    alt={content.imagePlaceholder[locale]}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
+              </div>
 
-            {/* Photo Placeholder */}
-            <div className="max-w-2xl mx-auto">
-              <div className="aspect-square bg-muted/30 border border-muted-foreground/10 flex items-center justify-center">
-                <div className="text-center space-y-3">
-                  <svg
-                    className="mx-auto h-16 w-16 text-muted-foreground/30"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <p className="text-sm text-muted-foreground/60 font-light">
-                    {content.imagePlaceholder[locale]}
-                  </p>
+              {/* Text Content - Right Side */}
+              <div className="space-y-12">
+                {/* Paragraphs */}
+                <div className="space-y-8">
+                  {content.paragraphs[locale].map((paragraph, index) => (
+                    <p key={index} className="body-text text-lg leading-relaxed text-muted-foreground">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+
+                {/* Quote - Below Text */}
+                <div className="pt-8">
+                  <blockquote className="border-l-2 border-gray-300 pl-6">
+                    <p className="text-xl font-light italic text-muted-foreground leading-relaxed">
+                      "{content.quote[locale]}"
+                    </p>
+                    <cite className="block text-sm font-medium mt-6 not-italic text-muted-foreground/70">
+                      — Helena Uberti
+                    </cite>
+                  </blockquote>
+                </div>
+
+                {/* CTA Button */}
+                <div className="pt-8">
+                  <Button size="lg" asChild className="min-w-[200px]">
+                    <Link href={`/${locale}/collections`}>
+                      {content.cta.button[locale]}
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>
-
-            {/* Quote */}
-            <div className="py-16">
-              <blockquote className="text-center max-w-3xl mx-auto">
-                <p className="text-2xl font-light italic text-muted-foreground leading-relaxed">
-                  "{content.quote[locale]}"
-                </p>
-                <cite className="block text-sm font-medium mt-8 not-italic text-muted-foreground/70">
-                  — Helena Uberti
-                </cite>
-              </blockquote>
-            </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-muted/10">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <Button size="lg" asChild className="min-w-[200px]">
-            <Link href={`/${locale}/collections`}>
-              {content.cta.button[locale]}
-            </Link>
-          </Button>
         </div>
       </section>
     </div>
