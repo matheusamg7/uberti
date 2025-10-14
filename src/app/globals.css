@@ -123,6 +123,8 @@
     scroll-padding-top: 100px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Previne scroll horizontal no mobile */
+    overflow-x: hidden;
   }
 
   body {
@@ -130,6 +132,8 @@
     letter-spacing: -0.01em;
     /* Suaviza a rolagem em todos os navegadores */
     overscroll-behavior-y: smooth;
+    /* Previne scroll horizontal no mobile */
+    overflow-x: hidden;
   }
 
   /* Tipografia minimalista */
@@ -361,5 +365,15 @@
 
   .animate-slide-out-right {
     animation: slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Hide scrollbar for carousels */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }

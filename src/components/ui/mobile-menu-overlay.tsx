@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { X, Instagram, ChevronRight, Globe, ChevronDown } from 'lucide-react';
+import { X, Instagram, ChevronRight, Globe, ChevronDown, User } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { navigationMenu } from '@/lib/mock-data';
@@ -37,15 +37,34 @@ export function MobileMenuOverlay({
 
   useEffect(() => {
     if (isOpen) {
+      // Salva a posição atual do scroll
+      const scrollY = window.scrollY;
+
+      // Bloqueia scroll no body
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
     } else {
-      document.body.style.overflow = 'unset';
+      // Restaura o scroll
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+
+      // Restaura a posição do scroll
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+
       setExpandedCategory(null); // Reset expanded state when menu closes
       setIsLanguageDropdownOpen(false); // Reset language dropdown
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
     };
   }, [isOpen]);
 
@@ -90,6 +109,7 @@ export function MobileMenuOverlay({
               {/* Language Selector Dropdown */}
               <div className="relative">
                 <button
+                  type="button"
                   onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
                   className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:border-gray-400 transition-colors"
                   aria-label="Select language"
@@ -109,6 +129,7 @@ export function MobileMenuOverlay({
                   <div className="absolute top-full right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-10">
                     {languages.map((lang) => (
                       <button
+                        type="button"
                         key={lang.code}
                         onClick={() => {
                           onLanguageChange(lang);
@@ -132,6 +153,7 @@ export function MobileMenuOverlay({
               </div>
 
               <button
+                type="button"
                 onClick={onClose}
                 className="p-0 transition-all duration-300 hover:opacity-70"
                 aria-label="Close menu"
@@ -149,17 +171,18 @@ export function MobileMenuOverlay({
                 <div key={category.id} className="border-b border-gray-100">
                   {/* Category Header */}
                   <button
+                    type="button"
                     onClick={() => toggleCategory(category.id)}
-                    className="w-full flex items-center justify-between py-4 text-left group"
+                    className="w-full flex flex-col md:flex-row items-center justify-between py-4 text-center md:text-left group"
                   >
                     <span
-                      className="text-lg font-light tracking-wide text-gray-800 group-hover:text-black transition-colors"
+                      className="text-2xl md:text-lg font-light tracking-wide text-gray-800 group-hover:text-black transition-colors"
                       style={{ fontFamily: "'Cinzel', serif" }}
                     >
                       {category.name[locale]}
                     </span>
                     <ChevronRight
-                      className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                      className={`h-5 w-5 text-gray-600 transition-transform duration-300 mt-2 md:mt-0 ${
                         expandedCategory === category.id ? 'rotate-90' : ''
                       }`}
                       strokeWidth={1.5}
@@ -172,12 +195,12 @@ export function MobileMenuOverlay({
                       expandedCategory === category.id ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                     }`}
                   >
-                    <div className="pl-6 pb-3">
+                    <div className="pl-0 md:pl-6 pb-3 text-center md:text-left">
                       {category.subcategories.map((subcategory) => (
                         <Link
                           key={subcategory.slug}
                           href={`/${locale}/${category.slug}/${subcategory.slug}`}
-                          className="block py-2.5 text-base font-light text-gray-600 hover:text-black transition-colors"
+                          className="block py-2.5 text-lg md:text-base font-light text-gray-600 hover:text-black transition-colors"
                           onClick={onClose}
                           style={{ fontFamily: "'Inter', sans-serif" }}
                         >
@@ -219,17 +242,18 @@ export function MobileMenuOverlay({
                   return (
                     <div key={item.href} className="border-b border-gray-100">
                       <button
+                        type="button"
                         onClick={() => toggleCategory(item.href)}
-                        className="w-full flex items-center justify-between py-3 text-left group"
+                        className="w-full flex flex-col md:flex-row items-center justify-between py-3 text-center md:text-left group"
                       >
                         <span
-                          className="text-base font-light text-gray-700 group-hover:text-black transition-colors"
+                          className="text-xl md:text-base font-light text-gray-700 group-hover:text-black transition-colors"
                           style={{ fontFamily: "'Inter', sans-serif" }}
                         >
                           {item.name[locale]}
                         </span>
                         <ChevronRight
-                          className={`h-4 w-4 text-gray-600 transition-transform duration-300 ${
+                          className={`h-4 w-4 text-gray-600 transition-transform duration-300 mt-2 md:mt-0 ${
                             expandedCategory === item.href ? 'rotate-90' : ''
                           }`}
                           strokeWidth={1.5}
@@ -242,12 +266,12 @@ export function MobileMenuOverlay({
                           expandedCategory === item.href ? 'max-h-[200px] opacity-100' : 'max-h-0 opacity-0'
                         }`}
                       >
-                        <div className="pl-6 pb-3">
+                        <div className="pl-0 md:pl-6 pb-3 text-center md:text-left">
                           {aboutSubcategories.map((subcategory) => (
                             <Link
                               key={subcategory.href}
                               href={`/${locale}${subcategory.href}`}
-                              className="block py-2 text-sm font-light text-gray-600 hover:text-black transition-colors"
+                              className="block py-2 text-base md:text-sm font-light text-gray-600 hover:text-black transition-colors"
                               onClick={onClose}
                               style={{ fontFamily: "'Inter', sans-serif" }}
                             >
@@ -265,7 +289,7 @@ export function MobileMenuOverlay({
                   <Link
                     key={item.href}
                     href={`/${locale}${item.href}`}
-                    className="block py-3 text-base font-light text-gray-700 hover:text-black transition-colors"
+                    className="block py-3 text-xl md:text-base font-light text-gray-700 hover:text-black transition-colors text-center md:text-left"
                     onClick={onClose}
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
@@ -275,66 +299,63 @@ export function MobileMenuOverlay({
               })}
             </div>
 
-            {/* Account Links */}
-            <div className="px-8 pb-8 border-t border-gray-100 pt-6">
-              <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-4">
-                {locale === 'pt' ? 'Conta' : locale === 'es' ? 'Cuenta' : locale === 'fr' ? 'Compte' : 'Account'}
-              </h3>
-              <Link
-                href={`/${locale}/account`}
-                className="block py-2 text-sm text-gray-700 hover:text-black transition-colors"
-                onClick={onClose}
-              >
-                {locale === 'pt' ? 'Minha Conta' : locale === 'es' ? 'Mi Cuenta' : locale === 'fr' ? 'Mon Compte' : 'My Account'}
-              </Link>
-              <Link
-                href={`/${locale}/login`}
-                className="block py-2 text-sm text-gray-700 hover:text-black transition-colors"
-                onClick={onClose}
-              >
-                {locale === 'pt' ? 'Entrar' : locale === 'es' ? 'Iniciar Sesión' : locale === 'fr' ? 'Connexion' : 'Sign In'}
-              </Link>
-            </div>
           </nav>
 
-          {/* Footer with Contact */}
+          {/* Footer with Contact and Account */}
           <div className="border-t border-gray-100 px-8 py-6">
-            {/* Contact */}
-            <div>
-              <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-4">
-                {locale === 'pt' ? 'Contato' : locale === 'es' ? 'Contacto' : locale === 'fr' ? 'Contact' : 'Contact'}
-              </h3>
-              <div className="flex gap-6">
-                <a
-                  href="https://instagram.com/uberti"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-all duration-300 hover:opacity-70"
-                >
-                  <Instagram className="h-6 w-6 text-gray-700" strokeWidth={1.2} />
-                </a>
-                <a
-                  href="https://wa.me/5511999999999"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-all duration-300 hover:opacity-70"
-                >
-                  {/* WhatsApp Icon */}
-                  <svg
-                    className="h-6 w-6 text-gray-700"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                    xmlns="http://www.w3.org/2000/svg"
+            <div className="flex items-start justify-between">
+              {/* Contact - Left side */}
+              <div>
+                <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-4">
+                  {locale === 'pt' ? 'Contato' : locale === 'es' ? 'Contacto' : locale === 'fr' ? 'Contact' : 'Contact'}
+                </h3>
+                <div className="flex gap-6">
+                  <a
+                    href="https://instagram.com/uberti"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-all duration-300 hover:opacity-70"
                   >
-                    <path
-                      d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
+                    <Instagram className="h-6 w-6 text-gray-700" strokeWidth={1.2} />
+                  </a>
+                  <a
+                    href="https://wa.me/5511999999999"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-all duration-300 hover:opacity-70"
+                  >
+                    {/* WhatsApp Icon */}
+                    <svg
+                      className="h-6 w-6 text-gray-700"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Account - Right side, visible only on mobile */}
+              <div className="md:hidden flex flex-col items-center">
+                <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-4">
+                  {locale === 'pt' ? 'Conta' : locale === 'es' ? 'Cuenta' : locale === 'fr' ? 'Compte' : 'Account'}
+                </h3>
+                <Link
+                  href={`/${locale}/account`}
+                  className="transition-all duration-300 hover:opacity-70"
+                  onClick={onClose}
+                  aria-label={locale === 'pt' ? 'Minha Conta' : locale === 'es' ? 'Mi Cuenta' : locale === 'fr' ? 'Mon Compte' : 'My Account'}
+                >
+                  <User className="h-6 w-6 text-gray-700" strokeWidth={1.2} />
+                </Link>
               </div>
             </div>
           </div>

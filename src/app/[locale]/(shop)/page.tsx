@@ -118,7 +118,7 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* Featured Products Section */}
       <section className="bg-[#FEFDFE] py-24">
         <div className="mx-auto max-w-[1800px] px-6 lg:px-12">
-          <div className="text-center mb-16">
+          <div className="mb-12 text-center">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight" style={{ fontFamily: "'Cinzel', serif" }}>
               {sectionsContent.featured.title[locale]}
             </h2>
@@ -129,7 +129,8 @@ export default async function HomePage({ params }: HomePageProps) {
             locale={locale}
           />
 
-          <div className="text-center mt-12">
+          {/* View All Button - abaixo dos produtos */}
+          <div className="flex justify-center mt-12">
             <Link
               href={`/${locale}/products`}
               className="inline-block px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider"
@@ -153,7 +154,7 @@ export default async function HomePage({ params }: HomePageProps) {
         </video>
         {/* Text Overlay */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="text-center" style={{ marginTop: '-10%' }}>
+          <div className="text-center mt-[-30%] md:mt-[-10%]">
             <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-light tracking-[0.2em] leading-tight drop-shadow-lg" style={{ fontFamily: "'Cinzel', serif" }}>
               PAMPA<br/>BRASILEIRO
             </h2>

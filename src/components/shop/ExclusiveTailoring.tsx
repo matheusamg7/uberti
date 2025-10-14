@@ -54,10 +54,10 @@ export function ExclusiveTailoring({ locale }: ExclusiveTailoringProps) {
       fr: 'Sur Mesure Exclusif',
     },
     subtitle: {
-      en: 'Each body is unique. Send us your measurements and receive a piece\nmade especially for you.',
-      pt: 'Cada corpo é único. Envie suas medidas e receba uma peça\nfeita especialmente para você.',
-      es: 'Cada cuerpo es único. Envía tus medidas y recibe una pieza\nhecha especialmente para ti.',
-      fr: 'Chaque corps est unique. Envoyez vos mesures et recevez une pièce\nfaite spécialement pour vous.',
+      en: 'Each body is unique. Send us your measurements\nand receive a piece made especially for you.',
+      pt: 'Cada corpo é único. Envie suas medidas\ne receba uma peça feita especialmente para você.',
+      es: 'Cada cuerpo es único. Envía tus medidas\ny recibe una pieza hecha especialmente para ti.',
+      fr: 'Chaque corps est unique. Envoyez vos mesures\net recevez une pièce faite spécialement pour vous.',
     },
     labels: {
       name: {
@@ -219,17 +219,17 @@ Gancho: ${formData.gancho}
           <div className="order-1 lg:order-1 lg:pt-16">
             {/* Header */}
             <div className="mb-12">
-              <h2 className="heading-1 mb-6 text-left" style={{ fontFamily: "'Cinzel', serif" }}>{content.title[locale]}</h2>
-              <p className="body-text text-muted-foreground text-left mb-12 whitespace-pre-line">
+              <h2 className="heading-1 mb-6 text-center md:text-left" style={{ fontFamily: "'Cinzel', serif" }}>{content.title[locale]}</h2>
+              <p className="body-text text-muted-foreground text-center md:text-left mb-12 whitespace-pre-line">
                 {content.subtitle[locale]}
               </p>
             </div>
 
             {/* Form - Personal Info Only */}
-            <form onSubmit={handleSubmit} className="space-y-6 max-w-md">
+            <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto md:mx-0">
               {/* Personal Info */}
               <div className="space-y-4">
-                <h3 className="text-sm uppercase tracking-wider text-gray-600">
+                <h3 className="text-sm uppercase tracking-wider text-gray-600 text-center md:text-left">
                   {locale === 'pt' ? 'Informações Pessoais' : locale === 'es' ? 'Información Personal' : locale === 'fr' ? 'Informations Personnelles' : 'Personal Information'}
                 </h3>
 
@@ -265,7 +265,7 @@ Gancho: ${formData.gancho}
               </div>
 
               {/* Submit Button */}
-              <div className="pt-6">
+              <div className="pt-6 text-center md:text-left">
                 <button
                   type="submit"
                   className="inline-block px-8 py-3 bg-black border border-black text-white hover:bg-white hover:text-black transition-all duration-300 text-sm uppercase tracking-wider"
@@ -276,8 +276,8 @@ Gancho: ${formData.gancho}
             </form>
           </div>
 
-          {/* Right side - Croqui */}
-          <div className="order-2 lg:order-2">
+          {/* Right side - Croqui - APENAS DESKTOP */}
+          <div className="hidden lg:block order-2 lg:order-2">
             <div className="relative w-full max-w-xl mx-auto">
               {/* SVG Background */}
               <Image

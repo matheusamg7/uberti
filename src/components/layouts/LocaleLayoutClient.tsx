@@ -19,7 +19,7 @@ export function LocaleLayoutClient({ locale, children }: LocaleLayoutClientProps
   return (
     <>
       <LanguageWelcomeModal currentLocale={locale} />
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col overflow-x-hidden">
         <Header locale={locale as 'en' | 'pt' | 'es' | 'fr'} />
         <main className={`flex-1 ${isHomePage ? '' : 'pt-24'}`}>
           {children}

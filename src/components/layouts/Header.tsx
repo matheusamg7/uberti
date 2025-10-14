@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Search, ShoppingBag, User } from 'lucide-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import Image from 'next/image';
 import { SearchOverlay } from '@/components/ui/search-overlay';
 import { MobileMenuOverlay } from '@/components/ui/mobile-menu-overlay';
+import { AccountMenuOverlay } from '@/components/ui/account-menu-overlay';
 
 interface HeaderProps {
   locale: 'en' | 'pt' | 'es' | 'fr';
@@ -31,6 +31,7 @@ export function Header({ locale }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -44,8 +45,8 @@ export function Header({ locale }: HeaderProps) {
 
     window.addEventListener('scroll', handleScroll);
 
-    // Trigger animations on load
-    setTimeout(() => setIsLoaded(true), 100);
+    // Trigger animations on load - instantâneo no mobile
+    setIsLoaded(true);
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -80,6 +81,15 @@ export function Header({ locale }: HeaderProps) {
           }
         }
 
+        @keyframes fadeInFast {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
         @keyframes slideInFromBottom {
           from {
             opacity: 0;
@@ -91,54 +101,114 @@ export function Header({ locale }: HeaderProps) {
           }
         }
 
+        /* Mobile: animação rápida sem delay - ignora animation-delay inline */
         .animate-fade-in-up {
-          animation: fadeInUp 0.6s ease-out forwards;
+          animation: fadeInFast 0.2s ease-out forwards !important;
+          animation-delay: 0s !important;
           opacity: 0;
         }
 
+        /* Desktop: animação com delay */
+        @media (min-width: 768px) {
+          .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards !important;
+            opacity: 0;
+          }
+        }
+
+        /* Mobile: animação rápida das linhas do menu */
         .animate-menu-line-1 {
-          animation: slideInFromBottom 0.4s ease-out 0.6s forwards;
+          animation: slideInFromBottom 0.2s ease-out 0.1s forwards;
           opacity: 0;
         }
 
         .animate-menu-line-2 {
-          animation: slideInFromBottom 0.4s ease-out 0.7s forwards;
+          animation: slideInFromBottom 0.2s ease-out 0.15s forwards;
           opacity: 0;
         }
 
         .animate-menu-line-3 {
-          animation: slideInFromBottom 0.4s ease-out 0.8s forwards;
+          animation: slideInFromBottom 0.2s ease-out 0.2s forwards;
           opacity: 0;
+        }
+
+        /* Desktop: animação normal das linhas */
+        @media (min-width: 768px) {
+          .animate-menu-line-1 {
+            animation: slideInFromBottom 0.4s ease-out 0.6s forwards;
+            opacity: 0;
+          }
+
+          .animate-menu-line-2 {
+            animation: slideInFromBottom 0.4s ease-out 0.7s forwards;
+            opacity: 0;
+          }
+
+          .animate-menu-line-3 {
+            animation: slideInFromBottom 0.4s ease-out 0.8s forwards;
+            opacity: 0;
+          }
+        }
+
+        /* Animação de slide apenas para desktop */
+        .icons-container {
+          /* Mobile: sem animação, ícones centralizados */
+          transform: translateX(0);
+          transition: none;
+        }
+
+        /* Desktop: com animação de slide para o centro */
+        @media (min-width: 768px) {
+          .icons-container {
+            transition: transform 900ms ease-out;
+          }
+
+          .icons-container.scrolled {
+            transform: translateX(calc(-50vw + 14rem));
+          }
+
+          .icons-container.not-scrolled {
+            transform: translateX(0);
+          }
         }
       `}</style>
 
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 cursor-default ${headerBackground()}`}>
-        <nav className="mx-auto px-4 sm:px-6 lg:px-8 cursor-default">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 cursor-default overflow-x-hidden ${headerBackground()}`}>
+        <nav className="mx-auto px-2 md:px-4 lg:px-8 cursor-default">
           <div className="relative flex h-24 items-center justify-between">
             {/* Logo na esquerda - sempre visível */}
-            <div className="absolute left-8">
+            <div className="absolute left-2 md:left-8">
               <Link
                 href={`/${locale}`}
                 prefetch={true}
                 className="flex items-center hover:scale-105 transition-all duration-300 cursor-pointer"
               >
+                {/* Logo completa - apenas desktop (md e acima) */}
                 <Image
                   src={isScrolled || !isHomePage ? "/logo/LOGO_UBERTI_MARROM_COMP.svg" : "/logo/LOGO_UBERTI_BRANCA_COMP.svg"}
                   alt="UBERTI"
                   width={280}
                   height={80}
-                  className="h-16 w-auto transition-all duration-300"
+                  className="hidden md:block h-16 w-auto transition-all duration-300"
+                  priority
+                />
+                {/* Logo símbolo - apenas mobile (menor que md) */}
+                <Image
+                  src={isScrolled || !isHomePage ? "/logo/logo_marrom.svg" : "/logo/logo_branca.svg"}
+                  alt="UBERTI"
+                  width={56}
+                  height={56}
+                  className="md:hidden h-14 w-14 transition-all duration-300"
                   priority
                 />
               </Link>
             </div>
 
-            {/* Container for icons (except hamburger) - smooth sliding animation to exact center */}
+            {/* Container for icons (except hamburger) - centralizados no mobile, animação slide no desktop */}
             <div
-              className="absolute right-28 flex items-center gap-5 transition-transform duration-[900ms] ease-out"
-              style={{
-                transform: isScrolled ? 'translateX(calc(-50vw + 14rem))' : 'translateX(0)'
-              }}
+              className={`absolute left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-28 flex items-center gap-6 md:gap-5 icons-container ${
+                isScrolled ? 'scrolled' : 'not-scrolled'
+              }`}
             >
               {/* Pesquisa - Segunda a aparecer */}
               <button
@@ -146,63 +216,43 @@ export function Header({ locale }: HeaderProps) {
                 className={`p-0 border-0 bg-transparent cursor-pointer group ${
                   isLoaded ? 'animate-fade-in-up' : 'opacity-0'
                 }`}
-                style={{ animationDelay: '0.15s' }}
                 aria-label="Search"
               >
                 <Search
-                  className={`h-7 w-7 transition-all duration-300 ${iconColor}`}
+                  className={`h-6 w-6 md:h-7 md:w-7 transition-all duration-300 ${iconColor}`}
                   strokeWidth={1}
                 />
               </button>
 
-              {/* Conta de Usuário - Terceira */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button
-                    className={`p-0 border-0 bg-transparent cursor-pointer group ${
-                      isLoaded ? 'animate-fade-in-up' : 'opacity-0'
-                    }`}
-                    style={{ animationDelay: '0.3s' }}
-                  >
-                    <User
-                      className={`h-7 w-7 transition-all duration-300 ${iconColor}`}
-                      strokeWidth={1}
-                    />
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  className="bg-white border border-gray-200 min-w-[180px] rounded-none shadow-lg p-0 mt-2"
-                >
-                  <DropdownMenuItem asChild className="rounded-none px-6 py-3 text-sm font-light tracking-wide hover:bg-gray-50 focus:bg-gray-50 cursor-pointer">
-                    <Link href={`/${locale}/account`} className="text-gray-800 hover:text-black transition-colors">
-                      {locale === 'pt' ? 'Minha Conta' : locale === 'es' ? 'Mi Cuenta' : locale === 'fr' ? 'Mon Compte' : 'My Account'}
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild className="rounded-none px-6 py-3 text-sm font-light tracking-wide hover:bg-gray-50 focus:bg-gray-50 cursor-pointer border-t border-gray-100">
-                    <Link href={`/${locale}/login`} className="text-gray-800 hover:text-black transition-colors">
-                      {locale === 'pt' ? 'Entrar' : locale === 'es' ? 'Iniciar Sesión' : locale === 'fr' ? 'Connexion' : 'Sign In'}
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              {/* Conta de Usuário - Terceira - APENAS DESKTOP */}
+              <button
+                onClick={() => setIsAccountMenuOpen(true)}
+                className={`hidden md:block p-0 border-0 bg-transparent cursor-pointer group ${
+                  isLoaded ? 'animate-fade-in-up' : 'opacity-0'
+                }`}
+                aria-label="Account"
+              >
+                <User
+                  className={`h-7 w-7 transition-all duration-300 ${iconColor}`}
+                  strokeWidth={1}
+                />
+              </button>
 
               {/* Sacola - Quarta */}
               <div
                 className={`relative group ${
                   isLoaded ? 'animate-fade-in-up' : 'opacity-0'
                 }`}
-                style={{ animationDelay: '0.45s' }}
               >
                 <Link
                   href={`/${locale}/cart`}
                   className="relative block"
                 >
                   <ShoppingBag
-                    className={`h-7 w-7 transition-all duration-300 ${iconColor}`}
+                    className={`h-6 w-6 md:h-7 md:w-7 transition-all duration-300 ${iconColor}`}
                     strokeWidth={1}
                   />
-                  <span className={`absolute -top-1 -right-1 h-5 w-5 rounded-full text-xs flex items-center justify-center font-medium ${
+                  <span className={`absolute -top-1 -right-1 h-4 w-4 md:h-5 md:w-5 rounded-full text-[10px] md:text-xs flex items-center justify-center font-medium ${
                     isScrolled || !isHomePage ? 'bg-gray-800 text-white' : 'bg-white text-black'
                   }`}>
                     0
@@ -212,7 +262,7 @@ export function Header({ locale }: HeaderProps) {
             </div>
 
             {/* Menu Hamburguer - fica fixo na direita */}
-            <div className="absolute right-8 flex items-center">
+            <div className="absolute right-2 md:right-8 flex items-center">
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
                 className="p-0 border-0 bg-transparent cursor-pointer group"
@@ -239,6 +289,13 @@ export function Header({ locale }: HeaderProps) {
       <SearchOverlay
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
+        locale={locale}
+      />
+
+      {/* Account Menu Overlay */}
+      <AccountMenuOverlay
+        isOpen={isAccountMenuOpen}
+        onClose={() => setIsAccountMenuOpen(false)}
         locale={locale}
       />
 

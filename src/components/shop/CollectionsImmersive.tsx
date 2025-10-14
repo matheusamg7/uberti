@@ -51,14 +51,14 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
   ];
 
   return (
-    <section className="relative h-[80vh] min-h-[600px] flex">
+    <section className="relative md:h-[80vh] md:min-h-[600px] md:flex">
       {collections.map((collection) => (
         <Link
           key={collection.id}
           href={`/${locale}/collections/${collection.slug}`}
-          className={`relative flex-1 overflow-hidden group cursor-pointer transition-all duration-500 ease-out ${
-            hoveredCollection === collection.id ? 'flex-[1.1]' : 'flex-1'
-          }`}
+          className={`relative md:flex-1 overflow-hidden group cursor-pointer transition-all duration-500 ease-out ${
+            hoveredCollection === collection.id ? 'md:flex-[1.1]' : 'md:flex-1'
+          } h-[70vh] min-h-[500px] md:h-auto block`}
           onMouseEnter={() => setHoveredCollection(collection.id)}
           onMouseLeave={() => setHoveredCollection(null)}
         >
@@ -76,8 +76,8 @@ export function CollectionsImmersive({ locale }: CollectionsImmersiveProps) {
             />
           </div>
 
-          {/* Gradient Overlay - Bottom to top */}
-          <div className={`absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-500 ${
+          {/* Gradient Overlay - Bottom to top (mais forte no mobile) */}
+          <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 via-50% to-transparent md:from-black/70 md:via-black/20 transition-opacity duration-500 ${
             hoveredCollection === collection.id ? 'opacity-100' : 'opacity-90'
           }`} />
 

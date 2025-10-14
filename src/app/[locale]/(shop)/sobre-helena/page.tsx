@@ -134,7 +134,7 @@ export default function AboutHelenaPage({ params }: AboutHelenaPageProps) {
                 <div className="pt-8">
                   <blockquote className="border-l-2 border-gray-300 pl-6">
                     <p className="text-xl font-light italic text-muted-foreground leading-relaxed">
-                      "{content.quote[locale]}"
+                      &ldquo;{content.quote[locale]}&rdquo;
                     </p>
                     <cite className="block text-sm font-medium mt-6 not-italic text-muted-foreground/70">
                       — Helena Uberti

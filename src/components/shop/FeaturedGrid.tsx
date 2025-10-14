@@ -13,13 +13,6 @@ interface FeaturedGridProps {
 export function FeaturedGrid({ products, locale }: FeaturedGridProps) {
   const [, setHoveredProduct] = useState<string | null>(null);
 
-  const ctaText = {
-    en: 'View More',
-    pt: 'Ver Mais',
-    es: 'Ver Más',
-    fr: 'Voir Plus',
-  };
-
   // Take only first 3 products
   const featuredProducts = products.slice(0, 3);
 
@@ -34,12 +27,12 @@ export function FeaturedGrid({ products, locale }: FeaturedGridProps) {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-2">
+    <div className="md:grid md:grid-cols-3 md:gap-2 flex md:flex-none overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-6 px-6 md:mx-0 md:px-0">
       {featuredProducts.map((product, index) => {
         const productName = getProductName(product);
 
         return (
-          <div key={product.id} className="bg-white">
+          <div key={product.id} className="bg-white w-[calc(100vw-8rem)] max-w-[320px] md:w-auto md:max-w-none snap-center flex-shrink-0 md:flex-shrink">
             {/* Product Image - Only this has hover */}
             <Link
               href={`/${locale}/products/${product.id}`}
@@ -59,18 +52,13 @@ export function FeaturedGrid({ products, locale }: FeaturedGridProps) {
               </div>
             </Link>
 
-            {/* Product Info - Below image, centered (no hover here) */}
+            {/* Product Info - Below image, centered */}
             <div className="pt-4 pb-8 text-center bg-white">
               {/* Product Name */}
-              <h3 className="text-base font-normal mb-6 text-gray-800">
-                {productName}
-              </h3>
-
-              {/* CTA Button */}
               <Link href={`/${locale}/products/${product.id}`}>
-                <span className="inline-block px-10 py-3 border border-gray-900 text-gray-900 text-xs uppercase tracking-[0.25em] hover:bg-gray-900 hover:text-white transition-all duration-300 cursor-pointer">
-                  {ctaText[locale]}
-                </span>
+                <h3 className="text-base font-normal text-gray-800 hover:text-gray-600 transition-colors cursor-pointer">
+                  {productName}
+                </h3>
               </Link>
             </div>
           </div>
