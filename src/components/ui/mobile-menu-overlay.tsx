@@ -311,7 +311,7 @@ export function MobileMenuOverlay({
                 </h3>
                 <div className="flex gap-6">
                   <a
-                    href="https://instagram.com/uberti"
+                    href="https://www.instagram.com/uberti_oficial/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="transition-all duration-300 hover:opacity-70"

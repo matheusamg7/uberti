@@ -32,6 +32,38 @@ export function LanguageWelcomeModal({ currentLocale }: LanguageWelcomeModalProp
     }
   }, []);
 
+  // Block scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+
+      // Prevent touch move on mobile
+      const preventScroll = (e: TouchEvent) => {
+        e.preventDefault();
+      };
+      document.body.addEventListener('touchmove', preventScroll, { passive: false });
+
+      return () => {
+        document.body.removeEventListener('touchmove', preventScroll);
+      };
+    } else {
+      // Restore scroll position
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
+  }, [isOpen]);
+
   const handleLanguageSelect = (langCode: string) => {
     setSelectedLanguage(langCode);
   };
@@ -74,31 +106,35 @@ export function LanguageWelcomeModal({ currentLocale }: LanguageWelcomeModalProp
           isOpen ? 'opacity-100' : 'opacity-0'
         }`}
         onClick={handleClose}
+        onTouchMove={(e) => e.preventDefault()}
       />
 
       {/* Modal */}
-      <div className="fixed inset-0 z-[101] flex items-center justify-center p-4">
+      <div
+        className="fixed inset-0 z-[101] flex items-center justify-center p-4"
+        onTouchMove={(e) => e.stopPropagation()}
+      >
         <div
-          className={`bg-white rounded-lg shadow-2xl max-w-md w-full transition-all duration-500 ${
+          className={`bg-white rounded-lg shadow-2xl max-w-sm w-full transition-all duration-500 max-h-[90vh] overflow-y-auto ${
             isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}
         >
           {/* Header */}
-          <div className="text-center pt-12 pb-8 px-8">
+          <div className="text-center pt-8 pb-6 px-6">
             {/* Logo */}
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center mb-4">
               <Image
                 src="/logo/logo_marrom.svg"
                 alt="UBERTI"
-                width={180}
-                height={70}
-                className="h-20 w-auto"
+                width={140}
+                height={55}
+                className="h-14 w-auto"
                 priority
               />
             </div>
 
             <h2
-              className="text-3xl md:text-4xl font-light tracking-tight mb-3"
+              className="text-2xl md:text-3xl font-light tracking-tight mb-2"
               style={{ fontFamily: "'Cinzel', serif" }}
             >
               {selectedLanguage
@@ -106,7 +142,7 @@ export function LanguageWelcomeModal({ currentLocale }: LanguageWelcomeModalProp
                 : languages.find(l => l.code === currentLocale)?.welcome || 'Welcome'}
             </h2>
             <p
-              className="text-base font-light text-gray-600"
+              className="text-sm font-light text-gray-600"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               {selectedLanguage
@@ -122,19 +158,20 @@ export function LanguageWelcomeModal({ currentLocale }: LanguageWelcomeModalProp
           </div>
 
           {/* Language Options */}
-          <div className="px-8 pb-8 space-y-3">
+          <div className="px-6 pb-6 space-y-2.5">
             {languages.map((lang) => (
               <button
+                type="button"
                 key={lang.code}
                 onClick={() => handleLanguageSelect(lang.code)}
-                className={`w-full flex items-center justify-center px-6 py-4 rounded-lg border-2 transition-all duration-300 ${
+                className={`w-full flex items-center justify-center px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
                   selectedLanguage === lang.code
                     ? 'border-black bg-black text-white scale-[1.02]'
                     : 'border-gray-200 hover:border-gray-400 hover:scale-[1.01]'
                 }`}
               >
                 <span
-                  className="text-lg font-light"
+                  className="text-base font-light"
                   style={{ fontFamily: "'Cinzel', serif" }}
                 >
                   {lang.name}
@@ -144,25 +181,27 @@ export function LanguageWelcomeModal({ currentLocale }: LanguageWelcomeModalProp
           </div>
 
           {/* Continue Button */}
-          <div className="px-8 pb-8">
+          <div className="px-6 pb-6">
             <button
+              type="button"
               onClick={handleContinue}
               disabled={!selectedLanguage}
-              className={`w-full py-4 rounded-lg flex items-center justify-center transition-all duration-300 ${
+              className={`w-full py-3 rounded-lg flex items-center justify-center transition-all duration-300 ${
                 selectedLanguage
                   ? 'bg-black text-white hover:bg-gray-800'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
               aria-label="Continue"
             >
-              <ArrowRight className="h-6 w-6" strokeWidth={1.5} />
+              <ArrowRight className="h-5 w-5" strokeWidth={1.5} />
             </button>
           </div>
 
           {/* Close button */}
           <button
+            type="button"
             onClick={handleClose}
-            className="absolute top-6 right-6 text-gray-400 hover:text-gray-800 transition-colors"
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors"
           >
             <svg
               className="w-6 h-6"

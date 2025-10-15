@@ -265,9 +265,9 @@ export default async function ConfirmationPage({ params }: ConfirmationPageProps
             >
               {locale === 'pt' ? 'Siga-nos no Instagram' : 'Follow us on Instagram'}
             </h2>
-            <p className="text-lg mb-6">@helenauberti</p>
+            <p className="text-lg mb-6">@uberti_oficial</p>
             <a
-              href="https://instagram.com/helenauberti"
+              href="https://www.instagram.com/uberti_oficial/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-8 py-3 bg-white text-black hover:bg-gray-100 transition-colors text-sm uppercase tracking-wider"

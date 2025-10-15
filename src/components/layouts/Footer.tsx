@@ -151,7 +151,14 @@ export function Footer({ locale }: FooterProps) {
             <p className="text-sm text-gray-400 mb-6 font-light">
               {content.newsletter.description[locale]}
             </p>
-            <form className="flex gap-3 max-w-md mx-auto">
+            <form
+              className="flex gap-3 max-w-md mx-auto"
+              onSubmit={(e) => {
+                e.preventDefault();
+                // TODO: Implementar integração com newsletter
+                console.log('Newsletter subscription');
+              }}
+            >
               <input
                 type="email"
                 placeholder={content.newsletter.placeholder[locale]}
@@ -296,7 +303,7 @@ export function Footer({ locale }: FooterProps) {
             <div className="flex items-center gap-6">
               {/* Social Media Links */}
               <a
-                href="https://instagram.com/helenauberti"
+                href="https://www.instagram.com/uberti_oficial/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-white transition-colors"

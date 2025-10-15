@@ -315,11 +315,11 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
               </div>
             </div>
 
-            {/* Navigation Arrows - Bolinhas pretas com flechas brancas */}
+            {/* Navigation Arrows - Bolinhas pretas com flechas brancas - Centralizadas na imagem */}
             <button
               type="button"
               onClick={handlePrevious}
-              className="absolute left-0 top-1/3 -translate-y-1/2 w-10 h-10 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors z-10"
+              className="absolute left-0 top-[28%] -translate-y-1/2 w-10 h-10 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors z-10"
               aria-label="Previous article"
             >
               <ChevronLeft className="w-5 h-5 text-white" strokeWidth={1.5} />
@@ -327,7 +327,7 @@ export function EditorialSection({ locale }: EditorialSectionProps) {
             <button
               type="button"
               onClick={handleNext}
-              className="absolute right-0 top-1/3 -translate-y-1/2 w-10 h-10 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors z-10"
+              className="absolute right-0 top-[28%] -translate-y-1/2 w-10 h-10 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors z-10"
               aria-label="Next article"
             >
               <ChevronRight className="w-5 h-5 text-white" strokeWidth={1.5} />

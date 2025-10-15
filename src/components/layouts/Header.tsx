@@ -212,6 +212,7 @@ export function Header({ locale }: HeaderProps) {
             >
               {/* Pesquisa - Segunda a aparecer */}
               <button
+                type="button"
                 onClick={() => setIsSearchOpen(true)}
                 className={`p-0 border-0 bg-transparent cursor-pointer group ${
                   isLoaded ? 'animate-fade-in-up' : 'opacity-0'
@@ -226,6 +227,7 @@ export function Header({ locale }: HeaderProps) {
 
               {/* Conta de Usuário - Terceira - APENAS DESKTOP */}
               <button
+                type="button"
                 onClick={() => setIsAccountMenuOpen(true)}
                 className={`hidden md:block p-0 border-0 bg-transparent cursor-pointer group ${
                   isLoaded ? 'animate-fade-in-up' : 'opacity-0'
@@ -264,6 +266,7 @@ export function Header({ locale }: HeaderProps) {
             {/* Menu Hamburguer - fica fixo na direita */}
             <div className="absolute right-2 md:right-8 flex items-center">
               <button
+                type="button"
                 onClick={() => setIsMobileMenuOpen(true)}
                 className="p-0 border-0 bg-transparent cursor-pointer group"
                 aria-label="Open menu"

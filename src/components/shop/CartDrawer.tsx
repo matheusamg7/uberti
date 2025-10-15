@@ -194,77 +194,84 @@ export function CartDrawer({ locale, trigger }: CartDrawerProps) {
                     const productName = item.product[`name_${locale}` as keyof typeof item.product] as string;
 
                     return (
-                      <div key={item.id} className={`flex gap-4 ${isUpdating ? 'opacity-50' : ''}`}>
-                        {/* Product Image */}
-                        <div className="flex-shrink-0">
-                          <div className="h-20 w-20 overflow-hidden rounded bg-muted">
-                            {item.product.images?.[0] && (
-                              <Image
-                                src={item.product.images[0]}
-                                alt={productName}
-                                width={80}
-                                height={80}
-                                className="h-full w-full object-cover"
-                              />
-                            )}
+                      <div key={item.id} className={`${isUpdating ? 'opacity-50' : ''}`}>
+                        <div className="flex gap-3">
+                          {/* Product Image */}
+                          <div className="flex-shrink-0">
+                            <div className="h-24 w-20 sm:h-28 sm:w-24 overflow-hidden rounded bg-muted">
+                              {item.product.images?.[0] && (
+                                <Image
+                                  src={item.product.images[0]}
+                                  alt={productName}
+                                  width={96}
+                                  height={112}
+                                  className="h-full w-full object-cover"
+                                />
+                              )}
+                            </div>
                           </div>
-                        </div>
 
-                        {/* Product Info */}
-                        <div className="flex-1 min-w-0">
-                          <h4 className="text-sm font-medium text-foreground truncate">
-                            {productName}
-                          </h4>
-                          <p className="text-xs text-muted-foreground mt-1">
-                            {item.product.sku}
-                          </p>
-                          {item.size && (
-                            <p className="text-xs text-muted-foreground">
-                              {locale === 'pt' ? 'Tamanho:' : locale === 'es' ? 'Talla:' : 'Size:'} {item.size}
-                            </p>
-                          )}
-                          <p className="text-sm font-medium text-foreground mt-1">
-                            {formatPrice(item.product.price)}
-                          </p>
+                          {/* Product Info */}
+                          <div className="flex-1 min-w-0 flex flex-col">
+                            <div className="flex justify-between gap-2">
+                              <div className="flex-1 min-w-0">
+                                <h4 className="text-sm font-medium text-foreground line-clamp-2">
+                                  {productName}
+                                </h4>
+                                <p className="text-xs text-muted-foreground mt-0.5">
+                                  {item.product.sku}
+                                </p>
+                                {item.size && (
+                                  <p className="text-xs text-muted-foreground mt-0.5">
+                                    {locale === 'pt' ? 'Tamanho:' : locale === 'es' ? 'Talla:' : 'Size:'} {item.size}
+                                  </p>
+                                )}
+                                {/* Price - logo abaixo das informações */}
+                                <p className="text-sm font-semibold text-foreground mt-2">
+                                  {formatPrice(item.product.price * item.quantity)}
+                                </p>
+                              </div>
 
-                          {/* Quantity Controls */}
-                          <div className="flex items-center gap-2 mt-2">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="h-8 w-8 p-0"
-                              onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
-                              disabled={isUpdating || item.quantity <= 1}
-                            >
-                              <Minus className="h-3 w-3" />
-                            </Button>
-                            <span className="text-sm font-medium min-w-[2rem] text-center">
-                              {item.quantity}
-                            </span>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="h-8 w-8 p-0"
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              disabled={isUpdating}
-                            >
-                              <Plus className="h-3 w-3" />
-                            </Button>
+                              {/* Remove Button */}
+                              <div className="flex-shrink-0">
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-7 w-7 p-0 text-muted-foreground hover:text-destructive"
+                                  onClick={() => removeItem(item.id)}
+                                  disabled={isUpdating}
+                                >
+                                  <X className="h-3.5 w-3.5" />
+                                  <span className="sr-only">{labels.remove[locale]}</span>
+                                </Button>
+                              </div>
+                            </div>
+
+                            {/* Quantity Controls */}
+                            <div className="flex items-center gap-2 mt-auto pt-3">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-7 w-7 p-0"
+                                onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                                disabled={isUpdating || item.quantity <= 1}
+                              >
+                                <Minus className="h-3 w-3" />
+                              </Button>
+                              <span className="text-sm font-medium min-w-[2rem] text-center">
+                                {item.quantity}
+                              </span>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-7 w-7 p-0"
+                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                disabled={isUpdating}
+                              >
+                                <Plus className="h-3 w-3" />
+                              </Button>
+                            </div>
                           </div>
-                        </div>
-
-                        {/* Remove Button */}
-                        <div className="flex-shrink-0">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-8 w-8 p-0 text-muted-foreground hover:text-destructive"
-                            onClick={() => removeItem(item.id)}
-                            disabled={isUpdating}
-                          >
-                            <X className="h-4 w-4" />
-                            <span className="sr-only">{labels.remove[locale]}</span>
-                          </Button>
                         </div>
                       </div>
                     );
@@ -273,37 +280,42 @@ export function CartDrawer({ locale, trigger }: CartDrawerProps) {
               </div>
 
               {/* Cart Summary */}
-              <div className="border-t border-border pt-4">
-                <div className="space-y-2">
+              <div className="border-t border-border pt-4 pb-2 space-y-4">
+                <div className="space-y-2.5 px-1">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">{labels.subtotal[locale]}</span>
                     <span className="font-medium">{formatPrice(cartSummary.subtotal)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">{labels.shipping[locale]}</span>
-                    <span className="font-medium">
+                    <span className="font-medium text-green-600">
                       {cartSummary.shipping === 0 ? labels.free[locale] : formatPrice(cartSummary.shipping)}
                     </span>
                   </div>
                   <Separator />
-                  <div className="flex justify-between">
-                    <span className="font-medium">{labels.total[locale]}</span>
-                    <span className="font-medium">{formatPrice(cartSummary.total)}</span>
+                  <div className="flex justify-between pt-1">
+                    <span className="font-semibold text-base">{labels.total[locale]}</span>
+                    <span className="font-semibold text-base">{formatPrice(cartSummary.total)}</span>
                   </div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="grid grid-cols-2 gap-2 mt-4">
+                <div className="flex flex-col sm:grid sm:grid-cols-2 gap-2.5">
                   <Button
                     variant="outline"
                     onClick={() => setIsOpen(false)}
+                    className="w-full"
                     asChild
                   >
                     <Link href={`/${locale}/cart`}>
                       {labels.viewCart[locale]}
                     </Link>
                   </Button>
-                  <Button onClick={() => setIsOpen(false)} asChild>
+                  <Button
+                    onClick={() => setIsOpen(false)}
+                    className="w-full"
+                    asChild
+                  >
                     <Link href={`/${locale}/checkout`}>
                       {labels.checkout[locale]}
                     </Link>

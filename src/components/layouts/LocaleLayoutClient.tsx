@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { Header } from '@/components/layouts/Header';
 import { Footer } from '@/components/layouts/Footer';
 import { LanguageWelcomeModal } from '@/components/ui/language-welcome-modal';
+import { LoadingProvider } from '@/components/providers/loading-provider';
 
 interface LocaleLayoutClientProps {
   locale: string;
@@ -17,7 +18,7 @@ export function LocaleLayoutClient({ locale, children }: LocaleLayoutClientProps
   const isHomePage = pathname === `/${locale}` || pathname === `/${locale}/`;
 
   return (
-    <>
+    <LoadingProvider>
       <LanguageWelcomeModal currentLocale={locale} />
       <div className="min-h-screen flex flex-col overflow-x-hidden">
         <Header locale={locale as 'en' | 'pt' | 'es' | 'fr'} />
@@ -26,6 +27,6 @@ export function LocaleLayoutClient({ locale, children }: LocaleLayoutClientProps
         </main>
         <Footer locale={locale as 'en' | 'pt' | 'es' | 'fr'} />
       </div>
-    </>
+    </LoadingProvider>
   );
 }

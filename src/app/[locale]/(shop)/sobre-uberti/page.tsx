@@ -119,24 +119,56 @@ export default function AboutUbertiPage({ params }: AboutUbertiPageProps) {
           <div className="space-y-16">
             {/* Photo and Text Side by Side - Reversed Order */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-              {/* Photo - Left Side */}
-              <div>
+              {/* Photo - Left Side - Desktop only (sticky) */}
+              <div className="hidden lg:block">
                 <div className="relative aspect-[3/4] overflow-hidden sticky top-24">
                   <Image
                     src="/about_uberti/foto_uberti.jpg"
                     alt={content.imagePlaceholder[locale]}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    sizes="50vw"
                   />
                 </div>
               </div>
 
               {/* Text Content - Right Side */}
               <div className="space-y-12">
-                {/* Paragraphs */}
+                {/* Paragraphs - Desktop: all together, Mobile: first paragraph only */}
                 <div className="space-y-8">
-                  {content.paragraphs[locale].map((paragraph, index) => (
+                  {/* Desktop: show all paragraphs */}
+                  <div className="hidden lg:block space-y-8">
+                    {content.paragraphs[locale].map((paragraph, index) => (
+                      <p key={index} className="body-text text-lg leading-relaxed text-muted-foreground">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+
+                  {/* Mobile: show only first paragraph */}
+                  <div className="lg:hidden">
+                    <p className="body-text text-lg leading-relaxed text-muted-foreground">
+                      {content.paragraphs[locale][0]}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Mobile: Photo after first paragraph */}
+                <div className="lg:hidden">
+                  <div className="relative aspect-[3/4] overflow-hidden">
+                    <Image
+                      src="/about_uberti/foto_uberti.jpg"
+                      alt={content.imagePlaceholder[locale]}
+                      fill
+                      className="object-cover"
+                      sizes="100vw"
+                    />
+                  </div>
+                </div>
+
+                {/* Mobile: Remaining paragraphs after photo */}
+                <div className="lg:hidden space-y-8">
+                  {content.paragraphs[locale].slice(1).map((paragraph, index) => (
                     <p key={index} className="body-text text-lg leading-relaxed text-muted-foreground">
                       {paragraph}
                     </p>
@@ -155,8 +187,8 @@ export default function AboutUbertiPage({ params }: AboutUbertiPageProps) {
                   </blockquote>
                 </div>
 
-                {/* CTA Button */}
-                <div className="pt-8">
+                {/* CTA Button - Centered on mobile only */}
+                <div className="pt-8 flex justify-center lg:justify-start">
                   <Button size="lg" asChild className="min-w-[200px]">
                     <Link href={`/${locale}/collections`}>
                       {content.cta.button[locale]}
